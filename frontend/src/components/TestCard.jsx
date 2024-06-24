@@ -217,6 +217,39 @@ const Card = () => {
         )
     },[amountValues.TotalRevenueSales, amountValues.ProfitBeforeDepreciationTax])
 
+    //Net profit after tax section
+    useEffect(()=>{
+        updatePercentValues(
+            'Less_DepreciationExpenses',
+            (amountValues.Less_DepreciationExpenses / amountValues.TotalRevenueSales) * 100
+        )
+    },[amountValues.Less_DepreciationExpenses, amountValues.TotalRevenueSales])
+
+    useEffect(()=>{
+        updatePercentValues(
+            'Less_IncomeTax',
+            (amountValues.Less_IncomeTax / amountValues.TotalRevenueSales) * 100
+        )
+    },[amountValues.Less_IncomeTax, amountValues.TotalRevenueSales])
+
+    useEffect(()=>{
+        updateAmountValues(
+            'NetProfitAfterTax',
+            amountValues.ProfitBeforeDepreciationTax - amountValues.Less_DepreciationExpenses - amountValues.Less_IncomeTax
+        )
+    },[
+        amountValues.ProfitBeforeDepreciationTax,
+        amountValues.Less_DepreciationExpenses,
+        amountValues.Less_IncomeTax
+    ])
+
+    useEffect(()=>{
+        updatePercentValues(
+            'NetProfitAfterTax',
+            (amountValues.NetProfitAfterTax / amountValues.TotalRevenueSales) * 100
+        )
+    },[amountValues.TotalRevenueSales, amountValues.NetProfitAfterTax])
+
     return (
         <div className={`max-w-sm bg-bck-gray rounded overflow-hidden shadow-lg transition-opacity duration-300 ${focus ? 'opacity-100' : 'opacity-30'}`}>
             {/* <img className="w-full" src={imageUrl} alt={title} /> */}
@@ -254,7 +287,7 @@ const Card = () => {
                                     min={0}
                                     max={100}
                                     value={colInformation.CapitalUtilization}
-                                    onChange={(e)=>updateColInformation('CapitalUtilization', e.target.value)} 
+                                    onChange={(e)=>updateColInformation('CapitalUtilization', parseFloat(e.target.value))} 
                                 />
                             </th>
                         </tr>
@@ -275,7 +308,7 @@ const Card = () => {
                                     value={amountValues.TotalRevenueSales}
                                     type='number'
                                     className='w-[80px] text-center pl-2'
-                                    onChange={(e)=>updateAmountValues('TotalRevenueSales', e.target.value)} 
+                                    onChange={(e)=>updateAmountValues('TotalRevenueSales', parseFloat(e.target.value))} 
                                     ref={TotalRevenueSalesRef}
                                     onClick={()=>{TotalRevenueSalesRef.current.select()}}
                                 />
@@ -291,7 +324,7 @@ const Card = () => {
                                     type='number'
                                     value={amountValues.Less_CostOfGoodsSold}
                                     className='w-[80px] text-center pl-2'
-                                    onChange={(e)=>updateAmountValues('Less_CostOfGoodsSold', e.target.value)}
+                                    onChange={(e)=>updateAmountValues('Less_CostOfGoodsSold', parseFloat(e.target.value))}
                                     ref={Less_CostOfGoodsSoldRef}
                                     onClick={()=>{Less_CostOfGoodsSoldRef.current.select()}}
                                 />
@@ -307,7 +340,7 @@ const Card = () => {
                                     type='number'
                                     value={amountValues.Less_OtherDirectExpenses} 
                                     className='w-[80px] text-center pl-2'
-                                    onChange={(e)=>updateAmountValues('Less_OtherDirectExpenses', e.target.value)}
+                                    onChange={(e)=>updateAmountValues('Less_OtherDirectExpenses', parseFloat(e.target.value))}
                                     ref={Less_OtherDirectExpensesRef}
                                     onClick={()=>{Less_OtherDirectExpensesRef.current.select()}}
                                 />
@@ -331,7 +364,7 @@ const Card = () => {
                                     type='number'
                                     value={amountValues.Add_OtherIncome}
                                     className='w-[80px] text-center pl-2'
-                                    onChange={(e)=>updateAmountValues('Add_OtherIncome', e.target.value)}
+                                    onChange={(e)=>updateAmountValues('Add_OtherIncome', parseFloat(e.target.value))}
                                     ref={Add_OtherIncomeRef}
                                     onClick={()=>{Add_OtherIncomeRef.current.select()}}
                                 />
@@ -346,7 +379,7 @@ const Card = () => {
                                     type='number'
                                     value={amountValues.Add_Less_Gain_LossOnSaleOfAsset}
                                     className='w-[80px] text-center pl-2'
-                                    onChange={(e)=>updateAmountValues('Add_Less_Gain_LossOnSaleOfAsset', e.target.value)}
+                                    onChange={(e)=>updateAmountValues('Add_Less_Gain_LossOnSaleOfAsset', parseFloat(e.target.value))}
                                     ref={Add_Less_Gain_LossOnSaleOfAssetRef}
                                     onClick={()=>{Add_Less_Gain_LossOnSaleOfAssetRef.current.select()}}
                                 />
@@ -361,7 +394,7 @@ const Card = () => {
                                     type='number'
                                     value={amountValues.Less_Office_AdministrativeOverhead}
                                     className='w-[80px] text-center pl-2' 
-                                    onChange={(e)=>updateAmountValues('Less_Office_AdministrativeOverhead', e.target.value)}
+                                    onChange={(e)=>updateAmountValues('Less_Office_AdministrativeOverhead', parseFloat(e.target.value))}
                                     ref={Less_Office_AdministrativeOverheadRef}
                                     onClick={()=>{Less_Office_AdministrativeOverheadRef.current.select()}}
                                 />
@@ -376,7 +409,7 @@ const Card = () => {
                                     type='number'
                                     value={amountValues.Less_FinancialExpenses_InterestExp}
                                     className='w-[80px] text-center pl-2'
-                                    onChange={(e)=>updateAmountValues('Less_FinancialExpenses_InterestExp', e.target.value)}
+                                    onChange={(e)=>updateAmountValues('Less_FinancialExpenses_InterestExp', parseFloat(e.target.value))}
                                     ref={Less_FinancialExpenses_InterestExpRef}
                                     onClick={()=>{Less_FinancialExpenses_InterestExpRef.current.select()}} 
                                 />
@@ -391,7 +424,7 @@ const Card = () => {
                                     type='number'
                                     value={amountValues.Less_Selling_DistributionExpenses}
                                     className='w-[80px] text-center pl-2'
-                                    onChange={(e)=>updateAmountValues('Less_Selling_DistributionExpenses', e.target.value)}
+                                    onChange={(e)=>updateAmountValues('Less_Selling_DistributionExpenses', parseFloat(e.target.value))}
                                     ref={Less_Selling_DistributionExpensesRef}
                                     onClick={()=>{Less_Selling_DistributionExpensesRef.current.select()}} 
                                 />
@@ -411,26 +444,40 @@ const Card = () => {
                         {/*Net Profit after tax Section */}
                         <tr className='border-b-2'>
                             <td className='w-[80px] border-r-2'>
-                                {colvals.amount.Less_DepreciationExpenses}
+                                <input
+                                    type='number'
+                                    value={amountValues.Less_DepreciationExpenses}
+                                    className='w-[80px] text-center pl-2'
+                                    onChange={(e)=>updateAmountValues('Less_DepreciationExpenses', parseFloat(e.target.value))}
+                                    ref={Less_DepreciationExpensesRef}
+                                    onClick={()=>{Less_DepreciationExpensesRef.current.select()}}
+                                />
                             </td>
                             <td className='w-[80px]'>
-                                10
+                                {`${percentValues.Less_DepreciationExpenses.toFixed(2)} %`}
                             </td>
                         </tr>
                         <tr className='border-b-2'>
                             <td className='w-[80px] border-r-2'>
-                                {colvals.amount.Less_IncomeTax}
+                                <input
+                                    type='number'
+                                    value={amountValues.Less_IncomeTax}
+                                    className='w-[80px] text-center pl-2'
+                                    onChange={(e)=>updateAmountValues('Less_IncomeTax', parseFloat(e.target.value))}
+                                    ref={Less_IncomeTaxRef}
+                                    onClick={()=>{Less_IncomeTaxRef.current.select()}}
+                                />
                             </td>
                             <td className='w-[80px]'>
-                                10
+                                {`${percentValues.Less_IncomeTax.toFixed(2)} %`}
                             </td>
                         </tr>
                         <tr className='font-bold border-b-2'>
                             <td className='w-[80px] border-r-2'>
-                                -
+                                {amountValues.NetProfitAfterTax}
                             </td>
                             <td className='w-[80px]'>
-                                10
+                                {`${percentValues.NetProfitAfterTax.toFixed(2)} %`}
                             </td>
                         </tr>
                         {/*Profit transferred to balanced sheet Section */}
