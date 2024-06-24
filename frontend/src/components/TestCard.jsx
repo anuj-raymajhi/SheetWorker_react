@@ -3,9 +3,18 @@ import colvals from '../data/colValue.json';
 
 const Card = () => {
     // refs
+
+    //gross profit input refs
     const TotalRevenueSalesRef = useRef(null);
     const Less_CostOfGoodsSoldRef = useRef(null);
     const Less_OtherDirectExpensesRef = useRef(null);
+
+    //profit before depreciation and tax refs
+    const Add_OtherIncomeRef = useRef(null)
+    const Add_Less_Gain_LossOnSaleOfAssetRef = useRef(null)
+    const Less_Office_AdministrativeOverheadRef = useRef(null)
+    const Less_FinancialExpenses_InterestExpRef = useRef(null)
+    const Less_Selling_DistributionExpensesRef = useRef(null)
 
     const [colInformation, setColInformation] = useState({
         Audited_projected: null,
@@ -103,7 +112,9 @@ const Card = () => {
         });
     };
 
-    // code to update percent values
+    //code to update percent values
+
+    //gross profit section
     useEffect(()=>{
         updatePercentValues(
             'TotalRevenueSales',
@@ -124,6 +135,60 @@ const Card = () => {
             (amountValues.Less_OtherDirectExpenses / amountValues.TotalRevenueSales) * 100
         )
     },[amountValues.Less_OtherDirectExpenses, amountValues.TotalRevenueSales])
+
+    useEffect(()=>{
+        updateAmountValues(
+            'GrossProfit',
+            amountValues.TotalRevenueSales - amountValues.Less_CostOfGoodsSold - amountValues.Less_OtherDirectExpenses
+        )
+    },[
+        amountValues.TotalRevenueSales,
+        amountValues.Less_CostOfGoodsSold,
+        amountValues.Less_OtherDirectExpenses
+    ])
+
+    useEffect(()=>{
+        updatePercentValues(
+            'GrossProfit',
+            (amountValues.GrossProfit / amountValues.TotalRevenueSales) * 100
+        )
+    },[amountValues.GrossProfit, amountValues.TotalRevenueSales])
+
+    //profit before depreciation and tax section
+    useEffect(()=>{
+        updatePercentValues(
+            'Add_OtherIncome',
+            (amountValues.Add_OtherIncome / amountValues.TotalRevenueSales) * 100
+        )
+    },[amountValues.TotalRevenueSales, amountValues.Add_OtherIncome])
+
+    useEffect(()=>{
+        updatePercentValues(
+            'Add_Less_Gain_LossOnSaleOfAsset',
+            (amountValues.Add_Less_Gain_LossOnSaleOfAsset / amountValues.TotalRevenueSales) * 100
+        )
+    },[amountValues.TotalRevenueSales, amountValues.Add_Less_Gain_LossOnSaleOfAsset])
+
+    useEffect(()=>{
+        updatePercentValues(
+            'Less_Office_AdministrativeOverhead',
+            (amountValues.Less_Office_AdministrativeOverhead / amountValues.TotalRevenueSales) * 100
+        )
+    },[amountValues.TotalRevenueSales, amountValues.Less_Office_AdministrativeOverhead])
+
+    useEffect(()=>{
+        updatePercentValues(
+            'Less_FinancialExpenses_InterestExp',
+            (amountValues.Less_FinancialExpenses_InterestExp / amountValues.TotalRevenueSales) * 100
+        )
+    }, [amountValues.TotalRevenueSales, amountValues.Less_FinancialExpenses_InterestExp])
+
+    useEffect(()=>{
+        updatePercentValues(
+            'Less_Selling_DistributionExpenses',
+            (amountValues.Less_Selling_DistributionExpenses / amountValues.TotalRevenueSales) * 100
+        )
+    },[amountValues.TotalRevenueSales, amountValues.Less_Selling_DistributionExpenses])
 
     return (
         <div className={`max-w-sm bg-bck-gray rounded overflow-hidden shadow-lg transition-opacity duration-300 ${focus ? 'opacity-100' : 'opacity-30'}`}>
@@ -226,51 +291,86 @@ const Card = () => {
                         </tr>
                         <tr className='font-semibold border-b-2'>
                             <td className='w-[80px] border-r-2'>
-                                -
+                                {amountValues.GrossProfit}
                             </td>
                             <td className='w-[80px]'>
-                                10
+                                {`${percentValues.GrossProfit.toFixed(2)} %`}
                             </td>
                         </tr>
                         {/*Profit before depreciation and tax Section */}
                         <tr className='border-b-2'>
                             <td className='w-[80px] border-r-2'>
-                                {colvals.amount.Add_OtherIncome}
+                                <input
+                                    type='number'
+                                    value={amountValues.Add_OtherIncome}
+                                    className='w-[80px] text-center pl-2'
+                                    onChange={(e)=>updateAmountValues('Add_OtherIncome', e.target.value)}
+                                    ref={Add_OtherIncomeRef}
+                                    onClick={()=>{Add_OtherIncomeRef.current.select()}}
+                                />
                             </td>
                             <td className='w-[80px]'>
-                                10
+                                {`${percentValues.Add_OtherIncome.toFixed(2)} %`}
                             </td>
                         </tr>
                         <tr className='border-b-2'>
                             <td className='w-[80px] border-r-2'>
-                                {colvals.amount.Add_Less_Gain_LossOnSaleOfAsset}
+                                <input
+                                    type='number'
+                                    value={amountValues.Add_Less_Gain_LossOnSaleOfAsset}
+                                    className='w-[80px] text-center pl-2'
+                                    onChange={(e)=>updateAmountValues('Add_Less_Gain_LossOnSaleOfAsset', e.target.value)}
+                                    ref={Add_Less_Gain_LossOnSaleOfAssetRef}
+                                    onClick={()=>{Add_Less_Gain_LossOnSaleOfAssetRef.current.select()}}
+                                />
                             </td>
                             <td className='w-[80px]'>
-                                10
+                                {`${percentValues.Add_Less_Gain_LossOnSaleOfAsset.toFixed(2)} %`}  
                             </td>
                         </tr>
                         <tr className='border-b-2'>
                             <td className='w-[80px] border-r-2'>
-                                {colvals.amount.Less_Office_AdministrativeOverhead}
+                                <input
+                                    type='number'
+                                    value={amountValues.Less_Office_AdministrativeOverhead}
+                                    className='w-[80px] text-center pl-2' 
+                                    onChange={(e)=>updateAmountValues('Less_Office_AdministrativeOverhead', e.target.value)}
+                                    ref={Less_Office_AdministrativeOverheadRef}
+                                    onClick={()=>{Less_Office_AdministrativeOverheadRef.current.select()}}
+                                />
                             </td>
                             <td className='w-[80px]'>
-                                10
+                                {`${percentValues.Less_Office_AdministrativeOverhead.toFixed(2)} %`}
                             </td>
                         </tr>
                         <tr className='border-b-2'>
                             <td className='w-[80px] border-r-2'>
-                                {colvals.amount.Less_FinancialExpenses_InterestExp}
+                                <input
+                                    type='number'
+                                    value={amountValues.Less_FinancialExpenses_InterestExp}
+                                    className='w-[80px] text-center pl-2'
+                                    onChange={(e)=>updateAmountValues('Less_FinancialExpenses_InterestExp', e.target.value)}
+                                    ref={Less_FinancialExpenses_InterestExpRef}
+                                    onClick={()=>{Less_FinancialExpenses_InterestExpRef.current.select()}} 
+                                />
                             </td>
                             <td className='w-[80px]'>
-                                10
+                                {`${percentValues.Less_FinancialExpenses_InterestExp.toFixed(2)} %`}
                             </td>
                         </tr>
                         <tr className='border-b-2'>
                             <td className='w-[80px] border-r-2'>
-                                {colvals.amount.Less_Selling_DistributionExpenses}
+                                <input
+                                    type='number'
+                                    value={amountValues.Less_Selling_DistributionExpenses}
+                                    className='w-[80px] text-center pl-2'
+                                    onChange={(e)=>updateAmountValues('Less_Selling_DistributionExpenses', e.target.value)}
+                                    ref={Less_Selling_DistributionExpensesRef}
+                                    onClick={()=>{Less_Selling_DistributionExpensesRef.current.select()}} 
+                                />
                             </td>
                             <td className='w-[80px] border-r-2'>
-                                10
+                                {`${percentValues.Less_Selling_DistributionExpenses.toFixed(2)} %`}
                             </td>
                         </tr>
                         <tr className='font-bold border-b-2'>
