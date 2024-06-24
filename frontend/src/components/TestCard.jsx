@@ -16,6 +16,11 @@ const Card = () => {
     const Less_FinancialExpenses_InterestExpRef = useRef(null)
     const Less_Selling_DistributionExpensesRef = useRef(null)
 
+    //net profit after tax ref
+    const Less_DepreciationExpensesRef = useRef(null)
+    const Less_IncomeTaxRef = useRef(null)
+
+
     const [colInformation, setColInformation] = useState({
         Audited_projected: null,
         Year: null,
@@ -189,6 +194,28 @@ const Card = () => {
             (amountValues.Less_Selling_DistributionExpenses / amountValues.TotalRevenueSales) * 100
         )
     },[amountValues.TotalRevenueSales, amountValues.Less_Selling_DistributionExpenses])
+
+    useEffect(()=>{
+        updateAmountValues(
+            'ProfitBeforeDepreciationTax',
+            parseFloat(amountValues.GrossProfit) + parseFloat(amountValues.Add_OtherIncome) + parseFloat(amountValues.Add_Less_Gain_LossOnSaleOfAsset) 
+            - parseFloat(amountValues.Less_Office_AdministrativeOverhead) - parseFloat(amountValues.Less_FinancialExpenses_InterestExp) - parseFloat(amountValues.Less_Selling_DistributionExpenses)
+        )
+    },[
+        amountValues.GrossProfit,
+        amountValues.Add_OtherIncome,
+        amountValues.Add_Less_Gain_LossOnSaleOfAsset,
+        amountValues.Less_Office_AdministrativeOverhead,
+        amountValues.Less_FinancialExpenses_InterestExp,
+        amountValues.Less_Selling_DistributionExpenses
+    ])
+
+    useEffect(()=>{
+        updatePercentValues(
+            'ProfitBeforeDepreciationTax',
+            (amountValues.ProfitBeforeDepreciationTax / amountValues.TotalRevenueSales) * 100
+        )
+    },[amountValues.TotalRevenueSales, amountValues.ProfitBeforeDepreciationTax])
 
     return (
         <div className={`max-w-sm bg-bck-gray rounded overflow-hidden shadow-lg transition-opacity duration-300 ${focus ? 'opacity-100' : 'opacity-30'}`}>
@@ -375,10 +402,10 @@ const Card = () => {
                         </tr>
                         <tr className='font-bold border-b-2'>
                             <td className='w-[80px] border-r-2'>
-                                -
+                                {amountValues.ProfitBeforeDepreciationTax}
                             </td>
                             <td className='w-[80px]'>
-                                10
+                                {`${percentValues.ProfitBeforeDepreciationTax.toFixed(2)} %`}
                             </td>
                         </tr>
                         {/*Net Profit after tax Section */}
