@@ -2,6 +2,7 @@
 import Home from './pages/Home'
 import CardContainer from './components/CardContainer'
 import colvals from './data/colValue.json'
+import PL_Rows from './components/PL_table';
 
 function App() {
 
@@ -18,10 +19,11 @@ function App() {
   console.log(colvals)
   return (
     <>
-      <div className='text-center m-4 text-2xl font-bold'>
+      <div className='text-center m-4 text-3xl font-bold'>
         <h1 className='block'>PL sheet</h1>
       </div>
-      <div className="flex justify-center items-center p-4">
+      <div className="flex justify-center items-center p-4 gap-x-5">
+            <PL_Rows />
             <CardContainer cards={cards} />
       </div>
     </>

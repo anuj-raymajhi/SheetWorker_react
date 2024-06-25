@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Card from '../components/TestCard';  // Import the Card component
+import Card from '../components/ColumnCard';  // Import the Card component
 
 const CardContainer = ({ cards }) => {
     const [focusedIndex, setFocusedIndex] = useState(0); // State to track the focused card
@@ -22,7 +22,7 @@ const CardContainer = ({ cards }) => {
     }, []);
 
     return (
-        <div ref={containerRef} className="flex justify-start items-center overflow-x-scroll scroll-smooth p-4 gap-4 h-[750px] w-fit max-w-[1000px]">
+        <div ref={containerRef} className="flex justify-start items-center overflow-x-scroll scroll-smooth p-4 gap-4 h-[750px] w-fit max-w-[900px]">
             {cards.map((card, index) => (
                 <div 
                     key={index} 

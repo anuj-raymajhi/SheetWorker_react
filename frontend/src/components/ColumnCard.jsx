@@ -486,7 +486,7 @@ const Card = () => {
                                 {colvals.amount.Add_ProfitUpToLastYear}
                             </td>
                             <td className='w-[80px]'>
-                                10
+                                -
                             </td>
                         </tr>
                         <tr className='border-b-2'>
@@ -494,7 +494,7 @@ const Card = () => {
                                 {colvals.amount.Less_Withdrawal_Dividend_Drawing}
                             </td>
                             <td className='w-[80px]'>
-                                10
+                                -
                             </td>
                         </tr>
                         <tr className='border-b-2'>
@@ -502,7 +502,7 @@ const Card = () => {
                                 {colvals.amount.Less_Provision_IfAny}
                             </td>
                             <td className='w-[80px]'>
-                                10
+                                -
                             </td>
                         </tr>
                         <tr className='font-bold border-b-2'>
@@ -510,7 +510,7 @@ const Card = () => {
                                 -
                             </td>
                             <td className='w-[80px]'>
-                                10
+                                -
                             </td>
                         </tr>
                         {/*EBIT Section */}
@@ -519,7 +519,7 @@ const Card = () => {
                                 -
                             </td>
                             <td className='w-[80px]'>
-                                10
+                                -
                             </td>
                         </tr>
                     </tbody>
