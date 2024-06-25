@@ -1,18 +1,25 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function YearEntry({yearVal, setYearVal}){
 
 
-
+    const [buttonStatus, setButtonStatus] = useState(false)
     let option = []
 
     for (let year = 2055; year <= 2100; year++) {
         option.push({ value: year, label: `${year}/${(year + 1).toString().substr(-2)}` });
     }
 
-    const handleBegin = () => {
+    useEffect(()=>{
+        if (yearVal){
+            setButtonStatus(true)
+        }
+        else {
+            setButtonStatus(false)
+        }
+    },[yearVal])
 
-    }
 
     return (
         <>
@@ -44,14 +51,13 @@ function YearEntry({yearVal, setYearVal}){
                         </select>
                     </div>
                     <div className="flex w-[100px] items-center justify-center">
-                        <Link to="/pl-sheet">
+                        {buttonStatus&&(<Link to="/pl-sheet">
                             <button 
                                 className="bg-bck-gray hover:bg-slate-200 pr-4 pl-4 pt-3 pb-3 rounded shadow-lg w-[80px] hover:text-blue-500"
-                                onClick={handleBegin}
                             >
                                 Begin
                             </button>
-                        </Link>
+                        </Link>)}
                     </div>
                 </div>
             </div>
