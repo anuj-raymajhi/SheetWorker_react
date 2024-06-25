@@ -6,7 +6,7 @@ function PL_Rows(){
             <div className="flex bg-bck-gray rounded overflow-hidden shadow-lg">
                 <table className="flex w-[300px] h-[544px] m-4 items-center justify-center border-2">
                     <thead className="flex flex-col justify-left items-center text-sm">
-                        <tr className="block h-[43px] border-b-2 w-full">
+                        <tr className="block h-[42px] border-b-2 w-full">
                             <div className="font-bold block text-center">
                                 Audited/Projected?
                             </div>
@@ -16,7 +16,7 @@ function PL_Rows(){
                                 Capacity Utilization(if applicable)
                             </div>
                         </tr>
-                        <tr className="block h-[23px] border-b-2">
+                        <tr className="block h-[24px] border-b-2">
 
                         </tr>
                         <tr className="block h-[23px] w-full border-y-2">

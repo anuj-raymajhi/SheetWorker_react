@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import colvals from '../data/colValue.json';
 
-const Card = () => {
+const Card = ({year}) => {
     // refs
+    const yearLabel = `${year}/${(year + 1).toString().substr(-2)}`
 
     //gross profit input refs
     const TotalRevenueSalesRef = useRef(null);
@@ -23,7 +24,7 @@ const Card = () => {
 
     const [colInformation, setColInformation] = useState({
         Audited_projected: null,
-        Year: null,
+        Year: yearLabel,
         CapitalUtilization: null,
     })
 
@@ -259,7 +260,7 @@ const Card = () => {
                         <tr className='border-y-2 border-x-2 w-full'>
                             <th className='block'>
                                 <select
-                                    className='text-center w-[160px]'
+                                    className='text-center w-[300px]'
                                     value={colInformation.Audited_projected}
                                     onChange={(e)=>updateColInformation('Audited_projected', e.target.value)}
                                 >
@@ -271,19 +272,20 @@ const Card = () => {
                         </tr>
                         <tr className='border-b-2 border-x-2 w-full'>
                             <th className='block'>
-                                <input
+                                {/* <input
                                     type="text"
-                                    className='text-center w-[160px]'
+                                    className='text-center w-[300px]'
                                     value={colInformation.Year}
                                     onChange={(e)=>updateColInformation('Year', e.target.value)} 
-                                />
+                                /> */}
+                                {colInformation.Year}
                             </th>
                         </tr>
                         <tr className='border-b-2 border-x-2 w-full'>
                             <th className='block'>
                                 <input
                                     type="number"
-                                    className='text-center w-[160px] pl-2'
+                                    className='text-center w-[300px] pl-2'
                                     min={0}
                                     max={100}
                                     value={colInformation.CapitalUtilization}
@@ -292,10 +294,10 @@ const Card = () => {
                             </th>
                         </tr>
                         <tr className='border-x-2'>
-                            <th className='w-[80px] border-r-2'>
+                            <th className='w-[150px] border-r-2'>
                                 Amount
                             </th>
-                            <th className='w-[80px]'>
+                            <th className='w-[150px]'>
                                 %
                             </th>
                         </tr>
@@ -303,222 +305,222 @@ const Card = () => {
                     <tbody className='flex flex-col justify-center items-center text-center text-sm border-2'>
                         {/*Gross Profit Section */}
                         <tr className='border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 <input
                                     value={amountValues.TotalRevenueSales}
                                     type='number'
-                                    className='w-[80px] text-center pl-2'
+                                    className='w-[150px] text-center pl-2'
                                     onChange={(e)=>updateAmountValues('TotalRevenueSales', parseFloat(e.target.value))} 
                                     ref={TotalRevenueSalesRef}
                                     onClick={()=>{TotalRevenueSalesRef.current.select()}}
                                 />
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 {`${percentValues.TotalRevenueSales.toFixed(2)} %`}
                             </td>
                         </tr>
                         <tr className='border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 {/* {colvals.amount.Less_CostOfGoodsSold} */}
                                 <input
                                     type='number'
                                     value={amountValues.Less_CostOfGoodsSold}
-                                    className='w-[80px] text-center pl-2'
+                                    className='w-[150px] text-center pl-2'
                                     onChange={(e)=>updateAmountValues('Less_CostOfGoodsSold', parseFloat(e.target.value))}
                                     ref={Less_CostOfGoodsSoldRef}
                                     onClick={()=>{Less_CostOfGoodsSoldRef.current.select()}}
                                 />
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 {`${percentValues.Less_CostOfGoodsSold.toFixed(2)} %`}
                             </td>
                         </tr>
                         <tr className='border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 {/* {colvals.amount.Less_OtherDirectExpenses} */}
                                 <input
                                     type='number'
                                     value={amountValues.Less_OtherDirectExpenses} 
-                                    className='w-[80px] text-center pl-2'
+                                    className='w-[150px] text-center pl-2'
                                     onChange={(e)=>updateAmountValues('Less_OtherDirectExpenses', parseFloat(e.target.value))}
                                     ref={Less_OtherDirectExpensesRef}
                                     onClick={()=>{Less_OtherDirectExpensesRef.current.select()}}
                                 />
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 {`${percentValues.Less_OtherDirectExpenses.toFixed(2)} %`}
                             </td>
                         </tr>
                         <tr className='font-semibold border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 {amountValues.GrossProfit}
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 {`${percentValues.GrossProfit.toFixed(2)} %`}
                             </td>
                         </tr>
                         {/*Profit before depreciation and tax Section */}
                         <tr className='border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 <input
                                     type='number'
                                     value={amountValues.Add_OtherIncome}
-                                    className='w-[80px] text-center pl-2'
+                                    className='w-[150px] text-center pl-2'
                                     onChange={(e)=>updateAmountValues('Add_OtherIncome', parseFloat(e.target.value))}
                                     ref={Add_OtherIncomeRef}
                                     onClick={()=>{Add_OtherIncomeRef.current.select()}}
                                 />
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 {`${percentValues.Add_OtherIncome.toFixed(2)} %`}
                             </td>
                         </tr>
                         <tr className='border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 <input
                                     type='number'
                                     value={amountValues.Add_Less_Gain_LossOnSaleOfAsset}
-                                    className='w-[80px] text-center pl-2'
+                                    className='w-[150px] text-center pl-2'
                                     onChange={(e)=>updateAmountValues('Add_Less_Gain_LossOnSaleOfAsset', parseFloat(e.target.value))}
                                     ref={Add_Less_Gain_LossOnSaleOfAssetRef}
                                     onClick={()=>{Add_Less_Gain_LossOnSaleOfAssetRef.current.select()}}
                                 />
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 {`${percentValues.Add_Less_Gain_LossOnSaleOfAsset.toFixed(2)} %`}  
                             </td>
                         </tr>
                         <tr className='border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 <input
                                     type='number'
                                     value={amountValues.Less_Office_AdministrativeOverhead}
-                                    className='w-[80px] text-center pl-2' 
+                                    className='w-[150px] text-center pl-2' 
                                     onChange={(e)=>updateAmountValues('Less_Office_AdministrativeOverhead', parseFloat(e.target.value))}
                                     ref={Less_Office_AdministrativeOverheadRef}
                                     onClick={()=>{Less_Office_AdministrativeOverheadRef.current.select()}}
                                 />
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 {`${percentValues.Less_Office_AdministrativeOverhead.toFixed(2)} %`}
                             </td>
                         </tr>
                         <tr className='border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 <input
                                     type='number'
                                     value={amountValues.Less_FinancialExpenses_InterestExp}
-                                    className='w-[80px] text-center pl-2'
+                                    className='w-[150px] text-center pl-2'
                                     onChange={(e)=>updateAmountValues('Less_FinancialExpenses_InterestExp', parseFloat(e.target.value))}
                                     ref={Less_FinancialExpenses_InterestExpRef}
                                     onClick={()=>{Less_FinancialExpenses_InterestExpRef.current.select()}} 
                                 />
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 {`${percentValues.Less_FinancialExpenses_InterestExp.toFixed(2)} %`}
                             </td>
                         </tr>
                         <tr className='border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 <input
                                     type='number'
                                     value={amountValues.Less_Selling_DistributionExpenses}
-                                    className='w-[80px] text-center pl-2'
+                                    className='w-[150px] text-center pl-2'
                                     onChange={(e)=>updateAmountValues('Less_Selling_DistributionExpenses', parseFloat(e.target.value))}
                                     ref={Less_Selling_DistributionExpensesRef}
                                     onClick={()=>{Less_Selling_DistributionExpensesRef.current.select()}} 
                                 />
                             </td>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 {`${percentValues.Less_Selling_DistributionExpenses.toFixed(2)} %`}
                             </td>
                         </tr>
                         <tr className='font-bold border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 {amountValues.ProfitBeforeDepreciationTax}
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 {`${percentValues.ProfitBeforeDepreciationTax.toFixed(2)} %`}
                             </td>
                         </tr>
                         {/*Net Profit after tax Section */}
                         <tr className='border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 <input
                                     type='number'
                                     value={amountValues.Less_DepreciationExpenses}
-                                    className='w-[80px] text-center pl-2'
+                                    className='w-[150px] text-center pl-2'
                                     onChange={(e)=>updateAmountValues('Less_DepreciationExpenses', parseFloat(e.target.value))}
                                     ref={Less_DepreciationExpensesRef}
                                     onClick={()=>{Less_DepreciationExpensesRef.current.select()}}
                                 />
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 {`${percentValues.Less_DepreciationExpenses.toFixed(2)} %`}
                             </td>
                         </tr>
                         <tr className='border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 <input
                                     type='number'
                                     value={amountValues.Less_IncomeTax}
-                                    className='w-[80px] text-center pl-2'
+                                    className='w-[150px] text-center pl-2'
                                     onChange={(e)=>updateAmountValues('Less_IncomeTax', parseFloat(e.target.value))}
                                     ref={Less_IncomeTaxRef}
                                     onClick={()=>{Less_IncomeTaxRef.current.select()}}
                                 />
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 {`${percentValues.Less_IncomeTax.toFixed(2)} %`}
                             </td>
                         </tr>
                         <tr className='font-bold border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 {amountValues.NetProfitAfterTax}
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 {`${percentValues.NetProfitAfterTax.toFixed(2)} %`}
                             </td>
                         </tr>
                         {/*Profit transferred to balanced sheet Section */}
                         <tr className='border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 {colvals.amount.Add_ProfitUpToLastYear}
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 -
                             </td>
                         </tr>
                         <tr className='border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 {colvals.amount.Less_Withdrawal_Dividend_Drawing}
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 -
                             </td>
                         </tr>
                         <tr className='border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 {colvals.amount.Less_Provision_IfAny}
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 -
                             </td>
                         </tr>
                         <tr className='font-bold border-b-2'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 -
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 -
                             </td>
                         </tr>
                         {/*EBIT Section */}
                         <tr className='font-bold'>
-                            <td className='w-[80px] border-r-2'>
+                            <td className='w-[150px] border-r-2'>
                                 -
                             </td>
-                            <td className='w-[80px]'>
+                            <td className='w-[150px]'>
                                 -
                             </td>
                         </tr>

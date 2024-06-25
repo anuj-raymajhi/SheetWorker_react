@@ -22,18 +22,14 @@ const CardContainer = ({ cards }) => {
     }, []);
 
     return (
-        <div ref={containerRef} className="flex justify-start items-center overflow-x-scroll scroll-smooth p-4 gap-4 h-[750px] w-fit max-w-[900px]">
+        <div ref={containerRef} className="flex justify-start items-center overflow-x-scroll scroll-smooth p-4 gap-4 h-[750px] w-[900px]">
             {cards.map((card, index) => (
                 <div 
                     key={index} 
                     className="snap-center shrink-0"
                     onClick={() => index === focusedIndex && setFocusedIndex(index)}  // Only clickable if in focus
                 >
-                    <Card 
-                        title={card.title} 
-                        description={card.description} 
-                        focus={index === focusedIndex}
-                    />
+                    <Card year={card.value}/>
                 </div>
             ))}
         </div>

@@ -1,31 +1,37 @@
 // import { useState } from 'react'
-import Home from './pages/Home'
-import CardContainer from './components/CardContainer'
-import colvals from './data/colValue.json'
-import PL_Rows from './components/PL_table';
+import { useEffect, useState } from 'react';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import PL_sheet from './pages/PL_sheet';
+import YearEntry from './pages/YearEntry';
 
 function App() {
 
-  const cards = [
-      { title: "Card 1", description: "Description for Card 1" },
-      { title: "Card 2", description: "Description for Card 2" },
-      { title: "Card 3", description: "Description for Card 3" },
-      { title: "Card 1", description: "Description for Card 1" },
-      { title: "Card 2", description: "Description for Card 2" },
-      { title: "Card 3", description: "Description for Card 3" },
-      // Add more cards as needed
-    ];
+  const [yearEntry, setYearEntry] = useState(null)
+  const [yEntered, setYEntered] = useState(false)
+
+  useEffect(()=>{
+    if (yearEntry){
+      setYEntered(true)
+    }
+  },[yearEntry])
+
+  const router = createBrowserRouter([
+    {
+      path:'/home',
+      element: <YearEntry yearVal={yearEntry} setYearVal={setYearEntry} />
+    },
+    {
+      path:'/pl-sheet',
+      element: <PL_sheet yearEntered={yearEntry} />
+    }
+  ])
   
-  console.log(colvals)
   return (
+    // <>
+    //   <YearEntry yearVal={yearEntry} setYearVal={setYearEntry}/>
+    // </>
     <>
-      <div className='text-center m-4 text-3xl font-bold'>
-        <h1 className='block'>PL sheet</h1>
-      </div>
-      <div className="flex justify-center items-center p-4 gap-x-5">
-            <PL_Rows />
-            <CardContainer cards={cards} />
-      </div>
+      <RouterProvider router={router} />
     </>
   )
 }
