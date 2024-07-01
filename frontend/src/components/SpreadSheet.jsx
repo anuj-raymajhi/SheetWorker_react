@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { SpreadsheetComponent, SheetsDirective, SheetDirective, ColumnsDirective, ColumnDirective, RangesDirective, RangeDirective, RowsDirective, RowDirective, CellsDirective, CellDirective, Cell } from '@syncfusion/ej2-react-spreadsheet';
 import { useLocation } from 'react-router-dom';
 
-function Spreadsheet({startYear, endYear}) {
+function Spreadsheet() {
     const spreadsheetRef = useRef(null);
 
     const location = useLocation();
@@ -254,6 +254,7 @@ function Spreadsheet({startYear, endYear}) {
 
     const [plSheetKeys, setPlSheetKeys] = useState([])
 
+    // useEffect to initialize the years values
     useEffect(()=>{
         if (location.state) {
             setYears(prevState => ({
@@ -263,6 +264,7 @@ function Spreadsheet({startYear, endYear}) {
         }
     },[])
 
+    // useEffect for making the sheet panel fullScreen
     useEffect(() => {
         if (spreadsheetRef.current) {
             const sheetPanel = spreadsheetRef.current.querySelector('.e-sheet-panel');
@@ -270,7 +272,15 @@ function Spreadsheet({startYear, endYear}) {
                 sheetPanel.style.height = '700px'; // Or any dynamic value
             }
         }
-    }, []); // Empty dependency array ensures this runs once after initial render
+    }, []); 
+    
+    // useEffect to get the number of columns required per year
+    useEffect(()=>{
+        if (years && plSheetVals) {
+            console.log(plSheetVals)
+            setPlSheetKeys(Object.keys(plSheetVals))
+        }
+    },[plSheetVals, years])
 
     useEffect(()=>{
         if (years) {
@@ -344,7 +354,7 @@ function Spreadsheet({startYear, endYear}) {
         }
     },[years])
 
-    // useeffect for audited_projected row
+    // useEffect for audited_projected row
     useEffect(()=>{
         if (years) {
             var time_in_years = years.yearEnd - years.yearStart + 1;
@@ -1240,12 +1250,6 @@ function Spreadsheet({startYear, endYear}) {
         }
     },[years])
 
-    useEffect(()=>{
-        if (years && plSheetVals) {
-            console.log(plSheetVals)
-            setPlSheetKeys(Object.keys(plSheetVals))
-        }
-    },[plSheetVals, years])
 
 
     const handleCellSave = (args) => {
@@ -1272,11 +1276,7 @@ function Spreadsheet({startYear, endYear}) {
         <div ref={spreadsheetRef}>
             <SpreadsheetComponent style={{ minHeight: '500px' }} cellSave={handleCellSave}>
                 <SheetsDirective>
-                    <SheetDirective>
-                        {/* <RangesDirective>
-                            <RangeDirective startCell='B1' endCell='C1' merge={true} />
-                        </RangesDirective> */}
-
+                    <SheetDirective name='PL'>
                         <RowsDirective>
                             {/*Audited/Projected row */}
                             <RowDirective>

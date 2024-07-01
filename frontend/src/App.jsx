@@ -1,7 +1,6 @@
 // import { useState } from 'react'
 import { useEffect, useState } from 'react';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import PL_sheet from './pages/PL_sheet';
 import YearEntry from './pages/YearEntry';
 import Test from './pages/Test';
 import Test1 from './pages/test1';
@@ -27,10 +26,6 @@ function App() {
     {
       path:'/home',
       element: <YearEntry yearVal={yearEntry} setYearVal={setYearEntry} yearEnd={yearEnd} setYearEnd={setYearEnd} />
-    },
-    {
-      path:'/pl-sheet',
-      element: <PL_sheet yearEntered={yearEntry} />
     },
     {
       path:'/test',
