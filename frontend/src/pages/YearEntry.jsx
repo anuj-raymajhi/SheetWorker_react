@@ -1,25 +1,59 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function YearEntry({yearVal, setYearVal}){
+function YearEntry({yearVal, setYearVal, yearEnd, setYearEnd}){
 
+    const navigate = useNavigate();
 
     const [buttonStatus, setButtonStatus] = useState(false)
-    let option = []
-
-    for (let year = 2055; year <= 2100; year++) {
-        option.push({ value: year, label: `${year}/${(year + 1).toString().substr(-2)}` });
-    }
+    const [option, setOption] = useState([])
+    const [endOption, setEndOption] = useState([])
 
     useEffect(()=>{
-        if (yearVal){
+        for (let start = 2055; start <= 2098; start++){
+            setOption(prevState => [
+                ...prevState,
+                { value: start, label: `${start}/${(start + 1).toString().substr(-2)}`}
+            ])
+        }
+    },[])
+
+    useEffect(()=>{
+        if (yearVal && yearEnd){
             setButtonStatus(true)
         }
         else {
             setButtonStatus(false)
         }
-    },[yearVal])
+    },[yearVal, yearEnd])
 
+    useEffect(()=>{
+        if (yearVal) {
+            setEndOption(sliceYear(option, yearVal))
+        }
+    },[yearVal, option])
+
+    const handleBeginClick = () => {
+        navigate(`/spreadsheet`, {
+            state:{
+                yearStart: yearVal,
+                yearEnd: yearEnd
+            }
+        })
+    }
+
+    const sliceYear = (lt, val) => {
+        var temp;
+        for (let i=0; i<lt.length; i++){
+            if (lt[i].value === val){
+                temp = i;
+                break
+            }
+        }
+        
+        return lt.slice(temp+1, -1)
+    }
 
     return (
         <>
@@ -50,14 +84,38 @@ function YearEntry({yearVal, setYearVal}){
                             ))}
                         </select>
                     </div>
+                    <div className="font-semibold text-xl">
+                        Select End Year
+                    </div>
+                    <div>
+                        {/* empty div */}
+                    </div>
+                    <div className="flex w-[200px]">
+                        <select
+                            value={yearEnd}
+                            className="text-center w-full"
+                            onChange={(e)=>setYearEnd(parseInt(e.target.value))}
+                        >   
+                            <option value={null}>Select Year</option>
+                            {endOption.map((opt, index)=>{
+                                    return (
+                                        <option key={index} value={opt.value}>
+                                            {opt.label} 
+                                        </option>
+                                    );
+                            })}
+                        </select>
+                    </div>
                     <div className="flex w-[100px] items-center justify-center">
-                        {buttonStatus&&(<Link to="/pl-sheet">
+                        {buttonStatus&&(
+                            // <Link to="/spreadsheet">
                             <button 
                                 className="bg-bck-gray hover:bg-slate-200 pr-4 pl-4 pt-3 pb-3 rounded shadow-lg w-[80px] hover:text-blue-500"
+                                onClick={handleBeginClick}
                             >
                                 Begin
                             </button>
-                        </Link>)}
+                    )}
                     </div>
                 </div>
             </div>

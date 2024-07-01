@@ -1,0 +1,69 @@
+    return (
+        <div ref={spreadsheetRef}>
+            <SpreadsheetComponent style={{ minHeight: '500px' }}>
+                <SheetsDirective>
+                {[...Array(5)].map((_, index) => (
+                    <SheetDirective key={index} name={`Sheet ${index + 1}`}>
+                    <RowsDirective>
+                        {/* Create a header row */}
+                        <RowDirective>
+                        <CellsDirective>
+                            {columnHeaders.map((header, cellIndex) => (
+                            <CellDirective key={cellIndex} value={header} />
+                            ))}
+                        </CellsDirective>
+                        </RowDirective>
+                        {/* Additional rows can be added here if needed */}
+                    </RowsDirective>
+                    <ColumnsDirective>
+                        {/* Set properties for each column */}
+                        {columnHeaders.map((_, colIndex) => (
+                        <ColumnDirective key={colIndex} width={100} />
+                        ))}
+                    </ColumnsDirective>
+                    </SheetDirective>
+                ))}
+                </SheetsDirective>
+            </SpreadsheetComponent>
+        </div>
+    );
+
+
+                <div ref={spreadsheetRef}>
+                <SpreadsheetComponent style={{ minHeight: '500px' }}>
+                    <SheetsDirective>
+                        <SheetDirective name="Employee Sheet">
+                        <RowsDirective>
+                            {/* Main Header Row */}
+                            <RowDirective>
+                            <CellsDirective>
+                                <CellDirective index={1} value="Employee Details" colSpan={2} />
+                            </CellsDirective>
+                            </RowDirective>
+                            {/* Sub-header Row */}
+                            <RowDirective>
+                            <CellsDirective>
+                                <CellDirective index={1} value="Name" />
+                                <CellDirective index={2} value="Role" />
+                            </CellsDirective>
+                            </RowDirective>
+                            <RowDirective>
+                                <CellsDirective>
+                                <CellDirective index={1} value={valStates} />
+                                </CellsDirective>
+                            </RowDirective>
+                        </RowsDirective>
+                        <ColumnsDirective>
+                            {/* Specify individual column properties if needed */}
+                            <ColumnDirective index={0} width={100} />
+                            <ColumnDirective index={1} width={100} />
+                        </ColumnsDirective>
+                        </SheetDirective>
+                    </SheetsDirective>
+                </SpreadsheetComponent>
+            </div>
+
+
+
+create index reference, as in index 0 -> col A ----> index n -> col BZ something like this
+create data holder for each year
