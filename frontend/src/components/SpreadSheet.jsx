@@ -1394,7 +1394,8 @@ function Spreadsheet() {
 
 //Logic for BSheet and ratios worksheet
 
-    // useEffect to load all Bsheet values into the state
+    // useEffect to load all Bsheet values into the state 
+    //TODO : to rename the parameters included in capital_and_liabilities and assets
     useEffect(()=>{
         if (years) {
             var time_in_years = years.yearEnd - years.yearStart + 1;
@@ -1517,6 +1518,33 @@ function Spreadsheet() {
                 ...prevState,
                 year_label: [
                     ...prevState.year_label,
+                    ...update
+                ]
+            })) 
+        }
+    },[years])
+
+    // useEffect for capital and liabilities section row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex
+                    }
+                )
+                ColIndex += 1
+            }
+            setBsRowSheet(prevState => ({
+                ...prevState,
+                capital_and_liabilities: [
+                    ...prevState.capital_and_liabilities,
                     ...update
                 ]
             })) 
@@ -2033,6 +2061,26 @@ function Spreadsheet() {
                                                         value={value.colVal}
                                                         colSpan={value.colSpan}
                                                         rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Capital and liabilities section row*/}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.capital_and_liabilities.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
                                                     />
                                                 )
                                             }
