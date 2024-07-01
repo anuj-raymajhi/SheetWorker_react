@@ -9,6 +9,7 @@ function Spreadsheet() {
 
     const [years, setYears] = useState({})
 
+// States for PL worksheet
     const [plRowSheet, setPlRowSheet] = useState({
         audited_projected: [
             {
@@ -254,6 +255,144 @@ function Spreadsheet() {
 
     const [plSheetKeys, setPlSheetKeys] = useState([])
 
+// States for Balanced Sheet
+
+    const [bsSheetKeys, setBsSheetKeys] = useState([])
+
+    const [bsSheetVals, setBsSheetVals] = useState({})
+
+    const [bsRowSheet, setBsRowSheet] = useState({
+        audited_projected:[
+            {
+                colVal: 'Audited/Projected?',
+                rowSpan: 2,
+                colSpan: 1,
+                index: 0
+            }
+        ],
+        year_label:[
+            {
+                colVal: '',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0
+            }
+        ],
+        capital_and_liabilities:[
+            {
+                colVal: 'Capital & Liabilities',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0
+            }
+        ],
+        share_capital: [
+            {
+                colVal: 'Share Capital',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0
+            }
+        ],
+        reserves_and_retained_earnings: [
+            {
+                colVal: 'Reserves & Retained Earnings',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0
+            }
+        ],
+        directors_loan_subordinated_loan: [
+            {
+                colVal: 'Directors Loan/Subordinated Loan',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0
+            }
+        ],
+        effective_networth: [
+            {
+                colVal: 'Effective Networth',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0
+            }
+        ],
+        long_term_loan: [
+            {
+                colVal: 'Long Term Loan (LTL)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0
+            }
+        ],
+        principal_of_LTL_repaid_during_the_year: [
+            {
+                colVal: 'Principal of LTL Repaid During the Year',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0
+            }
+        ],
+        total_long_term_loan: [
+            {
+                colVal: 'Total Long Term Loan',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0
+            }
+        ],
+        working_capital_loan: [
+            {
+                colVal: 'Working Capital Loan (WTL)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0
+            }
+        ],
+        creditors: [
+            {
+                colVal: 'Creditors',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0
+            }
+        ],
+        payables: [
+            {
+                colVal: 'Payables',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0
+            }
+        ],
+        other_current_liabilities_and_provisions:[
+            {
+                colVal: 'Other Current Liabilities & Provisions',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0
+            }
+        ],
+        total_current_liabilities: [
+            {
+                colVal: 'Total Current Liabilities',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0
+            }
+        ],
+        total_capital_and_liabilities: [
+            {
+                colVal: 'Total Capital & Liabilities',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0
+            }
+        ]
+    })
+
+
     // useEffect to initialize the years values
     useEffect(()=>{
         if (location.state) {
@@ -274,6 +413,8 @@ function Spreadsheet() {
         }
     }, []); 
     
+    
+// Logic for PL worksheet
     // useEffect to get the number of columns required per year
     useEffect(()=>{
         if (years && plSheetVals) {
@@ -282,6 +423,7 @@ function Spreadsheet() {
         }
     },[plSheetVals, years])
 
+    // for PLsheet values, prolly would be useful to keep around, when sending data to backend
     useEffect(()=>{
         if (years) {
             var time_in_years = years.yearEnd - years.yearStart + 1;
@@ -1250,7 +1392,136 @@ function Spreadsheet() {
         }
     },[years])
 
+//Logic for BSheet and ratios worksheet
 
+    // useEffect to load all Bsheet values into the state
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var mainColIndex = 1;
+            var yearCounter = years.yearStart;
+            let updates = {};
+            for (let i=0; i < time_in_years; i++){
+                updates[yearCounter] ={
+                    index:mainColIndex,
+                    audited_projected: null,
+                    year_label:`${yearCounter}/${(yearCounter + 1).toString().substr(-2)}`,
+                    capital_and_liabilities:{
+                        total_revenue_sales:null,
+                        cost_of_goods_sold:null,
+                        other_direct_expenses:null,
+                        gross_profit:null,
+                        other_income:null,
+                        gain_loss_on_sale_of_assest:null,
+                        office_administrative_overhead:null,
+                        financial_expenses_interest_exp:null,
+                        selling_and_distribution_expenses:null,
+                        profit_before_depreciation_and_tax:null,
+                        depreciation_expenses:null,
+                        income_tax:null,
+                        net_profit_after_tax:null,
+                        profit_upto_last_year:null,
+                        withdrawal_dividend_drawing:null,
+                        provision:null,
+                        profit_transferred_to_balanced_sheet:null,
+                        earning_before_interest_and_tax:null
+                    },
+                    assets:{
+                        total_revenue_sales:null,
+                        cost_of_goods_sold:null,
+                        other_direct_expenses:null,
+                        gross_profit:null,
+                        other_income:null,
+                        gain_loss_on_sale_of_assest:null,
+                        office_administrative_overhead:null,
+                        financial_expenses_interest_exp:null,
+                        selling_and_distribution_expenses:null,
+                        profit_before_depreciation_and_tax:null,
+                        depreciation_expenses:null,
+                        income_tax:null,
+                        net_profit_after_tax:null,
+                        profit_upto_last_year:null,
+                        withdrawal_dividend_drawing:null,
+                        provision:null,
+                        profit_transferred_to_balanced_sheet:null,
+                        earning_before_interest_and_tax:null
+                    },
+                    diff: null
+                }
+
+                yearCounter += 1;
+                mainColIndex += 1;
+            }
+            setBsSheetVals(prevState => ({
+                ...prevState,
+                ...updates
+            }))
+        }
+    },[years])
+
+    // useEffect for counting number of columns in the sheet
+    useEffect(() => {
+        if (bsSheetVals && years) {
+            console.log('BSheet : ', bsSheetVals)
+            setBsSheetKeys(Object.keys(bsSheetVals))
+        }
+    },[bsSheetVals, years])
+
+    // useEffect for audited/projected row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal: 'Audited',
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex
+                    }
+                )
+                ColIndex += 1
+            }
+            setBsRowSheet(prevState => ({
+                ...prevState,
+                audited_projected: [
+                    ...prevState.audited_projected,
+                    ...update
+                ]
+            }))
+        }
+    },[years])
+
+    // useEffect for year label row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            let yearCounter = years.yearStart;
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  `${yearCounter}/${(yearCounter + 1).toString().substr(-2)}`,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex
+                    }
+                )
+                ColIndex += 1
+                yearCounter += 1
+            }
+            setBsRowSheet(prevState => ({
+                ...prevState,
+                year_label: [
+                    ...prevState.year_label,
+                    ...update
+                ]
+            })) 
+        }
+    },[years])
 
     const handleCellSave = (args) => {
         console.log('Cell saved:', args); // Logs detailed information about the saved cell
@@ -1722,6 +1993,58 @@ function Spreadsheet() {
                             }
                             {
                                 Object.keys(plSheetVals).map((x, index)=>(
+                                    <ColumnDirective key={index} width={100} />
+                                ))
+                            }
+                        </ColumnsDirective>
+                    </SheetDirective>
+                    <SheetDirective name='BSheet & Ratios'>
+                        <RowsDirective>
+                            {/*audited/projected row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.audited_projected.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        colSpan={value.colSpan}
+                                                        rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Year label row*/}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.year_label.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        colSpan={value.colSpan}
+                                                        rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                        </RowsDirective>
+                        <ColumnsDirective>
+                            <ColumnDirective width={250} />
+                            {
+                                Object.keys(bsSheetVals).map((x, index)=>(
                                     <ColumnDirective key={index} width={100} />
                                 ))
                             }
