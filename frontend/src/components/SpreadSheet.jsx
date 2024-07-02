@@ -299,7 +299,8 @@ function Spreadsheet() {
                 colVal: 'Reserves & Retained Earnings',
                 rowSpan: 1,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                formula: ''
             }
         ],
         directors_loan_subordinated_loan: [
@@ -1551,6 +1552,112 @@ function Spreadsheet() {
         }
     },[years])
 
+    // share capital row value = 4
+    // reserves and retained earnings row value = 5
+
+    // useEffect of reserves and retained earnings row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var temp;
+            var PLcol;
+            for (let i = 0; i < time_in_years; i++) {
+                temp = getOddNumberAtIndex(ColIndex)
+                PLcol = getSpreadsheetColumn(temp)
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        formula: `=PL!${PLcol}21`
+                    }
+                )
+                ColIndex += 1
+            }
+            setBsRowSheet(prevState => ({
+                ...prevState,
+                reserves_and_retained_earnings: [
+                    ...prevState.reserves_and_retained_earnings,
+                    ...update
+                ]
+            })) 
+        }
+    },[years])
+
+
+    // Directors Loan/Subordinated Loan row value = 6
+
+    // useEffect for effective networth row 7
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+
+            let shareCapRow = 4;
+            // let reserveNretainedRow = 5;
+            let directorsLoanRow = 6;
+
+            for (let i = 0; i < time_in_years; i++) {
+                var columnCharacterIndex = getSpreadsheetColumn(ColIndex);
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        formula: `=SUM(${columnCharacterIndex}${shareCapRow}:${columnCharacterIndex}${directorsLoanRow})`
+                    }
+                )
+                ColIndex += 1
+            }
+            setBsRowSheet(prevState => ({
+                ...prevState,
+                effective_networth: [
+                    ...prevState.effective_networth,
+                    ...update
+                ]
+            })) 
+        }
+    },[years])
+
+    // long term loan row number 8
+    // principal of LTL repaid row number 9
+
+    // useEffect for long term loan
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let LTLrow = 8;
+            let update = [];
+            var columnCharacterIndex;
+            for (let i = 0; i < time_in_years; i++) {
+                columnCharacterIndex = getSpreadsheetColumn(ColIndex);
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        formula: `=+${columnCharacterIndex}${LTLrow}`
+                    }
+                )
+                ColIndex += 1
+            }
+            setBsRowSheet(prevState => ({
+                ...prevState,
+                total_long_term_loan: [
+                    ...prevState.total_long_term_loan,
+                    ...update
+                ]
+            })) 
+        }
+    },[years])
+
     const handleCellSave = (args) => {
         console.log('Cell saved:', args); // Logs detailed information about the saved cell
         console.log(`Value changed to ${args.value} at address ${args.address}`);
@@ -1565,6 +1672,18 @@ function Spreadsheet() {
         }
         return column;
     }
+
+    const getOddNumberAtIndex = (index) => {
+        // Generate the sequence of odd numbers up to the given index
+        const oddSequence = [];
+        for (let i = 1; i <= index * 2; i += 2) {
+          oddSequence.push(i);
+        }
+      
+        // Return the element at the given index
+        return oddSequence[index - 1]; // Subtracting 1 because array indices start at 0
+    }
+
 
     // const cellMapper = (address, colIndexs) => {
         
@@ -2122,6 +2241,7 @@ function Spreadsheet() {
                                                         value={value.colVal}
                                                         colSpan={value.colSpan}
                                                         rowSpan={value.rowSpan}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
@@ -2162,6 +2282,7 @@ function Spreadsheet() {
                                                         value={value.colVal}
                                                         colSpan={value.colSpan}
                                                         rowSpan={value.rowSpan}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
@@ -2222,6 +2343,7 @@ function Spreadsheet() {
                                                         value={value.colVal}
                                                         colSpan={value.colSpan}
                                                         rowSpan={value.rowSpan}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
