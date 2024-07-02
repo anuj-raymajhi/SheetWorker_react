@@ -262,12 +262,14 @@ function Spreadsheet() {
     const [bsSheetVals, setBsSheetVals] = useState({})
 
     const [bsRowSheet, setBsRowSheet] = useState({
+        // capital and liabilities rows
         audited_projected:[
             {
                 colVal: 'Audited/Projected?',
                 rowSpan: 2,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                isReadOnly: true
             }
         ],
         year_label:[
@@ -275,7 +277,8 @@ function Spreadsheet() {
                 colVal: '',
                 rowSpan: 1,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                isReadOnly: true
             }
         ],
         capital_and_liabilities:[
@@ -283,7 +286,8 @@ function Spreadsheet() {
                 colVal: 'Capital & Liabilities',
                 rowSpan: 1,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                isReadOnly: true
             }
         ],
         share_capital: [
@@ -291,7 +295,8 @@ function Spreadsheet() {
                 colVal: 'Share Capital',
                 rowSpan: 1,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                isReadOnly: true
             }
         ],
         reserves_and_retained_earnings: [
@@ -300,7 +305,8 @@ function Spreadsheet() {
                 rowSpan: 1,
                 colSpan: 1,
                 index: 0,
-                formula: ''
+                formula: '',
+                isReadOnly: true
             }
         ],
         directors_loan_subordinated_loan: [
@@ -308,7 +314,8 @@ function Spreadsheet() {
                 colVal: 'Directors Loan/Subordinated Loan',
                 rowSpan: 1,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                isReadOnly: true
             }
         ],
         effective_networth: [
@@ -316,7 +323,8 @@ function Spreadsheet() {
                 colVal: 'Effective Networth',
                 rowSpan: 1,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                isReadOnly: true
             }
         ],
         long_term_loan: [
@@ -324,7 +332,8 @@ function Spreadsheet() {
                 colVal: 'Long Term Loan (LTL)',
                 rowSpan: 1,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                isReadOnly: true
             }
         ],
         principal_of_LTL_repaid_during_the_year: [
@@ -332,7 +341,8 @@ function Spreadsheet() {
                 colVal: 'Principal of LTL Repaid During the Year',
                 rowSpan: 1,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                isReadOnly: true
             }
         ],
         total_long_term_loan: [
@@ -340,7 +350,8 @@ function Spreadsheet() {
                 colVal: 'Total Long Term Loan',
                 rowSpan: 1,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                isReadOnly: true
             }
         ],
         working_capital_loan: [
@@ -348,7 +359,8 @@ function Spreadsheet() {
                 colVal: 'Working Capital Loan (WTL)',
                 rowSpan: 1,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                isReadOnly: true
             }
         ],
         creditors: [
@@ -356,7 +368,8 @@ function Spreadsheet() {
                 colVal: 'Creditors',
                 rowSpan: 1,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                isReadOnly: true
             }
         ],
         payables: [
@@ -364,7 +377,8 @@ function Spreadsheet() {
                 colVal: 'Payables',
                 rowSpan: 1,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                isReadOnly: true
             }
         ],
         other_current_liabilities_and_provisions:[
@@ -372,7 +386,8 @@ function Spreadsheet() {
                 colVal: 'Other Current Liabilities & Provisions',
                 rowSpan: 1,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                isReadOnly: true
             }
         ],
         total_current_liabilities: [
@@ -380,7 +395,8 @@ function Spreadsheet() {
                 colVal: 'Total Current Liabilities',
                 rowSpan: 1,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                isReadOnly: true
             }
         ],
         total_capital_and_liabilities: [
@@ -388,7 +404,192 @@ function Spreadsheet() {
                 colVal: 'Total Capital & Liabilities',
                 rowSpan: 1,
                 colSpan: 1,
-                index: 0
+                index: 0,
+                isReadOnly: true
+            },
+        ],
+        //empty row
+        empty_row: [
+            {
+                colVal: '',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+
+        //assets section rows
+        assets: [
+            {
+                colVal: 'Assets',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        land: [
+            {
+                colVal: 'Land',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        building_civil_structure: [
+            {
+                colVal: 'Building/ Civil Structure(Net after Depreciation)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        plant_and_machinery: [
+            {
+                colVal: 'Plant & Machinery(Net after Depreciation)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        furniture_and_fixtures: [
+            {
+                colVal: 'Furniture & Fixtures (Net after Depreciation)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        office_equipment: [
+            {
+                colVal: 'Office Equipment(Net after Depreciation)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        vehicles: [
+            {
+                colVal: 'Vehicles(Net after Depreciation)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        other_fixed_assets: [
+            {
+                colVal: 'Other Fixed Assets(Net after Depreciation)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        total_fixed_assets: [
+            {
+                colVal: 'Total Fixed Assets (net after depreciation)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        investment: [
+            {
+                colVal: 'Investment',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        other_intangible_assets: [
+            {
+                colVal: 'Other Intangible Assets',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        total_long_term_investments: [
+            {
+                colVal: 'Total Long Term Investment',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        cash_bank: [
+            {
+                colVal: 'Cash / Bank',
+                rowSpan: 1,
+                colSpan: 1, 
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        store_stock: [
+            {
+                colVal: 'Store / Stock',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        debtors_receivables: [
+            {
+                colVal: 'Debtors / Receivables',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        other_current_assets: [
+            {
+                colVal: 'Other Current Assets',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        total_current_assets: [
+            {
+                colVal: 'Total Current Assets',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        total_assets: [
+            {
+                colVal: 'Total Assets',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        //diff section
+        diff: [
+            {
+                colVal: 'Diff',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
             }
         ]
     })
@@ -409,7 +610,7 @@ function Spreadsheet() {
         if (spreadsheetRef.current) {
             const sheetPanel = spreadsheetRef.current.querySelector('.e-sheet-panel');
             if (sheetPanel) {
-                sheetPanel.style.height = '700px'; // Or any dynamic value
+                sheetPanel.style.height = '800px'; // Or any dynamic value
             }
         }
     }, []); 
@@ -1481,7 +1682,8 @@ function Spreadsheet() {
                         colVal: 'Audited',
                         colSpan: 1,
                         rowSpan: 1,
-                        index: ColIndex
+                        index: ColIndex,
+                        isReadOnly: true
                     }
                 )
                 ColIndex += 1
@@ -1509,7 +1711,8 @@ function Spreadsheet() {
                         colVal:  `${yearCounter}/${(yearCounter + 1).toString().substr(-2)}`,
                         colSpan: 1,
                         rowSpan: 1,
-                        index: ColIndex
+                        index: ColIndex,
+                        isReadOnly: true
                     }
                 )
                 ColIndex += 1
@@ -1537,7 +1740,8 @@ function Spreadsheet() {
                         colVal:  ``,
                         colSpan: 1,
                         rowSpan: 1,
-                        index: ColIndex
+                        index: ColIndex,
+                        isReadOnly: true
                     }
                 )
                 ColIndex += 1
@@ -1572,7 +1776,8 @@ function Spreadsheet() {
                         colSpan: 1,
                         rowSpan: 1,
                         index: ColIndex,
-                        formula: `=PL!${PLcol}21`
+                        formula: `=PL!${PLcol}21`,
+                        isReadOnly: true
                     }
                 )
                 ColIndex += 1
@@ -1609,6 +1814,7 @@ function Spreadsheet() {
                         colSpan: 1,
                         rowSpan: 1,
                         index: ColIndex,
+                        isReadOnly: true,
                         formula: `=SUM(${columnCharacterIndex}${shareCapRow}:${columnCharacterIndex}${directorsLoanRow})`
                     }
                 )
@@ -1624,10 +1830,11 @@ function Spreadsheet() {
         }
     },[years])
 
+    
     // long term loan row number 8
     // principal of LTL repaid row number 9
-
-    // useEffect for long term loan
+    
+    // useEffect for total long term loan
     useEffect(()=>{
         if (years) {
             var time_in_years = years.yearEnd - years.yearStart + 1;
@@ -1643,6 +1850,7 @@ function Spreadsheet() {
                         colSpan: 1,
                         rowSpan: 1,
                         index: ColIndex,
+                        isReadOnly: true,
                         formula: `=+${columnCharacterIndex}${LTLrow}`
                     }
                 )
@@ -1652,6 +1860,315 @@ function Spreadsheet() {
                 ...prevState,
                 total_long_term_loan: [
                     ...prevState.total_long_term_loan,
+                    ...update
+                ]
+            })) 
+        }
+    },[years])
+    
+    // working capital loan row number 11
+    // creditors row number 12
+    // payables row number 13
+    // other current liabilities and provisions 14
+    
+    // useEffect for total current liabilities
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let WTLrow = 11;
+            let otherCurrLiabAndProvRow = 14;
+            let update = [];
+            var columnCharacterIndex;
+            for (let i = 0; i < time_in_years; i++) {
+                columnCharacterIndex = getSpreadsheetColumn(ColIndex)
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        formula: `=SUM(${columnCharacterIndex}${WTLrow}:${columnCharacterIndex}${otherCurrLiabAndProvRow})`,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setBsRowSheet(prevState => ({
+                ...prevState,
+                total_current_liabilities: [
+                    ...prevState.total_current_liabilities,
+                    ...update
+                ]
+            })) 
+        }
+    },[years])
+    
+    // useEffect for total capital and liabilities
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let effectiveNetRow = 7;
+            let totalLongTermLoanRow = 10;
+            let totalCurrentLiabilitiesRow = 15;
+            let update = [];
+            var columnCharacterIndex;
+            for (let i = 0; i < time_in_years; i++) {
+                columnCharacterIndex = getSpreadsheetColumn(ColIndex)
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `=${columnCharacterIndex}${effectiveNetRow}+${columnCharacterIndex}${totalLongTermLoanRow}+${columnCharacterIndex}${totalCurrentLiabilitiesRow}`
+                    }
+                )
+                ColIndex += 1
+            }
+            setBsRowSheet(prevState => ({
+                ...prevState,
+                total_capital_and_liabilities: [
+                    ...prevState.total_capital_and_liabilities,
+                    ...update
+                ]
+            })) 
+        }
+    },[years])
+
+    // useEffect for empty row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setBsRowSheet(prevState => ({
+                ...prevState,
+                empty_row: [
+                    ...prevState.empty_row,
+                    ...update
+                ]
+            })) 
+        }
+    },[years])
+
+    // useEffects for asset section
+    // useEffect for empty asset header
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setBsRowSheet(prevState => ({
+                ...prevState,
+                assets: [
+                    ...prevState.assets,
+                    ...update
+                ]
+            })) 
+        }
+    },[years])
+
+    // useEffect for total fixed assets row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+
+            let landRow = 19;
+            let otherFixedAssetsRow = 25;
+
+            let update = [];
+            var columnCharacterIndex;
+            for (let i = 0; i < time_in_years; i++) {
+                columnCharacterIndex = getSpreadsheetColumn(ColIndex)
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        formula: `=SUM(${columnCharacterIndex}${landRow}:${columnCharacterIndex}${otherFixedAssetsRow})`,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setBsRowSheet(prevState => ({
+                ...prevState,
+                total_fixed_assets: [
+                    ...prevState.total_fixed_assets,
+                    ...update
+                ]
+            })) 
+        }
+    },[years])
+
+    // useEffect for total long term investment row
+    useEffect(()=>{
+        if (years) {
+            // 27 28
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+
+            let investmentRow = 27;
+            let otherIntangibleAssetsRow = 28;
+
+            let update = [];
+            var columnCharacterIndex;
+            for (let i = 0; i < time_in_years; i++) {
+                columnCharacterIndex = getSpreadsheetColumn(ColIndex)
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        formula: `=SUM(${columnCharacterIndex}${investmentRow}:${columnCharacterIndex}${otherIntangibleAssetsRow})`,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setBsRowSheet(prevState => ({
+                ...prevState,
+                total_long_term_investments: [
+                    ...prevState.total_long_term_investments,
+                    ...update
+                ]
+            })) 
+        }
+    },[years])
+
+    // useEffect for total current assets row
+    useEffect(()=>{
+        if (years) {
+            // 30 -> 33 sum
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+
+            let cashBankRow = 30;
+            let otherCurrentAssetsRow = 33;
+
+            let update = [];
+            var columnCharacterIndex;
+            for (let i = 0; i < time_in_years; i++) {
+                columnCharacterIndex = getSpreadsheetColumn(ColIndex)
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        formula: `=SUM(${columnCharacterIndex}${cashBankRow}:${columnCharacterIndex}${otherCurrentAssetsRow})`,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setBsRowSheet(prevState => ({
+                ...prevState,
+                total_current_assets: [
+                    ...prevState.total_current_assets,
+                    ...update
+                ]
+            })) 
+        }
+    },[years])
+
+    // useEffect for total assets row
+    useEffect(()=>{
+        if (years) {
+            //26 29 34
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+
+            let totalFixedAssetsRow = 26;
+            let totalLTIRow = 29;
+            let totalCurrAssetsRow = 34;
+
+            let update = [];
+            var columnCharacterIndex;
+            for (let i = 0; i < time_in_years; i++) {
+                columnCharacterIndex = getSpreadsheetColumn(ColIndex)
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        formula: `=${columnCharacterIndex}${totalFixedAssetsRow}+${columnCharacterIndex}${totalLTIRow}+${columnCharacterIndex}${totalCurrAssetsRow}`,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setBsRowSheet(prevState => ({
+                ...prevState,
+                total_assets: [
+                    ...prevState.total_assets,
+                    ...update
+                ]
+            })) 
+        }
+    },[years])
+
+    //useEffect for diff calculation row
+    useEffect(()=>{
+        if (years) {
+            //35 - 16
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+
+            let totalAssetsRow = 35;
+            let totalCapNliabRow = 16;
+
+            let update = [];
+            var columnCharacterIndex;
+            for (let i = 0; i < time_in_years; i++) {
+                columnCharacterIndex = getSpreadsheetColumn(ColIndex)
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        formula: `=ABS(${columnCharacterIndex}${totalAssetsRow}-${columnCharacterIndex}${totalCapNliabRow})`,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setBsRowSheet(prevState => ({
+                ...prevState,
+                diff: [
+                    ...prevState.diff,
                     ...update
                 ]
             })) 
@@ -2161,6 +2678,7 @@ function Spreadsheet() {
                                                         value={value.colVal}
                                                         colSpan={value.colSpan}
                                                         rowSpan={value.rowSpan}
+                                                        isReadOnly={value.isReadOnly}
                                                     />
                                                 )
                                             }
@@ -2181,6 +2699,7 @@ function Spreadsheet() {
                                                         value={value.colVal}
                                                         colSpan={value.colSpan}
                                                         rowSpan={value.rowSpan}
+                                                        isReadOnly={value.isReadOnly}
                                                     />
                                                 )
                                             }
@@ -2201,6 +2720,7 @@ function Spreadsheet() {
                                                         value={value.colVal}
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
                                                     />
                                                 )
                                             }
@@ -2242,6 +2762,7 @@ function Spreadsheet() {
                                                         colSpan={value.colSpan}
                                                         rowSpan={value.rowSpan}
                                                         formula={value.formula}
+                                                        isReadOnly={value.isReadOnly}
                                                     />
                                                 )
                                             }
@@ -2283,6 +2804,7 @@ function Spreadsheet() {
                                                         colSpan={value.colSpan}
                                                         rowSpan={value.rowSpan}
                                                         formula={value.formula}
+                                                        isReadOnly={value.isReadOnly}
                                                     />
                                                 )
                                             }
@@ -2344,6 +2866,7 @@ function Spreadsheet() {
                                                         colSpan={value.colSpan}
                                                         rowSpan={value.rowSpan}
                                                         formula={value.formula}
+                                                        isReadOnly={value.isReadOnly}
                                                     />
                                                 )
                                             }
@@ -2444,6 +2967,8 @@ function Spreadsheet() {
                                                         value={value.colVal}
                                                         colSpan={value.colSpan}
                                                         rowSpan={value.rowSpan}
+                                                        formula={value.formula}
+                                                        isReadOnly={value.isReadOnly}
                                                     />
                                                 )
                                             }
@@ -2464,6 +2989,30 @@ function Spreadsheet() {
                                                         value={value.colVal}
                                                         colSpan={value.colSpan}
                                                         rowSpan={value.rowSpan}
+                                                        formula={value.formula}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+
+                            {/*Empty row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.empty_row.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan} 
+                                                        isReadOnly={value.isReadOnly}
                                                     />
                                                 )
                                             }
@@ -2473,9 +3022,402 @@ function Spreadsheet() {
                             </RowDirective>
 
                             {/*Assets section */}
+                            {/*Assets header row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.assets.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan} 
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*land row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.land.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan} 
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*building civil structure row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.building_civil_structure.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan} 
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Plant/Machinery row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.plant_and_machinery.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan} 
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/**furniture and fixtures row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.furniture_and_fixtures.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan} 
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Office equipment row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.office_equipment.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Vehicles row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.vehicles.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*other fixed assets row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.other_fixed_assets.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Total fixed assets row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.total_fixed_assets.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        formula={value.formula}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Investment row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.investment.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*other intangible assets row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.other_intangible_assets.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*total long term investment row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.total_long_term_investments.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        formula={value.formula}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Cash bank row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.cash_bank.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*store stock row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.store_stock.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*debtors recievables row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.debtors_receivables.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*other current assets */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.other_current_assets.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*total current assets row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.total_current_assets.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        formula={value.formula}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Total assets row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.total_assets.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        formula={value.formula}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+
+                            {/*Diff section */}
+                            {/*Diff row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.diff.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        formula={value.formula}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                         </RowsDirective>
                         <ColumnsDirective>
-                            <ColumnDirective width={250} />
+                            <ColumnDirective width={300} />
                             {
                                 Object.keys(bsSheetVals).map((x, index)=>(
                                     <ColumnDirective key={index} width={100} />
@@ -2485,9 +3427,9 @@ function Spreadsheet() {
                     </SheetDirective>
                 </SheetsDirective>
             </SpreadsheetComponent>
-            <button>
+            {/* <button>
                 Add Value
-            </button>
+            </button> */}
         </div>
     );
 
