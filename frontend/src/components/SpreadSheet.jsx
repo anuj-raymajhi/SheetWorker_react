@@ -2028,6 +2028,7 @@ function Spreadsheet() {
                     </SheetDirective>
                     <SheetDirective name='BSheet & Ratios'>
                         <RowsDirective>
+                            {/*Capital and liabilities section */}
                             {/*audited/projected row */}
                             <RowDirective>
                                 <CellsDirective>
@@ -2088,6 +2089,268 @@ function Spreadsheet() {
                                     }
                                 </CellsDirective>
                             </RowDirective>
+                            {/*Share capital row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.share_capital.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        colSpan={value.colSpan}
+                                                        rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Reserves and Retained earnings row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.reserves_and_retained_earnings.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        colSpan={value.colSpan}
+                                                        rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Directors Loan/ Subordinated Loan row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.directors_loan_subordinated_loan.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        colSpan={value.colSpan}
+                                                        rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Effective networth row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.effective_networth.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        colSpan={value.colSpan}
+                                                        rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Long Term Loan (LTL) row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.long_term_loan.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        colSpan={value.colSpan}
+                                                        rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*principal of LTL repaid during the year row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.principal_of_LTL_repaid_during_the_year.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        colSpan={value.colSpan}
+                                                        rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Total long term loan row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.total_long_term_loan.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        colSpan={value.colSpan}
+                                                        rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Working Capital Loan row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.working_capital_loan.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        colSpan={value.colSpan}
+                                                        rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*creditors row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.creditors.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        colSpan={value.colSpan}
+                                                        rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Payables row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.payables.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        colSpan={value.colSpan}
+                                                        rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*other current liabilities and provisions row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.other_current_liabilities_and_provisions.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        colSpan={value.colSpan}
+                                                        rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*total current liabilities */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.total_current_liabilities.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        colSpan={value.colSpan}
+                                                        rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*total capital and liabilities row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        bsRowSheet.total_capital_and_liabilities.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        colSpan={value.colSpan}
+                                                        rowSpan={value.rowSpan}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+
+                            {/*Assets section */}
                         </RowsDirective>
                         <ColumnsDirective>
                             <ColumnDirective width={250} />
