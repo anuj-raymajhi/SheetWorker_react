@@ -1,4 +1,3 @@
-// import { useState } from 'react'
 import { useEffect, useState } from 'react';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import YearEntry from './pages/YearEntry';
@@ -50,5 +49,4 @@ function App() {
     </>
   )
 }
-
-export default App;
+export default App
