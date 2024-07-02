@@ -3,7 +3,7 @@ const {AuditTable} = require('../models/audit')
 const yearsData = async(req,res)=>{
     try{
         const years = await AuditTable.findAll({
-            attributes: ['Year_label'] // Select only the Year_label attribute
+            attributes: ['Year_label','audited_projected'] // Select only the Year_label attribute
         });
         if(!years){
             console.log(years)
