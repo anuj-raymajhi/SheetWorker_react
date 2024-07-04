@@ -809,7 +809,7 @@ function Spreadsheet() {
             ],
             inc_dec_in_loan_of_promoters: [
                 {
-                    colVal: 'Add/(Less): Increase/(Decrease) in Loan of Promoters',
+                    colVal: 'Add/(Less): Increase/(Decrease) in Loan from Promoters',
                     rowSpan: 1,
                     colSpan: 1,
                     index: 0,
@@ -3479,6 +3479,62 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for increase decrease in loan from promoters
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+
+            var BsheetCol;
+            var prevBsheetCol;
+
+            //balanced sheet 6th row is directors loan/ subordinated loan
+            //formula -> Bsheet!{currentYear}{6} - Bsheet!{prevYear}{6}
+            for (let i = 0; i < time_in_years; i++) {
+                BsheetCol = getSpreadsheetColumn(ColIndex);
+                prevBsheetCol = getSpreadsheetColumn(ColIndex-1)
+                
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `='BSheet & Ratios'!${BsheetCol}6-'BSheet & Ratios'!${BsheetCol}6`
+                        }
+                    )
+                } 
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `='BSheet & Ratios'!${BsheetCol}6-'BSheet & Ratios'!${prevBsheetCol}6`
+                        }
+                    )
+                }
+
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_financing_activities: {
+                    ...prevState.cash_from_financing_activities, 
+                    inc_dec_in_loan_of_promoters: [
+                        ...prevState.cash_from_financing_activities.inc_dec_in_loan_of_promoters,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
     useEffect(()=>{
         console.log('Cashflow row sheet : ', cfRowSheet)
     },[cfRowSheet])
@@ -5203,6 +5259,28 @@ function Spreadsheet() {
                                 <CellsDirective>
                                     {
                                         cfRowSheet.cash_from_financing_activities.drawing.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*increase decrease in loan of promoters */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_financing_activities.inc_dec_in_loan_of_promoters.map(
                                             (value, index) => {
                                                 return (
                                                     <CellDirective
