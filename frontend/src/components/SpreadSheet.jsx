@@ -605,7 +605,7 @@ function Spreadsheet() {
             audited_projected: [
                 {
                     colVal: 'Audited/Projected?',
-                    rowSpan: 1,
+                    rowSpan: 2,
                     colSpan: 1,
                     index: 0,
                     isReadOnly: true
@@ -800,7 +800,7 @@ function Spreadsheet() {
             ],
             drawing: [
                 {
-                    colVal: 'Less: Drawings',
+                    colVal: 'Less: Drawing',
                     rowSpan: 1,
                     colSpan: 1,
                     index: 0,
@@ -2465,6 +2465,184 @@ function Spreadsheet() {
 
 // useEffect logic for cashflow worksheet, whole sheet should be readonly
 
+    // useEffect for load the data
+    //TODO: to rename the parameters according to cashflow structure
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var mainColIndex = 1;
+            var yearCounter = years.yearStart;
+            let updates = {};
+            for (let i=0; i < time_in_years; i++){
+                updates[yearCounter] ={
+                    index:mainColIndex,
+                    audited_projected: null,
+                    year_label:`${yearCounter}/${(yearCounter + 1).toString().substr(-2)}`,
+                    capital_and_liabilities:{
+                        total_revenue_sales:null,
+                        cost_of_goods_sold:null,
+                        other_direct_expenses:null,
+                        gross_profit:null,
+                        other_income:null,
+                        gain_loss_on_sale_of_assest:null,
+                        office_administrative_overhead:null,
+                        financial_expenses_interest_exp:null,
+                        selling_and_distribution_expenses:null,
+                        profit_before_depreciation_and_tax:null,
+                        depreciation_expenses:null,
+                        income_tax:null,
+                        net_profit_after_tax:null,
+                        profit_upto_last_year:null,
+                        withdrawal_dividend_drawing:null,
+                        provision:null,
+                        profit_transferred_to_balanced_sheet:null,
+                        earning_before_interest_and_tax:null
+                    },
+                    assets:{
+                        total_revenue_sales:null,
+                        cost_of_goods_sold:null,
+                        other_direct_expenses:null,
+                        gross_profit:null,
+                        other_income:null,
+                        gain_loss_on_sale_of_assest:null,
+                        office_administrative_overhead:null,
+                        financial_expenses_interest_exp:null,
+                        selling_and_distribution_expenses:null,
+                        profit_before_depreciation_and_tax:null,
+                        depreciation_expenses:null,
+                        income_tax:null,
+                        net_profit_after_tax:null,
+                        profit_upto_last_year:null,
+                        withdrawal_dividend_drawing:null,
+                        provision:null,
+                        profit_transferred_to_balanced_sheet:null,
+                        earning_before_interest_and_tax:null
+                    },
+                    diff: null
+                }
+
+                yearCounter += 1;
+                mainColIndex += 1;
+            }
+            setCfSheetVals(prevState => ({
+                ...prevState,
+                ...updates
+            }))
+        }
+    },[years])
+
+    // useEffect for the cashflow worksheet column count
+    useEffect(() => {
+        if (cfSheetVals && years) {
+            console.log('CfSheet : ', cfSheetVals)
+            setCfSheetKeys(Object.keys(cfSheetVals))
+        }
+    },[cfSheetVals, years])
+
+    // useEffect for cashflow worksheet audited projected section
+    // useEffect for audited projected field
+    useEffect(()=>{
+        if(years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal: 'Audited',
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                audited_projected: {
+                    ...prevState.audited_projected, 
+                    audited_projected: [
+                        ...prevState.audited_projected.audited_projected,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
+    //useEffect for year label row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            let yearCounter = years.yearStart;
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  `${yearCounter}/${(yearCounter + 1).toString().substr(-2)}`,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+                yearCounter += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                audited_projected: {
+                    ...prevState.audited_projected, 
+                    year_label: [
+                        ...prevState.audited_projected.year_label,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
+    // useEffect for cash from operating activities section
+    // useEffect for cash from operating activities
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_operating_activities: {
+                    ...prevState.cash_from_operating_activities, 
+                    cash_from_operating_activities: [
+                        ...prevState.cash_from_operating_activities.cash_from_operating_activities,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
+
+
+
+    useEffect(()=>{
+        console.log('Cashflow row sheet : ', cfRowSheet)
+    },[cfRowSheet])
+
     const handleCellSave = (args) => {
         console.log('Cell saved:', args); // Logs detailed information about the saved cell
         console.log(`Value changed to ${args.value} at address ${args.address}`);
@@ -3715,19 +3893,281 @@ function Spreadsheet() {
                             }
                         </ColumnsDirective>
                     </SheetDirective>
-                    {/* <SheetDirective name='Cashflow'>
+                    <SheetDirective name='Cashflow'>
                         <RowsDirective>
-
+                            {/*Audited projected section */}
+                            {/*Audited projected row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.audited_projected.audited_projected.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Year Label row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.audited_projected.year_label.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Cash from operating activities section */}
+                            {/*Cash from operating activities row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.cash_from_operating_activities.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*profit after tax row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.profit_after_tax.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*interest paid row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.interest_paid.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*depreciation amortization row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.depreciation_amortization.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*decrease increase in stock row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.dec_inc_in_stock.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*decrease increase in receivable */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.dec_inc_in_receivables.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*decrease increase in other current assets */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.dec_inc_in_other_current_assets.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*increase decrease in creditors row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.inc_dec_in_creditors.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*increase decrease in payable */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.inc_dec_in_payable.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*increase decrease in other current liabilities */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.inc_dec_in_other_current_liabilities.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                         </RowsDirective>
+        
                         <ColumnsDirective>
-                            
+                            <ColumnDirective width={300} />
+                            {
+                                Object.keys(cfSheetVals).map(
+                                    (x, index) => (
+                                        <ColumnDirective key={index} width={100} />
+                                    )
+                                )
+                            }
                         </ColumnsDirective>
-                    </SheetDirective> */}
+                    </SheetDirective>
                 </SheetsDirective>
             </SpreadsheetComponent>
             {/* <button>
                 Add Value
             </button> */}
+            
         </div>
     );
 
