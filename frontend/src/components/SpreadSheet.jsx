@@ -356,7 +356,7 @@ function Spreadsheet() {
         ],
         working_capital_loan: [
             {
-                colVal: 'Working Capital Loan (STL)',
+                colVal: 'Working Capital Loan (WTL)',
                 rowSpan: 1,
                 colSpan: 1,
                 index: 0,
@@ -586,6 +586,294 @@ function Spreadsheet() {
         diff: [
             {
                 colVal: 'Diff',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ]
+    })
+
+// States for Cashflow worksheet
+
+    const [cfSheetKeys, setCfSheetKeys] = useState([])
+
+    const [cfSheetVals, setCfSheetVals] = useState({})
+
+    const [cfRowSheet, setCfRowSheet] = useState({
+        audited_projected: {
+            audited_projected: [
+                {
+                    colVal: 'Audited/Projected?',
+                    rowSpan: 2,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            year_label: [
+                {
+                    colVal: '',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ]
+        },
+        cash_from_operating_activities: {
+            cash_from_operating_activities: [
+                {
+                    colVal: 'Cash From Operating Activities',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            profit_after_tax: [
+                {
+                    colVal: 'Profit After Tax',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            interest_paid: [
+                {
+                    colVal: 'Add: Interest Paid',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            depreciation_amortization: [
+                {
+                    colVal: 'Add: Depreciation/ Amortization',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            dec_inc_in_stock: [
+                {
+                    colVal: 'Add/(Less): Decrease (Increase) in Stock',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            dec_inc_in_receivables: [
+                {
+                    colVal: 'Add/(Less): Decrease (Increase) in Receivables',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            dec_inc_in_other_current_assets: [
+                {
+                    colVal: 'Add/(Less): Decrease (Increase) in Other Current Assets',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            inc_dec_in_creditors: [
+                {
+                    colVal: 'Add/(Less): Increase (Decrease) in Creditors',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            inc_dec_in_payable: [
+                {
+                    colVal: 'Add/(Less): Increase (Decrease) in Payable',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            inc_dec_in_other_current_liabilities: [
+                {
+                    colVal: 'Add/(Less): Increase (Decrease) in Other Current Liabilities',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            loss_gain_on_sale_of_fixed_assets: [
+                {
+                    colVal: 'Add/(Less): Loss/(Gain) on Sale of Fixed Assets',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            cash_from_operating_activities_A: [
+                {
+                    colVal: 'Cash From Operating Activities (A)',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ]
+
+        },
+        empty_row_1: [
+            {
+                colVal: '',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        cash_from_investing_activities: {
+            cash_from_investing_activities: [
+                {
+                    colVal: 'Cash From Investing Activities',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            sale_purchase_of_fixed_assets: [
+                {
+                    colVal: 'Add/(Less): Sale (Purchase) of Fixed Assets',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            cash_from_investing_activities_B: [
+                {
+                    colVal: 'Cash From Investing Activities (B)',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ]
+        },
+        empty_row_2: [
+            {
+                colVal: '',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        cash_from_financing_activities: {
+            cash_from_financing_activities: [
+                {
+                    colVal: 'Cash From Financing Activities',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            inc_in_share_capital: [
+                {
+                    colVal: 'Add: Increase in Share Capital',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            drawing: [
+                {
+                    colVal: 'Less: Drawing',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            inc_dec_in_loan_of_promoters: [
+                {
+                    colVal: 'Add/(Less): Increase/(Decrease) in Loan of Promoters',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            inc_dec_in_long_term_loan: [
+                {
+                    colVal: 'Add/(Less): Increase/(Decrease) in Long Term Loan',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            inc_dec_in_short_term_loan: [
+                {
+                    colVal: 'Add/(Less): Increase/(Decrease) in Short Term Loan',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            interest_paid: [
+                {
+                    colVal: 'Less: Interest Paid',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            cash_from_financing_activities_C: [
+                {
+                    colVal: 'Cash from Financing Activities (C)',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ]
+        },
+        net_cash_flow_sum_ABC: [
+            {
+                colVal: 'Net Cash Flow (A+B+C)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        opening_cash_bank_balance: [
+            {
+                colVal: 'Add: Opening Cash/ Bank Balance',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        closing_cash_bank_balance: [
+            {
+                colVal: 'Closing Cash/ Bank Balance',
                 rowSpan: 1,
                 colSpan: 1,
                 index: 0,
@@ -2175,6 +2463,186 @@ function Spreadsheet() {
         }
     },[years])
 
+// useEffect logic for cashflow worksheet, whole sheet should be readonly
+
+    // useEffect for load the data
+    //TODO: to rename the parameters according to cashflow structure
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var mainColIndex = 1;
+            var yearCounter = years.yearStart;
+            let updates = {};
+            for (let i=0; i < time_in_years; i++){
+                updates[yearCounter] ={
+                    index:mainColIndex,
+                    audited_projected: null,
+                    year_label:`${yearCounter}/${(yearCounter + 1).toString().substr(-2)}`,
+                    capital_and_liabilities:{
+                        total_revenue_sales:null,
+                        cost_of_goods_sold:null,
+                        other_direct_expenses:null,
+                        gross_profit:null,
+                        other_income:null,
+                        gain_loss_on_sale_of_assest:null,
+                        office_administrative_overhead:null,
+                        financial_expenses_interest_exp:null,
+                        selling_and_distribution_expenses:null,
+                        profit_before_depreciation_and_tax:null,
+                        depreciation_expenses:null,
+                        income_tax:null,
+                        net_profit_after_tax:null,
+                        profit_upto_last_year:null,
+                        withdrawal_dividend_drawing:null,
+                        provision:null,
+                        profit_transferred_to_balanced_sheet:null,
+                        earning_before_interest_and_tax:null
+                    },
+                    assets:{
+                        total_revenue_sales:null,
+                        cost_of_goods_sold:null,
+                        other_direct_expenses:null,
+                        gross_profit:null,
+                        other_income:null,
+                        gain_loss_on_sale_of_assest:null,
+                        office_administrative_overhead:null,
+                        financial_expenses_interest_exp:null,
+                        selling_and_distribution_expenses:null,
+                        profit_before_depreciation_and_tax:null,
+                        depreciation_expenses:null,
+                        income_tax:null,
+                        net_profit_after_tax:null,
+                        profit_upto_last_year:null,
+                        withdrawal_dividend_drawing:null,
+                        provision:null,
+                        profit_transferred_to_balanced_sheet:null,
+                        earning_before_interest_and_tax:null
+                    },
+                    diff: null
+                }
+
+                yearCounter += 1;
+                mainColIndex += 1;
+            }
+            setCfSheetVals(prevState => ({
+                ...prevState,
+                ...updates
+            }))
+        }
+    },[years])
+
+    // useEffect for the cashflow worksheet column count
+    useEffect(() => {
+        if (cfSheetVals && years) {
+            console.log('CfSheet : ', cfSheetVals)
+            setCfSheetKeys(Object.keys(cfSheetVals))
+        }
+    },[cfSheetVals, years])
+
+    // useEffect for cashflow worksheet audited projected section
+    // useEffect for audited projected field
+    useEffect(()=>{
+        if(years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal: 'Audited',
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                audited_projected: {
+                    ...prevState.audited_projected, 
+                    audited_projected: [
+                        ...prevState.audited_projected.audited_projected,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
+    //useEffect for year label row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            let yearCounter = years.yearStart;
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  `${yearCounter}/${(yearCounter + 1).toString().substr(-2)}`,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+                yearCounter += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                audited_projected: {
+                    ...prevState.audited_projected, 
+                    year_label: [
+                        ...prevState.audited_projected.year_label,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
+    // useEffect for cash from operating activities section
+    // useEffect for cash from operating activities
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_operating_activities: {
+                    ...prevState.cash_from_operating_activities, 
+                    cash_from_operating_activities: [
+                        ...prevState.cash_from_operating_activities.cash_from_operating_activities,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
+
+
+
+    useEffect(()=>{
+        console.log('Cashflow row sheet : ', cfRowSheet)
+    },[cfRowSheet])
+
     const handleCellSave = (args) => {
         console.log('Cell saved:', args); // Logs detailed information about the saved cell
         console.log(`Value changed to ${args.value} at address ${args.address}`);
@@ -3425,11 +3893,281 @@ function Spreadsheet() {
                             }
                         </ColumnsDirective>
                     </SheetDirective>
+                    <SheetDirective name='Cashflow'>
+                        <RowsDirective>
+                            {/*Audited projected section */}
+                            {/*Audited projected row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.audited_projected.audited_projected.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Year Label row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.audited_projected.year_label.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Cash from operating activities section */}
+                            {/*Cash from operating activities row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.cash_from_operating_activities.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*profit after tax row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.profit_after_tax.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*interest paid row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.interest_paid.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*depreciation amortization row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.depreciation_amortization.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*decrease increase in stock row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.dec_inc_in_stock.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*decrease increase in receivable */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.dec_inc_in_receivables.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*decrease increase in other current assets */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.dec_inc_in_other_current_assets.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*increase decrease in creditors row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.inc_dec_in_creditors.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*increase decrease in payable */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.inc_dec_in_payable.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*increase decrease in other current liabilities */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.inc_dec_in_other_current_liabilities.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                        </RowsDirective>
+        
+                        <ColumnsDirective>
+                            <ColumnDirective width={300} />
+                            {
+                                Object.keys(cfSheetVals).map(
+                                    (x, index) => (
+                                        <ColumnDirective key={index} width={100} />
+                                    )
+                                )
+                            }
+                        </ColumnsDirective>
+                    </SheetDirective>
                 </SheetsDirective>
             </SpreadsheetComponent>
             {/* <button>
                 Add Value
             </button> */}
+            
         </div>
     );
 
