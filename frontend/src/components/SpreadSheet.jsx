@@ -2804,6 +2804,63 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for decrease increase in receivable
+        //TODO: formula for first year not clear
+        useEffect(()=>{
+            if (years) {
+                var time_in_years = years.yearEnd - years.yearStart + 1;
+                var ColIndex = 1;
+                let update = [];
+                var BsheetCol;
+                var prevBsheetCol;
+                for (let i = 0; i < time_in_years; i++) {
+                    // 32st row in Bsheet&Ratios contains information about debtors/receivable
+                    // formula {prevYear}{32} - {currentYear}{32}
+                    if (ColIndex === 1) {
+                        BsheetCol = getSpreadsheetColumn(ColIndex);
+                        update.push(
+                            {
+                                colVal:  ``,
+                                colSpan: 1,
+                                rowSpan: 1,
+                                index: ColIndex,
+                                isReadOnly: true,
+                                formula: `='BSheet & Ratios'!${BsheetCol}32-'BSheet & Ratios'!${BsheetCol}32`
+                            }
+                        )
+                    }
+                    else {
+                        let prevColIndex = ColIndex - 1;
+                        BsheetCol = getSpreadsheetColumn(ColIndex);
+                        prevBsheetCol = getSpreadsheetColumn(prevColIndex);
+    
+                        update.push(
+                            {
+                                colVal:  ``,
+                                colSpan: 1,
+                                rowSpan: 1,
+                                index: ColIndex,
+                                isReadOnly: true,
+                                formula: `='BSheet & Ratios'!${prevBsheetCol}32-'BSheet & Ratios'!${BsheetCol}32`
+                            }
+                        )
+                    }
+    
+                    ColIndex += 1;
+                }
+                setCfRowSheet(prevState => ({
+                    ...prevState,
+                    cash_from_operating_activities: {
+                        ...prevState.cash_from_operating_activities, 
+                        dec_inc_in_receivables: [
+                            ...prevState.cash_from_operating_activities.dec_inc_in_receivables,
+                            ...update
+                        ]
+                    }
+                }))
+            }
+        },[years])
+
     useEffect(()=>{
         console.log('Cashflow row sheet : ', cfRowSheet)
     },[cfRowSheet])
@@ -4227,6 +4284,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
