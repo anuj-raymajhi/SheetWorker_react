@@ -2673,6 +2673,42 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for interest paid
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var temp;
+            var PLcol;
+            for (let i = 0; i < time_in_years; i++) {
+                temp = getOddNumberAtIndex(ColIndex)
+                PLcol = getSpreadsheetColumn(temp)
+                //12th row in PLSheet is financial expenses / interest expenses
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `=PL!${PLcol}12`
+                    }
+                )
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_operating_activities: {
+                    ...prevState.cash_from_operating_activities, 
+                    interest_paid: [
+                        ...prevState.cash_from_operating_activities.interest_paid,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
 
 
 
@@ -4033,6 +4069,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
