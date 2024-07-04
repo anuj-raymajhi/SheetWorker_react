@@ -3126,6 +3126,42 @@ function Spreadsheet() {
         }
     },[years]) 
 
+    // useEffect for cash from operating activities value, sum
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            // sum from row 4 to 13
+            let pftAfterTaxRow = 4;
+            let LGonSaleRow = 13;
+            var columnCharacterIndex;
+            for (let i = 0; i < time_in_years; i++) {
+                columnCharacterIndex = getSpreadsheetColumn(ColIndex)
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `=SUM(${columnCharacterIndex}${pftAfterTaxRow}:${columnCharacterIndex}${LGonSaleRow})`
+                    }
+                )
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_operating_activities: {
+                    ...prevState.cash_from_operating_activities, 
+                    cash_from_operating_activities_A: [
+                        ...prevState.cash_from_operating_activities.cash_from_operating_activities_A,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
 
     useEffect(()=>{
         console.log('Cashflow row sheet : ', cfRowSheet)
@@ -4682,6 +4718,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
