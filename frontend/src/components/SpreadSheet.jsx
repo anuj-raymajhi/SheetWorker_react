@@ -3535,6 +3535,62 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for increase decrease in long term loan
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+
+            var BsheetCol;
+            var prevBsheetCol;
+
+            //balanced sheet 8th row is long term loan
+            //formula -> Bsheet!{currentYear}{8} - Bsheet!{prevYear}{8}
+            for (let i = 0; i < time_in_years; i++) {
+                BsheetCol = getSpreadsheetColumn(ColIndex);
+                prevBsheetCol = getSpreadsheetColumn(ColIndex-1)
+                
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `='BSheet & Ratios'!${BsheetCol}8-'BSheet & Ratios'!${BsheetCol}8`
+                        }
+                    )
+                } 
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `='BSheet & Ratios'!${BsheetCol}8-'BSheet & Ratios'!${prevBsheetCol}8`
+                        }
+                    )
+                }
+
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_financing_activities: {
+                    ...prevState.cash_from_financing_activities, 
+                    inc_dec_in_long_term_loan: [
+                        ...prevState.cash_from_financing_activities.inc_dec_in_long_term_loan,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
     useEffect(()=>{
         console.log('Cashflow row sheet : ', cfRowSheet)
     },[cfRowSheet])
@@ -5298,8 +5354,30 @@ function Spreadsheet() {
                                     }
                                 </CellsDirective>
                             </RowDirective>
+                            {/* increase decrease in long term loan */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_financing_activities.inc_dec_in_long_term_loan.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                         </RowsDirective>
-        
+
                         <ColumnsDirective>
                             <ColumnDirective width={360} />
                             {
