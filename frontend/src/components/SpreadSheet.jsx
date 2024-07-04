@@ -356,7 +356,7 @@ function Spreadsheet() {
         ],
         working_capital_loan: [
             {
-                colVal: 'Working Capital Loan (WTL)',
+                colVal: 'Working Capital Loan (STL)',
                 rowSpan: 1,
                 colSpan: 1,
                 index: 0,
