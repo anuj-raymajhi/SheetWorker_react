@@ -3259,6 +3259,41 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for cash from investing activities
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            let salePurFixedAssetRow = 17;
+            var columnCharacterIndex;
+            for (let i = 0; i < time_in_years; i++) {
+                columnCharacterIndex = getSpreadsheetColumn(ColIndex)
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `=${columnCharacterIndex}${salePurFixedAssetRow}`
+                    }
+                )
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_investing_activities: {
+                    ...prevState.cash_from_investing_activities, 
+                    cash_from_investing_activities_B: [
+                        ...prevState.cash_from_investing_activities.cash_from_investing_activities_B,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
     useEffect(()=>{
         console.log('Cashflow row sheet : ', cfRowSheet)
     },[cfRowSheet])
@@ -4872,6 +4907,28 @@ function Spreadsheet() {
                                 <CellsDirective>
                                     {
                                         cfRowSheet.cash_from_investing_activities.sale_purchase_of_fixed_assets.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*cash from investing activities row, sum */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_investing_activities.cash_from_investing_activities_B.map(
                                             (value, index) => {
                                                 return (
                                                     <CellDirective
