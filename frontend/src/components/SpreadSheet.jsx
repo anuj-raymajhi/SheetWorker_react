@@ -4149,6 +4149,48 @@ function Spreadsheet() {
                                     }
                                 </CellsDirective>
                             </RowDirective>
+                            {/*loss gain on sale of fixed assets row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.loss_gain_on_sale_of_fixed_assets.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*cash from operating activities A value row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_operating_activities.cash_from_operating_activities_A.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                         </RowsDirective>
         
                         <ColumnsDirective>
