@@ -3647,6 +3647,43 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for interest paid row, using 12th row in PL worksheet
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var temp;
+            var PLcol;
+            //interest expenses in 12th row in PL worksheet
+            for (let i = 0; i < time_in_years; i++) {
+                temp = getOddNumberAtIndex(ColIndex)
+                PLcol = getSpreadsheetColumn(temp)
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        formula: `=-PL!${PLcol}12`,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_financing_activities: {
+                    ...prevState.cash_from_financing_activities, 
+                    interest_paid: [
+                        ...prevState.cash_from_financing_activities.interest_paid,
+                        ...update
+                    ]
+                }
+            })) 
+        }
+    },[years])
+
     useEffect(()=>{
         console.log('Cashflow row sheet : ', cfRowSheet)
     },[cfRowSheet])
@@ -5454,7 +5491,28 @@ function Spreadsheet() {
                                     }
                                 </CellsDirective>
                             </RowDirective>
-
+                            {/*interest paid row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_financing_activities.interest_paid.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
 
                         </RowsDirective>
 
