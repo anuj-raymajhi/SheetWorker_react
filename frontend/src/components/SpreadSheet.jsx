@@ -3386,7 +3386,61 @@ function Spreadsheet() {
         }
     },[years])
 
-    
+    // useEffect for increase in share capital
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+
+            var BsheetCol;
+            var prevBsheetCol;
+
+            //balanced sheet 4th row is share capital
+            //formula -> Bsheet!{currentYear}{4} - Bsheet!{prevYear}{4}
+            for (let i = 0; i < time_in_years; i++) {
+                BsheetCol = getSpreadsheetColumn(ColIndex);
+                prevBsheetCol = getSpreadsheetColumn(ColIndex-1)
+                
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `='BSheet & Ratios'!${BsheetCol}4-'BSheet & Ratios'!${BsheetCol}4`
+                        }
+                    )
+                } 
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `='BSheet & Ratios'!${BsheetCol}4-'BSheet & Ratios'!${prevBsheetCol}4`
+                        }
+                    )
+                }
+
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_financing_activities: {
+                    ...prevState.cash_from_financing_activities, 
+                    inc_in_share_capital: [
+                        ...prevState.cash_from_financing_activities.inc_in_share_capital,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
 
     useEffect(()=>{
         console.log('Cashflow row sheet : ', cfRowSheet)
@@ -5078,6 +5132,28 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*increase in share capital row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_financing_activities.inc_in_share_capital.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
