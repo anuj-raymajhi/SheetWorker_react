@@ -594,6 +594,294 @@ function Spreadsheet() {
         ]
     })
 
+// States for Cashflow worksheet
+
+    const [cfSheetKeys, setCfSheetKeys] = useState([])
+
+    const [cfSheetVals, setCfSheetVals] = useState({})
+
+    const [cfRowSheet, setCfRowSheet] = useState({
+        audited_projected: {
+            audited_projected: [
+                {
+                    colVal: 'Audited/Projected?',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            year_label: [
+                {
+                    colVal: '',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ]
+        },
+        cash_from_operating_activities: {
+            cash_from_operating_activities: [
+                {
+                    colVal: 'Cash From Operating Activities',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            profit_after_tax: [
+                {
+                    colVal: 'Profit After Tax',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            interest_paid: [
+                {
+                    colVal: 'Add: Interest Paid',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            depreciation_amortization: [
+                {
+                    colVal: 'Add: Depreciation/ Amortization',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            dec_inc_in_stock: [
+                {
+                    colVal: 'Add/(Less): Decrease (Increase) in Stock',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            dec_inc_in_receivables: [
+                {
+                    colVal: 'Add/(Less): Decrease (Increase) in Receivables',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            dec_inc_in_other_current_assets: [
+                {
+                    colVal: 'Add/(Less): Decrease (Increase) in Other Current Assets',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            inc_dec_in_creditors: [
+                {
+                    colVal: 'Add/(Less): Increase (Decrease) in Creditors',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            inc_dec_in_payable: [
+                {
+                    colVal: 'Add/(Less): Increase (Decrease) in Payable',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            inc_dec_in_other_current_liabilities: [
+                {
+                    colVal: 'Add/(Less): Increase (Decrease) in Other Current Liabilities',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            loss_gain_on_sale_of_fixed_assets: [
+                {
+                    colVal: 'Add/(Less): Loss/(Gain) on Sale of Fixed Assets',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            cash_from_operating_activities_A: [
+                {
+                    colVal: 'Cash From Operating Activities (A)',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ]
+
+        },
+        empty_row_1: [
+            {
+                colVal: '',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        cash_from_investing_activities: {
+            cash_from_investing_activities: [
+                {
+                    colVal: 'Cash From Investing Activities',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            sale_purchase_of_fixed_assets: [
+                {
+                    colVal: 'Add/(Less): Sale (Purchase) of Fixed Assets',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            cash_from_investing_activities_B: [
+                {
+                    colVal: 'Cash From Investing Activities (B)',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ]
+        },
+        empty_row_2: [
+            {
+                colVal: '',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        cash_from_financing_activities: {
+            cash_from_financing_activities: [
+                {
+                    colVal: 'Cash From Financing Activities',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            inc_in_share_capital: [
+                {
+                    colVal: 'Add: Increase in Share Capital',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            drawing: [
+                {
+                    colVal: 'Less: Drawings',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            inc_dec_in_loan_of_promoters: [
+                {
+                    colVal: 'Add/(Less): Increase/(Decrease) in Loan of Promoters',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            inc_dec_in_long_term_loan: [
+                {
+                    colVal: 'Add/(Less): Increase/(Decrease) in Long Term Loan',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            inc_dec_in_short_term_loan: [
+                {
+                    colVal: 'Add/(Less): Increase/(Decrease) in Short Term Loan',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            interest_paid: [
+                {
+                    colVal: 'Less: Interest Paid',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            cash_from_financing_activities_C: [
+                {
+                    colVal: 'Cash from Financing Activities (C)',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ]
+        },
+        net_cash_flow_sum_ABC: [
+            {
+                colVal: 'Net Cash Flow (A+B+C)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        opening_cash_bank_balance: [
+            {
+                colVal: 'Add: Opening Cash/ Bank Balance',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        closing_cash_bank_balance: [
+            {
+                colVal: 'Closing Cash/ Bank Balance',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ]
+    })
+
 
     // useEffect to initialize the years values
     useEffect(()=>{
@@ -2175,6 +2463,8 @@ function Spreadsheet() {
         }
     },[years])
 
+// useEffect logic for cashflow worksheet, whole sheet should be readonly
+
     const handleCellSave = (args) => {
         console.log('Cell saved:', args); // Logs detailed information about the saved cell
         console.log(`Value changed to ${args.value} at address ${args.address}`);
@@ -3425,6 +3715,14 @@ function Spreadsheet() {
                             }
                         </ColumnsDirective>
                     </SheetDirective>
+                    {/* <SheetDirective name='Cashflow'>
+                        <RowsDirective>
+
+                        </RowsDirective>
+                        <ColumnsDirective>
+                            
+                        </ColumnsDirective>
+                    </SheetDirective> */}
                 </SheetsDirective>
             </SpreadsheetComponent>
             {/* <button>
