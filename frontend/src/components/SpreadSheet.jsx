@@ -3352,6 +3352,40 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for cash from financing activities section
+    // useEffect for cash from financing activities header row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: ``
+                    }
+                )
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_financing_activities: {
+                    ...prevState.cash_from_financing_activities, 
+                    cash_from_financing_activities: [
+                        ...prevState.cash_from_financing_activities.cash_from_financing_activities,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
     
 
     useEffect(()=>{
@@ -5012,6 +5046,29 @@ function Spreadsheet() {
                                 <CellsDirective>
                                     {
                                         cfRowSheet.empty_row_2.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+
+                            {/*cash from financing activities section */}
+                            {/*cash from financing activities header row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_financing_activities.cash_from_financing_activities.map(
                                             (value, index) => {
                                                 return (
                                                     <CellDirective
