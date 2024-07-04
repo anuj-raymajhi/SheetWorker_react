@@ -3042,7 +3042,7 @@ function Spreadsheet() {
             var BsheetCol;
             var prevBsheetCol;
             for (let i = 0; i < time_in_years; i++) {
-                // 14th row in Bsheet&Ratios contains information about creditors
+                // 14th row in Bsheet&Ratios contains information about other current liabilities
                 // formula {currentYear}{14} - {prevYear}{14}
                 if (ColIndex === 1) {
                     BsheetCol = getSpreadsheetColumn(ColIndex);
@@ -3088,6 +3088,44 @@ function Spreadsheet() {
             }))
         }
     },[years])
+
+    // useEffect for loss gain on sale of fixed asset
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var temp;
+            var PLcol;
+            for (let i = 0; i < time_in_years; i++) {
+                temp = getOddNumberAtIndex(ColIndex)
+                PLcol = getSpreadsheetColumn(temp)
+                //10th row in PLSheet is gain/ loss on sale of asset
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `=PL!${PLcol}10*(-1)`
+                    }
+                )
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_operating_activities: {
+                    ...prevState.cash_from_operating_activities, 
+                    loss_gain_on_sale_of_fixed_assets: [
+                        ...prevState.cash_from_operating_activities.loss_gain_on_sale_of_fixed_assets,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years]) 
+
 
     useEffect(()=>{
         console.log('Cashflow row sheet : ', cfRowSheet)
@@ -4622,6 +4660,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
