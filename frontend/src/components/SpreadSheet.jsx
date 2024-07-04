@@ -3590,6 +3590,62 @@ function Spreadsheet() {
             }))
         }
     },[years])
+    
+    // useEffect for increase decrease in short term loan row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+
+            var BsheetCol;
+            var prevBsheetCol;
+
+            //balanced sheet 11th row is working capital loan (stl)
+            //formula -> Bsheet!{currentYear}{11} - Bsheet!{prevYear}{11}
+            for (let i = 0; i < time_in_years; i++) {
+                BsheetCol = getSpreadsheetColumn(ColIndex);
+                prevBsheetCol = getSpreadsheetColumn(ColIndex-1)
+                
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `='BSheet & Ratios'!${BsheetCol}11-'BSheet & Ratios'!${BsheetCol}11`
+                        }
+                    )
+                } 
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `='BSheet & Ratios'!${BsheetCol}11-'BSheet & Ratios'!${prevBsheetCol}11`
+                        }
+                    )
+                }
+
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_financing_activities: {
+                    ...prevState.cash_from_financing_activities, 
+                    inc_dec_in_short_term_loan: [
+                        ...prevState.cash_from_financing_activities.inc_dec_in_short_term_loan,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
 
     useEffect(()=>{
         console.log('Cashflow row sheet : ', cfRowSheet)
@@ -5376,6 +5432,30 @@ function Spreadsheet() {
                                     }
                                 </CellsDirective>
                             </RowDirective>
+                            {/*increase decrease in short term loan */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_financing_activities.inc_dec_in_short_term_loan.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+
+
                         </RowsDirective>
 
                         <ColumnsDirective>
