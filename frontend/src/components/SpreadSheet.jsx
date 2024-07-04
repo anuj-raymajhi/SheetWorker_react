@@ -4191,10 +4191,31 @@ function Spreadsheet() {
                                     }
                                 </CellsDirective>
                             </RowDirective>
+                            {/*empty row 1 */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.empty_row_1.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                         </RowsDirective>
         
                         <ColumnsDirective>
-                            <ColumnDirective width={300} />
+                            <ColumnDirective width={360} />
                             {
                                 Object.keys(cfSheetVals).map(
                                     (x, index) => (
