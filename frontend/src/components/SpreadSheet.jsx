@@ -2747,6 +2747,63 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for decrease increase in stock
+    //TODO: formula for first year not clear
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var BsheetCol;
+            var prevBsheetCol;
+            for (let i = 0; i < time_in_years; i++) {
+                // 31st row in Bsheet&Ratios contains information about store/stock
+                // formula {prevYear}{31} - {currentYear}{31}
+                if (ColIndex === 1) {
+                    BsheetCol = getSpreadsheetColumn(ColIndex);
+                    update.push(
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `='BSheet & Ratios'!${BsheetCol}31-'BSheet & Ratios'!${BsheetCol}31`
+                        }
+                    )
+                }
+                else {
+                    let prevColIndex = ColIndex - 1;
+                    BsheetCol = getSpreadsheetColumn(ColIndex);
+                    prevBsheetCol = getSpreadsheetColumn(prevColIndex);
+
+                    update.push(
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `='BSheet & Ratios'!${prevBsheetCol}31-'BSheet & Ratios'!${BsheetCol}31`
+                        }
+                    )
+                }
+
+                ColIndex += 1;
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_operating_activities: {
+                    ...prevState.cash_from_operating_activities, 
+                    dec_inc_in_stock: [
+                        ...prevState.cash_from_operating_activities.dec_inc_in_stock,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
     useEffect(()=>{
         console.log('Cashflow row sheet : ', cfRowSheet)
     },[cfRowSheet])
@@ -4148,6 +4205,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
