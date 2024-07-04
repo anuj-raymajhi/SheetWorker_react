@@ -2975,6 +2975,62 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for increase decrease in payable
+    //TODO: formula for first year not clear
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var BsheetCol;
+            var prevBsheetCol;
+            for (let i = 0; i < time_in_years; i++) {
+                // 13th row in Bsheet&Ratios contains information about payable
+                // formula {currentYear}{13} - {prevYear}{13}
+                if (ColIndex === 1) {
+                    BsheetCol = getSpreadsheetColumn(ColIndex);
+                    update.push(
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `='BSheet & Ratios'!${BsheetCol}13-'BSheet & Ratios'!${BsheetCol}13`
+                        }
+                    )
+                }
+                else {
+                    let prevColIndex = ColIndex - 1;
+                    BsheetCol = getSpreadsheetColumn(ColIndex);
+                    prevBsheetCol = getSpreadsheetColumn(prevColIndex);
+
+                    update.push(
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `='BSheet & Ratios'!${BsheetCol}13-'BSheet & Ratios'!${prevBsheetCol}13`
+                        }
+                    )
+                }
+
+                ColIndex += 1;
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_operating_activities: {
+                    ...prevState.cash_from_operating_activities, 
+                    inc_dec_in_payable: [
+                        ...prevState.cash_from_operating_activities.inc_dec_in_payable,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
 
     useEffect(()=>{
         console.log('Cashflow row sheet : ', cfRowSheet)
@@ -4465,6 +4521,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
