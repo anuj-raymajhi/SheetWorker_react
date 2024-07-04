@@ -3195,7 +3195,69 @@ function Spreadsheet() {
         }
     },[years])
 
-    
+    // useEffect for sale (purchase) of fixed assets
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            // for PL sheet
+            var temp;
+            var PLcol;
+
+            // for Bsheet
+            var BsheetCol;
+            var prevBsheetCol;
+
+            for (let i = 0; i < time_in_years; i++) {
+                
+                temp = getOddNumberAtIndex(ColIndex)
+                PLcol = getSpreadsheetColumn(temp)
+
+                BsheetCol = getSpreadsheetColumn(ColIndex)
+                prevBsheetCol = getSpreadsheetColumn(ColIndex - 1)
+
+                //Balanced sheet 26th row -> total fixed asset
+                //PL sheet 15th row -> depreciation expenses
+                // formula : Bsheet!{currentYear}{26} + PL!{currentYear}{15} - Bsheet!{prevYear}{26}
+                if (ColIndex === 1){
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `='BSheet & Ratios'!${BsheetCol}26 + PL!${PLcol}15 - 'BSheet & Ratios'!${BsheetCol}26`
+                        }
+                    )
+                }
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `='BSheet & Ratios'!${BsheetCol}26 - PL!${PLcol}15 + 'BSheet & Ratios'!${prevBsheetCol}26`
+                        }
+                    )
+                }
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_investing_activities: {
+                    ...prevState.cash_from_investing_activities, 
+                    sale_purchase_of_fixed_assets: [
+                        ...prevState.cash_from_investing_activities.sale_purchase_of_fixed_assets,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
 
     useEffect(()=>{
         console.log('Cashflow row sheet : ', cfRowSheet)
@@ -4798,6 +4860,28 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*sale (purchase) of fixed assets */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_investing_activities.sale_purchase_of_fixed_assets.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
