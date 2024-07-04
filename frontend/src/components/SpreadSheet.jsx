@@ -3163,6 +3163,40 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect logic for cash from investing activities section
+    // useEffect for cash from investing activities row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                cash_from_investing_activities: {
+                    ...prevState.cash_from_investing_activities, 
+                    cash_from_investing_activities: [
+                        ...prevState.cash_from_investing_activities.cash_from_investing_activities,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
+    
+
     useEffect(()=>{
         console.log('Cashflow row sheet : ', cfRowSheet)
     },[cfRowSheet])
@@ -4726,6 +4760,7 @@ function Spreadsheet() {
                                     }
                                 </CellsDirective>
                             </RowDirective>
+
                             {/*empty row 1 */}
                             <RowDirective>
                                 <CellsDirective>
@@ -4734,6 +4769,29 @@ function Spreadsheet() {
                                             (value, index) => {
                                                 return (
                                                     <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+
+                            {/*Cash from investing activities section */}
+                            {/*Cash from investing activities row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.cash_from_investing_activities.cash_from_investing_activities.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
                                                         key={index}
                                                         index={value.index}
                                                         value={value.colVal}
