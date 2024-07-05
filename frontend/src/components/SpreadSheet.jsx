@@ -3589,7 +3589,7 @@ function Spreadsheet() {
                             rowSpan: 1,
                             index: ColIndex,
                             isReadOnly: true,
-                            formula: `='BSheet & Ratios'!${BsheetCol}6-'BSheet & Ratios'!${BsheetCol}6`
+                            formula: ``
                         }
                     )
                 } 
@@ -3645,7 +3645,7 @@ function Spreadsheet() {
                             rowSpan: 1,
                             index: ColIndex,
                             isReadOnly: true,
-                            formula: `='BSheet & Ratios'!${BsheetCol}8-'BSheet & Ratios'!${BsheetCol}8`
+                            formula: ``
                         }
                     )
                 } 
@@ -3701,7 +3701,7 @@ function Spreadsheet() {
                             rowSpan: 1,
                             index: ColIndex,
                             isReadOnly: true,
-                            formula: `='BSheet & Ratios'!${BsheetCol}11-'BSheet & Ratios'!${BsheetCol}11`
+                            formula: ``
                         }
                     )
                 } 
@@ -3745,16 +3745,30 @@ function Spreadsheet() {
             for (let i = 0; i < time_in_years; i++) {
                 temp = getOddNumberAtIndex(ColIndex)
                 PLcol = getSpreadsheetColumn(temp)
-                update.push( 
-                    {
-                        colVal:  ``,
-                        colSpan: 1,
-                        rowSpan: 1,
-                        index: ColIndex,
-                        formula: `=-PL!${PLcol}12`,
-                        isReadOnly: true
-                    }
-                )
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            formula: ``,
+                            isReadOnly: true
+                        }
+                    )
+                }
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            formula: `=-PL!${PLcol}12`,
+                            isReadOnly: true
+                        }
+                    )
+                }
                 ColIndex += 1
             }
             setCfRowSheet(prevState => ({
