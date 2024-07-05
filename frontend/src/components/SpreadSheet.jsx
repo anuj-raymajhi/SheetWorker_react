@@ -2750,16 +2750,30 @@ function Spreadsheet() {
                 temp = getOddNumberAtIndex(ColIndex)
                 PLcol = getSpreadsheetColumn(temp)
                 //15th row in PLSheet is depreciation expenses
-                update.push( 
-                    {
-                        colVal:  ``,
-                        colSpan: 1,
-                        rowSpan: 1,
-                        index: ColIndex,
-                        isReadOnly: true,
-                        formula: `=PL!${PLcol}15`
-                    }
-                )
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: ``
+                        }
+                    )
+                }
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `=PL!${PLcol}15`
+                        }
+                    )
+                }
                 ColIndex += 1
             }
             setCfRowSheet(prevState => ({
