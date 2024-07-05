@@ -5686,19 +5686,70 @@ function Spreadsheet() {
                                     }
                                 </CellsDirective>
                             </RowDirective>
+
                             {/*net cash flow (A+B+C) row */}
-                            {/* <RowDirective>
+                            <RowDirective>
                                 <CellsDirective>
                                     {
                                         cfRowSheet.net_cash_flow_sum_ABC.map(
                                             (value, index) => {
-                                                return ()
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
                                             }
                                         )
                                     }
                                 </CellsDirective>
-                            </RowDirective> */}
-
+                            </RowDirective>
+                            {/*opening cash/bank balance row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.opening_cash_bank_balance.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*closing cash/bank balance row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.closing_cash_bank_balance.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                         </RowsDirective>
 
                         <ColumnsDirective>
