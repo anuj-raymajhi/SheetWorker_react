@@ -3482,7 +3482,7 @@ function Spreadsheet() {
                             rowSpan: 1,
                             index: ColIndex,
                             isReadOnly: true,
-                            formula: `='BSheet & Ratios'!${BsheetCol}4-'BSheet & Ratios'!${BsheetCol}4`
+                            formula: ``
                         }
                     )
                 } 
@@ -3526,16 +3526,30 @@ function Spreadsheet() {
             for (let i = 0; i < time_in_years; i++) {
                 temp = getOddNumberAtIndex(ColIndex)
                 PLcol = getSpreadsheetColumn(temp)
-                update.push( 
-                    {
-                        colVal:  ``,
-                        colSpan: 1,
-                        rowSpan: 1,
-                        index: ColIndex,
-                        formula: `=-PL!${PLcol}19`,
-                        isReadOnly: true
-                    }
-                )
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            formula: ``,
+                            isReadOnly: true
+                        }
+                    )
+                }
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            formula: `=-PL!${PLcol}19`,
+                            isReadOnly: true
+                        }
+                    )
+                }
                 ColIndex += 1
             }
             setCfRowSheet(prevState => ({
