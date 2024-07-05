@@ -2648,16 +2648,30 @@ function Spreadsheet() {
                 temp = getOddNumberAtIndex(ColIndex)
                 PLcol = getSpreadsheetColumn(temp)
                 //17th row in PLSheet is net profit after tax
-                update.push( 
-                    {
-                        colVal:  ``,
-                        colSpan: 1,
-                        rowSpan: 1,
-                        index: ColIndex,
-                        isReadOnly: true,
-                        formula: `=PL!${PLcol}17`
-                    }
-                )
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  `0`,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: ``
+                        }
+                    )
+                }
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `=PL!${PLcol}17`
+                        }
+                    )
+                }
                 ColIndex += 1
             }
             setCfRowSheet(prevState => ({
@@ -5572,6 +5586,18 @@ function Spreadsheet() {
                                     }
                                 </CellsDirective>
                             </RowDirective>
+                            {/*net cash flow (A+B+C) row */}
+                            {/* <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        cfRowSheet.net_cash_flow_sum_ABC.map(
+                                            (value, index) => {
+                                                return ()
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective> */}
 
                         </RowsDirective>
 
