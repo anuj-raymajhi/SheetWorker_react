@@ -2651,7 +2651,7 @@ function Spreadsheet() {
                 if (ColIndex === 1) {
                     update.push( 
                         {
-                            colVal:  `0`,
+                            colVal:  ``,
                             colSpan: 1,
                             rowSpan: 1,
                             index: ColIndex,
@@ -2699,16 +2699,30 @@ function Spreadsheet() {
                 temp = getOddNumberAtIndex(ColIndex)
                 PLcol = getSpreadsheetColumn(temp)
                 //12th row in PLSheet is financial expenses / interest expenses
-                update.push( 
-                    {
-                        colVal:  ``,
-                        colSpan: 1,
-                        rowSpan: 1,
-                        index: ColIndex,
-                        isReadOnly: true,
-                        formula: `=PL!${PLcol}12`
-                    }
-                )
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: ``
+                        }
+                    )
+                }
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `=PL!${PLcol}12`
+                        }
+                    )
+                }
                 ColIndex += 1
             }
             setCfRowSheet(prevState => ({
