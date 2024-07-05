@@ -2790,7 +2790,6 @@ function Spreadsheet() {
     },[years])
 
     // useEffect for decrease increase in stock
-    //TODO: formula for first year not clear
     useEffect(()=>{
         if (years) {
             var time_in_years = years.yearEnd - years.yearStart + 1;
@@ -2802,7 +2801,6 @@ function Spreadsheet() {
                 // 31st row in Bsheet&Ratios contains information about store/stock
                 // formula {prevYear}{31} - {currentYear}{31}
                 if (ColIndex === 1) {
-                    BsheetCol = getSpreadsheetColumn(ColIndex);
                     update.push(
                         {
                             colVal:  ``,
@@ -2810,7 +2808,7 @@ function Spreadsheet() {
                             rowSpan: 1,
                             index: ColIndex,
                             isReadOnly: true,
-                            formula: `='BSheet & Ratios'!${BsheetCol}31-'BSheet & Ratios'!${BsheetCol}31`
+                            formula: ``
                         }
                     )
                 }
@@ -2847,7 +2845,6 @@ function Spreadsheet() {
     },[years])
 
     // useEffect for decrease increase in receivable
-    //TODO: formula for first year not clear
     useEffect(()=>{
         if (years) {
             var time_in_years = years.yearEnd - years.yearStart + 1;
@@ -2859,7 +2856,6 @@ function Spreadsheet() {
                 // 32st row in Bsheet&Ratios contains information about debtors/receivable
                 // formula {prevYear}{32} - {currentYear}{32}
                 if (ColIndex === 1) {
-                    BsheetCol = getSpreadsheetColumn(ColIndex);
                     update.push(
                         {
                             colVal:  ``,
@@ -2867,7 +2863,7 @@ function Spreadsheet() {
                             rowSpan: 1,
                             index: ColIndex,
                             isReadOnly: true,
-                            formula: `='BSheet & Ratios'!${BsheetCol}32-'BSheet & Ratios'!${BsheetCol}32`
+                            formula: ``
                         }
                     )
                 }
@@ -2904,7 +2900,6 @@ function Spreadsheet() {
     },[years])
 
     // useEffect for decrease increase in other current assets
-    //TODO: formula for first year not clear
     useEffect(()=>{
         if (years) {
             var time_in_years = years.yearEnd - years.yearStart + 1;
@@ -2916,7 +2911,6 @@ function Spreadsheet() {
                 // 33rd row in Bsheet&Ratios contains information about other current assets
                 // formula {prevYear}{33} - {currentYear}{33}
                 if (ColIndex === 1) {
-                    BsheetCol = getSpreadsheetColumn(ColIndex);
                     update.push(
                         {
                             colVal:  ``,
@@ -2924,7 +2918,7 @@ function Spreadsheet() {
                             rowSpan: 1,
                             index: ColIndex,
                             isReadOnly: true,
-                            formula: `='BSheet & Ratios'!${BsheetCol}33-'BSheet & Ratios'!${BsheetCol}33`
+                            formula: ``
                         }
                     )
                 }
