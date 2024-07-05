@@ -3315,7 +3315,7 @@ function Spreadsheet() {
                             rowSpan: 1,
                             index: ColIndex,
                             isReadOnly: true,
-                            formula: `='BSheet & Ratios'!${BsheetCol}26 + PL!${PLcol}15 - 'BSheet & Ratios'!${BsheetCol}26`
+                            formula: ``
                         }
                     )
                 }
@@ -3356,16 +3356,30 @@ function Spreadsheet() {
             var columnCharacterIndex;
             for (let i = 0; i < time_in_years; i++) {
                 columnCharacterIndex = getSpreadsheetColumn(ColIndex)
-                update.push( 
-                    {
-                        colVal:  ``,
-                        colSpan: 1,
-                        rowSpan: 1,
-                        index: ColIndex,
-                        isReadOnly: true,
-                        formula: `=${columnCharacterIndex}${salePurFixedAssetRow}`
-                    }
-                )
+                if (ColIndex === 1){
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: ``
+                        }
+                    )
+                }
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `=${columnCharacterIndex}${salePurFixedAssetRow}`
+                        }
+                    )
+                }
                 ColIndex += 1
             }
             setCfRowSheet(prevState => ({
