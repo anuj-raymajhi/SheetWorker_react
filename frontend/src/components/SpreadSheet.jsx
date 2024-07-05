@@ -3933,6 +3933,54 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect closing cash/ bank balance
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+
+            let netCFrow = 28;
+            let openingCashRow = 29;
+            var columnCharacterIndex;
+            for (let i = 0; i < time_in_years; i++) {
+                columnCharacterIndex = getSpreadsheetColumn(ColIndex)
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: ``
+                        }
+                    )
+                }
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `=+${columnCharacterIndex}${netCFrow}+${columnCharacterIndex}${openingCashRow}`
+                        }
+                    )
+                }
+                ColIndex += 1
+            }
+            setCfRowSheet(prevState => ({
+                ...prevState,
+                closing_cash_bank_balance: [
+                    ...prevState.closing_cash_bank_balance,
+                    ...update
+                ]
+            }))
+        }
+    },[years])
+
     useEffect(()=>{
         console.log('Cashflow row sheet : ', cfRowSheet)
     },[cfRowSheet])
@@ -5843,6 +5891,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
