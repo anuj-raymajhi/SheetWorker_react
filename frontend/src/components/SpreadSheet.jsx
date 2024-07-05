@@ -2955,7 +2955,6 @@ function Spreadsheet() {
     },[years])
 
     // useEffect for increase decrease in creditors
-    //TODO: formula for first year not clear
     useEffect(()=>{
         if (years) {
             var time_in_years = years.yearEnd - years.yearStart + 1;
@@ -2967,7 +2966,6 @@ function Spreadsheet() {
                 // 12th row in Bsheet&Ratios contains information about creditors
                 // formula {currentYear}{12} - {prevYear}{12}
                 if (ColIndex === 1) {
-                    BsheetCol = getSpreadsheetColumn(ColIndex);
                     update.push(
                         {
                             colVal:  ``,
@@ -2975,7 +2973,7 @@ function Spreadsheet() {
                             rowSpan: 1,
                             index: ColIndex,
                             isReadOnly: true,
-                            formula: `='BSheet & Ratios'!${BsheetCol}12-'BSheet & Ratios'!${BsheetCol}12`
+                            formula: ``
                         }
                     )
                 }
@@ -3012,7 +3010,6 @@ function Spreadsheet() {
     },[years])
 
     // useEffect for increase decrease in payable
-    //TODO: formula for first year not clear
     useEffect(()=>{
         if (years) {
             var time_in_years = years.yearEnd - years.yearStart + 1;
@@ -3024,7 +3021,6 @@ function Spreadsheet() {
                 // 13th row in Bsheet&Ratios contains information about payable
                 // formula {currentYear}{13} - {prevYear}{13}
                 if (ColIndex === 1) {
-                    BsheetCol = getSpreadsheetColumn(ColIndex);
                     update.push(
                         {
                             colVal:  ``,
@@ -3032,7 +3028,7 @@ function Spreadsheet() {
                             rowSpan: 1,
                             index: ColIndex,
                             isReadOnly: true,
-                            formula: `='BSheet & Ratios'!${BsheetCol}13-'BSheet & Ratios'!${BsheetCol}13`
+                            formula: ``
                         }
                     )
                 }
@@ -3069,7 +3065,6 @@ function Spreadsheet() {
     },[years])
 
     // useEffect for increase decrease in other current liabilities
-    //TODO: formula for first year not clear
     useEffect(()=>{
         if (years) {
             var time_in_years = years.yearEnd - years.yearStart + 1;
@@ -3081,7 +3076,6 @@ function Spreadsheet() {
                 // 14th row in Bsheet&Ratios contains information about other current liabilities
                 // formula {currentYear}{14} - {prevYear}{14}
                 if (ColIndex === 1) {
-                    BsheetCol = getSpreadsheetColumn(ColIndex);
                     update.push(
                         {
                             colVal:  ``,
@@ -3089,7 +3083,7 @@ function Spreadsheet() {
                             rowSpan: 1,
                             index: ColIndex,
                             isReadOnly: true,
-                            formula: `='BSheet & Ratios'!${BsheetCol}14-'BSheet & Ratios'!${BsheetCol}14`
+                            formula: ``
                         }
                     )
                 }
@@ -3137,16 +3131,30 @@ function Spreadsheet() {
                 temp = getOddNumberAtIndex(ColIndex)
                 PLcol = getSpreadsheetColumn(temp)
                 //10th row in PLSheet is gain/ loss on sale of asset
-                update.push( 
-                    {
-                        colVal:  ``,
-                        colSpan: 1,
-                        rowSpan: 1,
-                        index: ColIndex,
-                        isReadOnly: true,
-                        formula: `=PL!${PLcol}10*(-1)`
-                    }
-                )
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: ``
+                        }
+                    )
+                }
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `=PL!${PLcol}10*(-1)`
+                        }
+                    )
+                }
                 ColIndex += 1
             }
             setCfRowSheet(prevState => ({
