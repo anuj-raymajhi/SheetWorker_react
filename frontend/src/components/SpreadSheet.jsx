@@ -3796,16 +3796,30 @@ function Spreadsheet() {
             var columnCharacterIndex;
             for (let i = 0; i < time_in_years; i++) {
                 columnCharacterIndex = getSpreadsheetColumn(ColIndex)
-                update.push( 
-                    {
-                        colVal:  ``,
-                        colSpan: 1,
-                        rowSpan: 1,
-                        index: ColIndex,
-                        isReadOnly: true,
-                        formula: `=SUM(${columnCharacterIndex}${shareCapitalRow}:${columnCharacterIndex}${interestPaidRow})`
-                    }
-                )
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: ``
+                        }
+                    )
+                }
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `=SUM(${columnCharacterIndex}${shareCapitalRow}:${columnCharacterIndex}${interestPaidRow})`
+                        }
+                    )
+                }
                 ColIndex += 1
             }
             setCfRowSheet(prevState => ({
