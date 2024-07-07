@@ -6524,18 +6524,198 @@ function Spreadsheet() {
 
                             {/*Risk Grading section */}
                             {/*Risk grading row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.risk_grading.risk_grading.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*Particulars section */}
                             {/*particulars row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.risk_grading.particulars.particulars.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*year label row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.risk_grading.particulars.year_label.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*debt to equity (in times of equity) row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.risk_grading.debt_to_equity.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*cash conversion cycle row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.risk_grading.cash_conversion_cycle.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*return on equiry (ROE) row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.risk_grading.return_on_equity.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*gross profit row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.risk_grading.gross_profit.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*projected sales of above FY row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.risk_grading.projected_sales_of_above_FY.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*Achievement of actual sales against projected sales (AS/PS) row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.risk_grading.achievement_of_actual_sales_ASPS.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                         </RowsDirective>
                         <ColumnsDirective>
-                            <ColumnDirective width={300} />
+                            <ColumnDirective width={365} />
                                 {
                                     Object.keys(cfSheetVals).map(
                                         (x, index) => (
