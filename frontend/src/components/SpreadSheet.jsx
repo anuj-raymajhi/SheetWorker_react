@@ -4677,7 +4677,7 @@ function Spreadsheet() {
                 ...prevState,
                 key_ratios: {
                     ...prevState.key_ratios,
-                    risk_grading : [
+                    key_ratios : [
                         ...prevState.key_ratios.key_ratios,
                         ...update
                     ]
@@ -4780,12 +4780,82 @@ function Spreadsheet() {
                 ...prevState,
                 cash_flow: {
                     ...prevState.cash_flow,
-                    risk_grading : [
+                    cash_flow : [
                         ...prevState.cash_flow.cash_flow,
                         ...update
                     ]
                 }
             })) 
+        }
+    },[years])
+
+    // useEffect for particulars section/ audited projected row
+    useEffect(()=>{
+        if(years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal: 'Audited',
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                cash_flow: {
+                    ...prevState.cash_flow, 
+                    particulars: {
+                        ...prevState.cash_flow.particulars,
+                        particulars: [
+                            ...prevState.cash_flow.particulars.particulars,
+                            ...update
+                        ]
+                    }
+                }
+            }))
+        }
+    },[years])
+
+    // useEffect for year label row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            let yearCounter = years.yearStart;
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  `${yearCounter}/${(yearCounter + 1).toString().substr(-2)}`,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+                yearCounter += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                cash_flow: {
+                    ...prevState.cash_flow, 
+                    particulars: {
+                        ...prevState.cash_flow.particulars,
+                        year_label: [
+                            ...prevState.cash_flow.particulars.year_label,
+                            ...update
+                        ]
+                    }
+                }
+            }))
         }
     },[years])
 
@@ -7653,7 +7723,7 @@ function Spreadsheet() {
                             <RowDirective>
                                 <CellsDirective>
                                     {
-                                        summRowSheet.cash_flow.particulars.particulars.map(
+                                        summRowSheet.cash_flow.particulars.year_label.map(
                                             (value, index) => {
                                                 return (
                                                     <CellDirective 
