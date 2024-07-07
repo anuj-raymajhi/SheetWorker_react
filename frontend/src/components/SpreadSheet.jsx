@@ -882,6 +882,158 @@ function Spreadsheet() {
         ]
     })
 
+// States for Summary worksheet
+
+    const [summRowSheet, setSummRowSheet] = useState({
+        key_financial_assesments: {
+            key_financial_assesments : [
+                {
+                    colVal: 'Key Financial Assesments',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            particulars : {
+                particulars : [
+                    {
+                        colVal: 'Particulars',
+                        rowSpan: 2,
+                        colSpan: 1,
+                        index: 0,
+                        isReadOnly: true
+                    },
+                ],
+                year_label : [
+                    {
+                        colVal: '',
+                        rowSpan: 1,
+                        colSpan: 1,
+                        index: 0,
+                        isReadOnly: true
+                    }
+                ]
+            },
+            sales : [
+                {
+                    colVal: 'Sales',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            percentage_change_in_sales : [
+                {
+                    colVal: '% Change in Sales',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            profit_after_tax : [
+                {
+                    colVal: 'Profit After Tax',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            net_profit_to_sales_ratio : [
+                {
+                    colVal: 'Net Profit to Sales Ratio',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            effective_net_worth : [
+                {
+                    colVal: 'Effective Net Worth',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            directors_loan_subordinated_loan : [
+                {
+                    colVal: 'Directors Loan/Subordinated Loan',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            paid_up_capital : [
+                {
+                    colVal: 'Paid-Up Capital',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            net_fixed_assets : [
+                {
+                    colVal: 'Net Fixed Assets',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            term_loan : [
+                {
+                    colVal: 'Term Loan',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            term_loan_to_net_fixed_assets : [
+                {
+                    colVal: 'Term Loan to Net Fixed Assets',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            net_current_asset_NCA : [
+                {
+                    colVal: 'Net Current Asset (NCA)',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            working_capital_loan : [
+                {
+                    colVal: 'Working Capital Loan',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            working_capital_loan_to_NCA : [
+                {
+                    colVal: 'Working Capital Loan to NCA',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ]
+        }
+    })
 
     // useEffect to initialize the years values
     useEffect(()=>{
@@ -5911,6 +6063,98 @@ function Spreadsheet() {
                                 )
                             }
                         </ColumnsDirective>
+                    </SheetDirective>
+                    <SheetDirective name='Summary'>
+                        <RowsDirective>
+                            {/*Key financials assessment section */}
+                            {/*Key financial assesment row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.key_financial_assesments.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*particulars section */}
+                            {/*audited projected row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.particulars.particulars.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*year label row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.particulars.year_label.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*sales row */}
+                            {/*percentage change in sales row */}
+                            {/*profit after tax row */}
+                            {/*net profit to sales ratio row */}
+                            {/*effective net worth row */}
+                            {/*directors loan/ subordinated debt row */}
+                            {/*paid up capital row */}
+                            {/*net fixed assets row */}
+                            {/*term loan row */}
+                            {/*term loan to net fixed assets row */}
+                            {/*net current asset (NCA) row */}
+                            {/*working capital loan row */}
+                            {/*working capital loan to NCA */}
+                        </RowsDirective>
+                        <ColumnsDirective>
+                            <ColumnDirective width={300} />
+                                {
+                                    Object.keys(cfSheetVals).map(
+                                        (x, index) => (
+                                            <ColumnDirective key={index} width={100} />
+                                        )
+                                    )
+                                }
+                            </ColumnsDirective>
                     </SheetDirective>
                 </SheetsDirective>
             </SpreadsheetComponent>
