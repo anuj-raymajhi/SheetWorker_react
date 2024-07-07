@@ -1175,6 +1175,15 @@ function Spreadsheet() {
                     isReadOnly: true
                 }
             ],
+            interest_coverage_ratio : [
+                {
+                    colVal: 'Interest Coverage Ratio',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
             debt_equity_ratio : [
                 {
                     colVal: 'Debt Equity Ratio',
@@ -6861,19 +6870,279 @@ function Spreadsheet() {
 
                             {/*key ratios section */}
                             {/*key ratios row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_ratios.key_ratios.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*particulars section */}
                             {/*particulars row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_ratios.particulars.particulars.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*year label row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_ratios.particulars.year_label.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*debt service coverage ratio row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_ratios.debt_service_coverage_ratio.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*interest coverage ration row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_ratios.interest_coverage_ratio.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*debt equity ratio row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_ratios.debt_equity_ratio.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*leverage ratio row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_ratios.leverage_ratio.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*current ratio row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_ratios.current_ratio.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*sales to working capital loan ratio row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_ratios.sales_to_WCL_ratio.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*stock turnover period row*/}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_ratios.stock_turnover_period.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*debtors turnover period row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_ratios.debtors_turnover_period.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*creditors turnover period */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_ratios.creditors_turnover_period.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*working capital cycle period row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_ratios.working_capital_cycle_period.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                         </RowsDirective>
                         <ColumnsDirective>
                             <ColumnDirective width={365} />
