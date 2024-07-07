@@ -1,12 +1,12 @@
 
-const {RiskGradingTable} = require('../models/riskgrading')
+const {SummaryCashFlowTable} = require('../models/summarycashflow')
 
-const yearsIndividualPostRiskGrading = async (req, res) => {
+const yearsIndividualPostSummaryCashFlow = async (req, res) => {
     const yearsData = req.body;
     console.log(yearsData);
 
     try {
-        const year = await PLTable.findOne({
+        const year = await SummaryCashFlowTable.findOne({
             where: { Year_label: yearsData.Year_label }
         });
 
@@ -15,7 +15,7 @@ const yearsIndividualPostRiskGrading = async (req, res) => {
             return res.status(409).send({ message: 'Year data already present' });
         }
 
-        await RiskGradingTable.create(dataEntry)
+        await SummaryCashFlowTable.create(yearsData)
             .then((data) => {
                 console.log('Data entry successful');
                 return res.status(200).send({ message: 'Row added to table' });
@@ -31,7 +31,7 @@ const yearsIndividualPostRiskGrading = async (req, res) => {
     }
 };
 
-module.exports = { yearsIndividualPostRiskGrading };
+module.exports = { yearsIndividualPostSummaryCashFlow };
 
 
 

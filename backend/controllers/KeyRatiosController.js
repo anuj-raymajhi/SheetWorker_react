@@ -1,12 +1,12 @@
 
-const {RiskGradingTable} = require('../models/riskgrading')
+const {KeyRatiosTable} = require('../models/keyratios')
 
-const yearsIndividualPostRiskGrading = async (req, res) => {
+const yearsIndividualPostKeyRatios = async (req, res) => {
     const yearsData = req.body;
     console.log(yearsData);
 
     try {
-        const year = await PLTable.findOne({
+        const year = await KeyRatiosTable.findOne({
             where: { Year_label: yearsData.Year_label }
         });
 
@@ -16,7 +16,7 @@ const yearsIndividualPostRiskGrading = async (req, res) => {
         }
 
 
-        await RiskGradingTable.create(dataEntry)
+        await KeyRatiosTable.create(yearsData)
             .then((data) => {
                 console.log('Data entry successful');
                 return res.status(200).send({ message: 'Row added to table' });
@@ -32,7 +32,7 @@ const yearsIndividualPostRiskGrading = async (req, res) => {
     }
 };
 
-module.exports = { yearsIndividualPostRiskGrading };
+module.exports = { yearsIndividualPostKeyRatios };
 
 
 

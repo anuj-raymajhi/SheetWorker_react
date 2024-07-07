@@ -6,7 +6,7 @@ const yearsIndividualPostKFA = async (req, res) => {
     console.log(yearsData);
 
     try {
-        const year = await PLTable.findOne({
+        const year = await KeyFinancialTable.findOne({
             where: { Year_label: yearsData.Year_label }
         });
 
@@ -16,7 +16,7 @@ const yearsIndividualPostKFA = async (req, res) => {
         }
 
 
-        await KeyFinancialTable.create(dataEntry)
+        await KeyFinancialTable.create(yearsData)
             .then((data) => {
                 console.log('Data entry successful');
                 return res.status(200).send({ message: 'Row added to table' });
