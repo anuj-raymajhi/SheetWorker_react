@@ -4442,9 +4442,361 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect(()=>{
+    //     console.log('Cashflow row sheet : ', cfRowSheet)
+    // },[cfRowSheet])
+
+// useEffect for summary worksheet
+    // useEffect for key financials assessment
+    // useEffect for key financial assessment header row
     useEffect(()=>{
-        console.log('Cashflow row sheet : ', cfRowSheet)
-    },[cfRowSheet])
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        formula: ``,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                key_financial_assesments: {
+                    ...prevState.key_financial_assesments,
+                    key_financial_assesments : [
+                        ...prevState.key_financial_assesments.key_financial_assesments,
+                        ...update
+                    ]
+                }
+            })) 
+        }
+    },[years])
+
+    // useEffect for particulars row/ audited projected information
+    useEffect(()=>{
+        if(years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal: 'Audited',
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                key_financial_assesments: {
+                    ...prevState.key_financial_assesments, 
+                    particulars: {
+                        ...prevState.key_financial_assesments.particulars,
+                        particulars: [
+                            ...prevState.key_financial_assesments.particulars.particulars,
+                            ...update
+                        ]
+                    }
+                }
+            }))
+        }
+    },[years])
+
+    // useEffect for year label row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            let yearCounter = years.yearStart;
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  `${yearCounter}/${(yearCounter + 1).toString().substr(-2)}`,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+                yearCounter += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                key_financial_assesments: {
+                    ...prevState.key_financial_assesments, 
+                    particulars: {
+                        ...prevState.key_financial_assesments.particulars,
+                        year_label: [
+                            ...prevState.key_financial_assesments.particulars.year_label,
+                            ...update
+                        ]
+                    }
+                }
+            }))
+        }
+    },[years])
+
+    // useEffect for Risk Grading section
+    // useEffect for risk grading header row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        formula: ``,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                risk_grading: {
+                    ...prevState.risk_grading,
+                    risk_grading : [
+                        ...prevState.risk_grading.risk_grading,
+                        ...update
+                    ]
+                }
+            })) 
+        }
+    },[years])
+
+    // useEffect for particulars row/ audited projected row
+    useEffect(()=>{
+        if(years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal: 'Audited',
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                risk_grading: {
+                    ...prevState.risk_grading, 
+                    particulars: {
+                        ...prevState.risk_grading.particulars,
+                        particulars: [
+                            ...prevState.risk_grading.particulars.particulars,
+                            ...update
+                        ]
+                    }
+                }
+            }))
+        }
+    },[years])
+
+    // useEffect for year label row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            let yearCounter = years.yearStart;
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  `${yearCounter}/${(yearCounter + 1).toString().substr(-2)}`,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+                yearCounter += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                risk_grading: {
+                    ...prevState.risk_grading, 
+                    particulars: {
+                        ...prevState.risk_grading.particulars,
+                        year_label: [
+                            ...prevState.risk_grading.particulars.year_label,
+                            ...update
+                        ]
+                    }
+                }
+            }))
+        }
+    },[years])
+
+    // useEffect for key ratios section
+    // useEffect for key ratios header section
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        formula: ``,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                key_ratios: {
+                    ...prevState.key_ratios,
+                    risk_grading : [
+                        ...prevState.key_ratios.key_ratios,
+                        ...update
+                    ]
+                }
+            })) 
+        }
+    },[years])
+
+    // useEffect for particulars section/ audited projected row
+    useEffect(()=>{
+        if(years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal: 'Audited',
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                key_ratios: {
+                    ...prevState.key_ratios, 
+                    particulars: {
+                        ...prevState.key_ratios.particulars,
+                        particulars: [
+                            ...prevState.key_ratios.particulars.particulars,
+                            ...update
+                        ]
+                    }
+                }
+            }))
+        }
+    },[years])
+
+    // useEffect for year label row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            let yearCounter = years.yearStart;
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  `${yearCounter}/${(yearCounter + 1).toString().substr(-2)}`,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+                yearCounter += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                key_ratios: {
+                    ...prevState.key_ratios, 
+                    particulars: {
+                        ...prevState.key_ratios.particulars,
+                        year_label: [
+                            ...prevState.key_ratios.particulars.year_label,
+                            ...update
+                        ]
+                    }
+                }
+            }))
+        }
+    },[years])
+
+    // useEffect for cash flow section
+    // useEffect for cash flow header
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        formula: ``,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                cash_flow: {
+                    ...prevState.cash_flow,
+                    risk_grading : [
+                        ...prevState.cash_flow.cash_flow,
+                        ...update
+                    ]
+                }
+            })) 
+        }
+    },[years])
+
+    useEffect(()=>{
+        if (summRowSheet) {
+            console.log('summRowSheet : ', summRowSheet)
+        }
+    },[summRowSheet])
+
+
+
 
     const handleCellSave = (args) => {
         console.log('Cell saved:', args); // Logs detailed information about the saved cell
