@@ -6132,18 +6132,278 @@ function Spreadsheet() {
                                 </CellsDirective>
                             </RowDirective>
                             {/*sales row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.sales.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*percentage change in sales row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.percentage_change_in_sales.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*profit after tax row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.profit_after_tax.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*net profit to sales ratio row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.net_profit_to_sales_ratio.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*effective net worth row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.effective_net_worth.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*directors loan/ subordinated debt row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.directors_loan_subordinated_loan.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*paid up capital row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.paid_up_capital.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*net fixed assets row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.net_fixed_assets.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*term loan row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.term_loan.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*term loan to net fixed assets row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.term_loan_to_net_fixed_assets.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*net current asset (NCA) row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.net_current_asset_NCA.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*working capital loan row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.working_capital_loan.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*working capital loan to NCA */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.key_financial_assesments.working_capital_loan_to_NCA.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                         </RowsDirective>
                         <ColumnsDirective>
                             <ColumnDirective width={300} />
