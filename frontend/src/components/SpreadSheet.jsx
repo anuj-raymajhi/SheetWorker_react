@@ -7232,18 +7232,199 @@ function Spreadsheet() {
                             {/*^^^ Key ratios section over ^^^*/}
 
                             {/*Empty row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.empty_row_3.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             
                             {/*Cash flow section */}
                             {/*cash flow row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.cash_flow.cash_flow.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*particulars section */}
                             {/*particulars row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.cash_flow.particulars.particulars.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*year label row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.cash_flow.particulars.particulars.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*cash from operating activities row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.cash_flow.cash_from_operating_activities.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*cash from investing activities row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.cash_flow.cash_from_investing_activities.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*cash from financing activities row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.cash_flow.cash_from_financing_activities.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*net cash flow row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.cash_flow.net_cash_flow.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                             {/*closing cash/ bank balance row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.cash_flow.closing_cash_bank_balance.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
 
+                            {/*^^^ cash flow section over ^^^*/}
                         </RowsDirective>
                         <ColumnsDirective>
                             <ColumnDirective width={365} />
