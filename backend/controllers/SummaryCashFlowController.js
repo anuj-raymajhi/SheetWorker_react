@@ -6,8 +6,8 @@ const yearsIndividualPostRiskGrading = async (req, res) => {
     console.log(yearsData);
 
     try {
-        const year = await RiskGradingTable.findOne({
-            where: { ShareCapital: yearsData.ShareCapital }
+        const year = await PLTable.findOne({
+            where: { Year_label: yearsData.Year_label }
         });
 
         if (year) {
