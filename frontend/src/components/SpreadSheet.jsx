@@ -1126,6 +1126,127 @@ function Spreadsheet() {
                     isReadOnly: true
                 }
             ]
+        },
+        empty_row_2 : [
+            {
+                colVal: '',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        key_ratios: {
+            key_ratios : [
+                {
+                    colVal: 'Key Ratios',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            particulars : {
+                particulars : [
+                    {
+                        colVal: 'Particulars',
+                        rowSpan: 2,
+                        colSpan: 1,
+                        index: 0,
+                        isReadOnly: true
+                    }
+                ],
+                year_label : [
+                    {
+                        colVal: '',
+                        rowSpan: 1,
+                        colSpan: 1,
+                        index: 0,
+                        isReadOnly: true
+                    }
+                ]
+            },
+            debt_service_coverage_ratio : [
+                {
+                    colVal: 'Debt Service Coverage Ratio',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            debt_equity_ratio : [
+                {
+                    colVal: 'Debt Equity Ratio',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            leverage_ratio : [
+                {
+                    colVal: 'Leverage Ratio',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            current_ratio : [
+                {
+                    colVal: 'Current Ratio',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            sales_to_WCL_ratio : [
+                {
+                    colVal: 'Sales to Working Captial Loan Ratio',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            stock_turnover_period : [
+                {
+                    colVal: 'Stock Turnover Period',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            debtors_turnover_period : [
+                {
+                    colVal: 'Debtors Turnover Period',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            creditors_turnover_period : [
+                {
+                    colVal: 'Creditors Turnover Period',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            working_capital_cycle_period : [
+                {
+                    colVal: 'Working Capital Cycle Period',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ]
         }
     })
 
@@ -6713,6 +6834,46 @@ function Spreadsheet() {
                                     }
                                 </CellsDirective>
                             </RowDirective>
+
+                            {/*^^^ Risk grading section over ^^^*/}
+
+                            {/*Empty row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.empty_row_2.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+
+                            {/*key ratios section */}
+                            {/*key ratios row */}
+                            {/*particulars section */}
+                            {/*particulars row */}
+                            {/*year label row */}
+                            {/*debt service coverage ratio row */}
+                            {/*interest coverage ration row */}
+                            {/*debt equity ratio row */}
+                            {/*leverage ratio row */}
+                            {/*current ratio row */}
+                            {/*sales to working capital loan ratio row */}
+                            {/*stock turnover period row*/}
+                            {/*debtors turnover period row */}
+                            {/*creditors turnover period */}
+                            {/*working capital cycle period row */}
                         </RowsDirective>
                         <ColumnsDirective>
                             <ColumnDirective width={365} />
