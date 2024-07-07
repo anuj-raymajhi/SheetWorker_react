@@ -1256,6 +1256,91 @@ function Spreadsheet() {
                     isReadOnly: true
                 }
             ]
+        },
+        empty_row_3 : [
+            {
+                colVal: '',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        cash_flow : {
+            cash_flow : [
+                {
+                    colVal: 'Cash Flow',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            particulars : {
+                particulars : [
+                    {
+                        colVal: 'Particulars',
+                        rowSpan: 2,
+                        colSpan: 1,
+                        index: 0,
+                        isReadOnly: true
+                    }
+                ],
+                year_label : [
+                    {
+                        colVal: '',
+                        rowSpan: 1,
+                        colSpan: 1,
+                        index: 0,
+                        isReadOnly: true
+                    }
+                ]
+            },
+            cash_from_operating_activities : [
+                {
+                    colVal: 'Cash From Operating Activities',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            cash_from_investing_activities : [
+                {
+                    colVal: 'Cash From Investing Activities',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            cash_from_financing_activities : [
+                {
+                    colVal: 'Cash From Financing Activities',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            net_cash_flow : [
+                {
+                    colVal: 'Net Cash Flow',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            closing_cash_bank_balance : [
+                {
+                    colVal: 'Closing Cash/ Bank Balance',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ]
         }
     })
 
@@ -7143,6 +7228,22 @@ function Spreadsheet() {
                                     }
                                 </CellsDirective>
                             </RowDirective>
+
+                            {/*^^^ Key ratios section over ^^^*/}
+
+                            {/*Empty row */}
+                            
+                            {/*Cash flow section */}
+                            {/*cash flow row */}
+                            {/*particulars section */}
+                            {/*particulars row */}
+                            {/*year label row */}
+                            {/*cash from operating activities row */}
+                            {/*cash from investing activities row */}
+                            {/*cash from financing activities row */}
+                            {/*net cash flow row */}
+                            {/*closing cash/ bank balance row */}
+
                         </RowsDirective>
                         <ColumnsDirective>
                             <ColumnDirective width={365} />
