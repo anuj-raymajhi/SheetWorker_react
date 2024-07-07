@@ -1032,6 +1032,100 @@ function Spreadsheet() {
                     isReadOnly: true
                 }
             ]
+        },
+        empty_row_1 : [
+            {
+                colVal: '',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        risk_grading : {
+            risk_grading : [
+                {
+                    colVal: 'Risk Grading',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            particulars: {
+                particulars : [
+                    {
+                        colVal: 'Particulars',
+                        rowSpan: 2,
+                        colSpan: 1,
+                        index: 0,
+                        isReadOnly: true
+                    }
+                ],
+                year_label : [
+                    {
+                        colVal: '',
+                        rowSpan: 1,
+                        colSpan: 1,
+                        index: 0,
+                        isReadOnly: true
+                    }
+                ]
+            },
+            debt_to_equity : [
+                {
+                    colVal: 'Debt to Equity (in times of equity)',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            cash_conversion_cycle : [
+                {
+                    colVal: 'Cash Conversion Cycle',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            return_on_equity : [
+                {
+                    colVal: 'Return on Equity (ROE)',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            gross_profit: [
+                {
+                    colVal: 'Gross Profit',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            projected_sales_of_above_FY : [
+                {
+                    colVal: 'Projected Sales of above FY',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            achievement_of_actual_sales_ASPS : [
+                {
+                    colVal: 'Achievement of actual sales against projected sales (AS/PS)',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ]
         }
     })
 
@@ -6404,6 +6498,41 @@ function Spreadsheet() {
                                     }
                                 </CellsDirective>
                             </RowDirective>
+                            {/*^^^ key financial assessment section over ^^^*/}
+
+                            {/*Empty row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        summRowSheet.empty_row_1.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective 
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+
+                            {/*Risk Grading section */}
+                            {/*Risk grading row */}
+                            {/*Particulars section */}
+                            {/*particulars row */}
+                            {/*year label row */}
+                            {/*debt to equity (in times of equity) row */}
+                            {/*cash conversion cycle row */}
+                            {/*return on equiry (ROE) row */}
+                            {/*gross profit row */}
+                            {/*projected sales of above FY row */}
+                            {/*Achievement of actual sales against projected sales (AS/PS) row */}
                         </RowsDirective>
                         <ColumnsDirective>
                             <ColumnDirective width={300} />
