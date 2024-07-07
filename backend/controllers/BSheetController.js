@@ -8,14 +8,15 @@ const yearsIndividualPostBSheet = async (req, res) => {
     console.log(yearsData);
 
     try {
-        const year = await BSheetTable.findOne({
-            where: { ShareCapital: yearsData.ShareCapital }
+        const year = await PLTable.findOne({
+            where: { Year_label: yearsData.Year_label }
         });
 
         if (year) {
             console.error('Year data already present');
             return res.status(409).send({ message: 'Year data already present' });
         }
+
 
         // Ensure all attribute names match the model definition
         const dataEntry = {

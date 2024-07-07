@@ -1,12 +1,13 @@
-const {CashFlowTable} = require('../models/Cashflow')
+const { CashFlowTable } = require('../models/Cashflow');
 
 const yearsIndividualPostCashFlow = async (req, res) => {
     const yearsData = req.body;
     console.log(yearsData);
 
     try {
+        // Check if the year data already exists
         const year = await CashFlowTable.findOne({
-            where: { ShareCapital: yearsData.ShareCapital }
+            where: { Year_label: yearsData.Year_label }
         });
 
         if (year) {
@@ -14,45 +15,11 @@ const yearsIndividualPostCashFlow = async (req, res) => {
             return res.status(409).send({ message: 'Year data already present' });
         }
 
-        // Ensure all attribute names match the model definition
-        const dataEntry = {
-            ShareCapital: yearsData.ShareCapital,
-            ReservesRetainedEarnings: yearsData.ReservesRetainedEarnings,
-            DirectorsLoanSubordinatedLoan: yearsData.DirectorsLoanSubordinatedLoan,
-            EffectiveNetworth: yearsData.EffectiveNetworth,
-            LongTermLoan: yearsData.LongTermLoan,
-            PrincipalLTLRepaidDuringYear: yearsData.PrincipalLTLRepaidDuringYear,
-            TotalLongTermLoan: yearsData.TotalLongTermLoan,
-            WorkingCapitalLoan: yearsData.WorkingCapitalLoan,
-            Creditors: yearsData.Creditors,
-            Payables: yearsData.Payables,
-            OtherCurrentLiabilitiesProvisions: yearsData.OtherCurrentLiabilitiesProvisions,
-            TotalCurrentLiabilities: yearsData.TotalCurrentLiabilities,
-            TotalCapitalLiabilities: yearsData.TotalCapitalLiabilities,
-            Land: yearsData.Land,
-            BuildingCivilStructureNetAfterDepreciation: yearsData.BuildingCivilStructureNetAfterDepreciation,
-            PlantMachineryNetAfterDepreciation: yearsData.PlantMachineryNetAfterDepreciation,
-            FurnitureFixturesNetAfterDepreciation: yearsData.FurnitureFixturesNetAfterDepreciation,
-            OfficeEquipmentNetAfterDepreciation: yearsData.OfficeEquipmentNetAfterDepreciation,
-            VehiclesNetAfterDepreciation: yearsData.VehiclesNetAfterDepreciation,
-            OtherFixedAssetsNetAfterDepreciation: yearsData.OtherFixedAssetsNetAfterDepreciation,
-            TotalFixedAssetsNetAfterDepreciation: yearsData.TotalFixedAssetsNetAfterDepreciation,
-            Investment: yearsData.Investment,
-            OtherIntangibleAssets: yearsData.OtherIntangibleAssets,
-            TotalLongTermInvestment: yearsData.TotalLongTermInvestment,
-            CashBank: yearsData.CashBank,
-            StoreStock: yearsData.StoreStock,
-            DebtorsReceivables: yearsData.DebtorsReceivables,
-            OtherCurrentAssets: yearsData.OtherCurrentAssets,
-            TotalCurrentAssets: yearsData.TotalCurrentAssets,
-            TotalAssets: yearsData.TotalAssets,
-            Diff: yearsData.Diff
-        };
-
-        await CashFlowTable.create(dataEntry)
+        // Create a new entry in the CashFlowTable
+        await CashFlowTable.create(yearsData)
             .then((data) => {
-                console.log('Data entry successful');
-                return res.status(200).send({ message: 'Row added to table' });
+                console.log('Data entry successful', data);
+                return res.status(201).send({ message: 'Row added to table', data });
             })
             .catch((error) => {
                 console.error('Error creating entry:', error);
@@ -66,6 +33,3 @@ const yearsIndividualPostCashFlow = async (req, res) => {
 };
 
 module.exports = { yearsIndividualPostCashFlow };
-
-
-

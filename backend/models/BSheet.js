@@ -2,6 +2,10 @@ const { Sequelize, DataTypes } = require('sequelize');
 const { sequelize, connectToDatabase } = require('../db');
 
 const BSheetTable = sequelize.define('BSheet&Ratios', {
+    Year_label: {
+        type: DataTypes.STRING, // Adjust data type as per your needs
+        primaryKey: true
+    },
     ShareCapital: {
         type: DataTypes.FLOAT,
         allowNull: false
