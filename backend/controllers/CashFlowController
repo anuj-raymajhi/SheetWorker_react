@@ -1,14 +1,11 @@
-const {BSheetTable} = require('../models/BSheet')
+const {CashFlowTable} = require('../models/Cashflow')
 
-
-
-
-const yearsIndividualPostBSheet = async (req, res) => {
+const yearsIndividualPostCashFlow = async (req, res) => {
     const yearsData = req.body;
     console.log(yearsData);
 
     try {
-        const year = await BSheetTable.findOne({
+        const year = await CashFlowTable.findOne({
             where: { ShareCapital: yearsData.ShareCapital }
         });
 
@@ -52,7 +49,7 @@ const yearsIndividualPostBSheet = async (req, res) => {
             Diff: yearsData.Diff
         };
 
-        await BSheetTable.create(dataEntry)
+        await CashFlowTable.create(dataEntry)
             .then((data) => {
                 console.log('Data entry successful');
                 return res.status(200).send({ message: 'Row added to table' });
@@ -68,7 +65,7 @@ const yearsIndividualPostBSheet = async (req, res) => {
     }
 };
 
-module.exports = { yearsIndividualPostBSheet };
+module.exports = { yearsIndividualPostCashFlow };
 
 
 
