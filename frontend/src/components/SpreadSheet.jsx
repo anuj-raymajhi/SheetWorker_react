@@ -5199,6 +5199,44 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for cash conversion cycle row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var currCol;
+            var PLcol;
+            for (let i = 0; i < time_in_years; i++) {
+                PLcol = getOddNumberAtIndex(ColIndex)
+                PLcol = getSpreadsheetColumn(PLcol)
+                currCol = getSpreadsheetColumn(ColIndex)
+
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `=IFERROR('BSheet & Ratios'!${currCol}31/PL!${PLcol}6*365+'BSheet & Ratios'!${currCol}32/PL!${PLcol}5*365-'BSheet & Ratios'!${currCol}12/PL!${PLcol}6*365, "Input Error")`
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                risk_grading: {
+                    ...prevState.risk_grading, 
+                    cash_conversion_cycle: [
+                        ...prevState.risk_grading.cash_conversion_cycle,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
     // useEffect for key ratios section
     // useEffect for key ratios header section
     useEffect(()=>{
@@ -7819,6 +7857,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
