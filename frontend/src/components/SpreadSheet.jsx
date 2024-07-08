@@ -5311,6 +5311,39 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for projected sales of the above FY row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: false,
+                        formula: ``
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                risk_grading: {
+                    ...prevState.risk_grading, 
+                    projected_sales_of_above_FY: [
+                        ...prevState.risk_grading.projected_sales_of_above_FY,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
     // useEffect for key ratios section
     // useEffect for key ratios header section
     useEffect(()=>{
@@ -7997,6 +8030,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
