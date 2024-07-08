@@ -4643,6 +4643,43 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for profit after tax row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var temp;
+            var PLcol;
+            for (let i = 0; i < time_in_years; i++) {
+                temp = getOddNumberAtIndex(ColIndex)
+                PLcol = getSpreadsheetColumn(temp)
+
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `=PL!${PLcol}17`
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                key_financial_assesments: {
+                    ...prevState.key_financial_assesments, 
+                    profit_after_tax: [
+                        ...prevState.key_financial_assesments.profit_after_tax,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
     // useEffect for Risk Grading section
     // useEffect for risk grading header row
     useEffect(()=>{
@@ -7013,6 +7050,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
@@ -7962,8 +8000,6 @@ function Spreadsheet() {
             
         </div>
     );
-
-
 }
 
 export default Spreadsheet;
