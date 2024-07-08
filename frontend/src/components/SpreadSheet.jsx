@@ -5344,6 +5344,41 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for achievement of actual sales against projected sales AS/PS row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var currCol;
+            for (let i = 0; i < time_in_years; i++) {
+                currCol = getSpreadsheetColumn(ColIndex);
+
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: false,
+                        formula: `=IFERROR(${currCol}4/${currCol}25, "NA")`
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                risk_grading: {
+                    ...prevState.risk_grading, 
+                    achievement_of_actual_sales_ASPS: [
+                        ...prevState.risk_grading.achievement_of_actual_sales_ASPS,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
     // useEffect for key ratios section
     // useEffect for key ratios header section
     useEffect(()=>{
@@ -8052,6 +8087,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
