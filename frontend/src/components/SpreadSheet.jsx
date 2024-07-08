@@ -5237,6 +5237,44 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for return on equity row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var currCol;
+            var PLcol;
+            for (let i = 0; i < time_in_years; i++) {
+                PLcol = getOddNumberAtIndex(ColIndex)
+                PLcol = getSpreadsheetColumn(PLcol)
+                currCol = getSpreadsheetColumn(ColIndex)
+
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `=IFERROR(PL!${PLcol}17/('BSheet & Ratios'!${currCol}4+'BSheet & Ratios'!${currCol}5), "Input Error")`
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                risk_grading: {
+                    ...prevState.risk_grading, 
+                    return_on_equity: [
+                        ...prevState.risk_grading.return_on_equity,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
     // useEffect for key ratios section
     // useEffect for key ratios header section
     useEffect(()=>{
@@ -7879,6 +7917,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
