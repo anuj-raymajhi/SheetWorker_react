@@ -4717,6 +4717,41 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for effective net worth row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var PLcol;
+            for (let i = 0; i < time_in_years; i++) {
+                PLcol = getSpreadsheetColumn(ColIndex)
+
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `='BSheet & Ratios'!${PLcol}7`
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                key_financial_assesments: {
+                    ...prevState.key_financial_assesments, 
+                    effective_net_worth: [
+                        ...prevState.key_financial_assesments.effective_net_worth,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
     // useEffect for Risk Grading section
     // useEffect for risk grading header row
     useEffect(()=>{
@@ -7131,6 +7166,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
