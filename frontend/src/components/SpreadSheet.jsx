@@ -4752,6 +4752,41 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for directors loan/ subordinated loan row
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var PLcol;
+            for (let i = 0; i < time_in_years; i++) {
+                PLcol = getSpreadsheetColumn(ColIndex)
+
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `='BSheet & Ratios'!${PLcol}6`
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                key_financial_assesments: {
+                    ...prevState.key_financial_assesments, 
+                    directors_loan_subordinated_loan: [
+                        ...prevState.key_financial_assesments.directors_loan_subordinated_loan,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
     // useEffect for Risk Grading section
     // useEffect for risk grading header row
     useEffect(()=>{
@@ -7188,6 +7223,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
