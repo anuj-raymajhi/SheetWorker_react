@@ -4680,6 +4680,43 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for net profit to sales ratio
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var temp;
+            var PLcol;
+            for (let i = 0; i < time_in_years; i++) {
+                temp = getOddNumberAtIndex(ColIndex)
+                PLcol = getSpreadsheetColumn(temp)
+
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `=IFERROR((+PL!${PLcol}17)/PL!${PLcol}5, "NA")`
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                key_financial_assesments: {
+                    ...prevState.key_financial_assesments, 
+                    net_profit_to_sales_ratio: [
+                        ...prevState.key_financial_assesments.net_profit_to_sales_ratio,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
     // useEffect for Risk Grading section
     // useEffect for risk grading header row
     useEffect(()=>{
@@ -7072,6 +7109,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
