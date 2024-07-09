@@ -32,7 +32,28 @@ const yearsIndividualPostKeyRatios = async (req, res) => {
     }
 };
 
-module.exports = { yearsIndividualPostKeyRatios };
+
+const yearsIndividualKeyRatios = async(req,res)=>{
+    const yearId = req.params.yearId; // Correctly get the yearId from request parameters
+    try {
+        const year = await KeyRatiosTable.findOne({
+            where:{Year_label: yearId}
+        });
+
+        if (!year) {
+            return res.status(404).send({ message: 'No years data found' });
+        }
+
+        res.status(200).send(year);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: 'Internal Server error' });
+    }
+};
+
+
+module.exports = { yearsIndividualPostKeyRatios,yearsIndividualKeyRatios };
 
 
 
