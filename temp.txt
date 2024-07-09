@@ -67,3 +67,21 @@
 
 create index reference, as in index 0 -> col A ----> index n -> col BZ something like this
 create data holder for each year
+
+for dropdown option
+
+                        <RowsDirective>
+                            <RowDirective>
+                                <CellsDirective>
+                                    <CellDirective 
+                                        validation={{
+                                            type: 'List',
+                                            operator: 'Between',
+                                            value1: 'Option1,Option2,Option3',  // Dropdown options
+                                            ignoreBlank: true,
+                                            inCellDropDown: true
+                                          }}
+                                    />
+                                </CellsDirective>
+                            </RowDirective>
+                        </RowsDirective>
