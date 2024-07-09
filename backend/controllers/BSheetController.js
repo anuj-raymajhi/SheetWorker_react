@@ -13,42 +13,6 @@ const yearsIndividualPostBSheet = async (req, res) => {
             return res.status(409).send({ message: 'Year data already present' });
         }
 
-
-        // // Ensure all attribute names match the model definition
-        // const dataEntry = {
-        //     ShareCapital: yearsData.ShareCapital,
-        //     ReservesRetainedEarnings: yearsData.ReservesRetainedEarnings,
-        //     DirectorsLoanSubordinatedLoan: yearsData.DirectorsLoanSubordinatedLoan,
-        //     EffectiveNetworth: yearsData.EffectiveNetworth,
-        //     LongTermLoan: yearsData.LongTermLoan,
-        //     PrincipalLTLRepaidDuringYear: yearsData.PrincipalLTLRepaidDuringYear,
-        //     TotalLongTermLoan: yearsData.TotalLongTermLoan,
-        //     WorkingCapitalLoan: yearsData.WorkingCapitalLoan,
-        //     Creditors: yearsData.Creditors,
-        //     Payables: yearsData.Payables,
-        //     OtherCurrentLiabilitiesProvisions: yearsData.OtherCurrentLiabilitiesProvisions,
-        //     TotalCurrentLiabilities: yearsData.TotalCurrentLiabilities,
-        //     TotalCapitalLiabilities: yearsData.TotalCapitalLiabilities,
-        //     Land: yearsData.Land,
-        //     BuildingCivilStructureNetAfterDepreciation: yearsData.BuildingCivilStructureNetAfterDepreciation,
-        //     PlantMachineryNetAfterDepreciation: yearsData.PlantMachineryNetAfterDepreciation,
-        //     FurnitureFixturesNetAfterDepreciation: yearsData.FurnitureFixturesNetAfterDepreciation,
-        //     OfficeEquipmentNetAfterDepreciation: yearsData.OfficeEquipmentNetAfterDepreciation,
-        //     VehiclesNetAfterDepreciation: yearsData.VehiclesNetAfterDepreciation,
-        //     OtherFixedAssetsNetAfterDepreciation: yearsData.OtherFixedAssetsNetAfterDepreciation,
-        //     TotalFixedAssetsNetAfterDepreciation: yearsData.TotalFixedAssetsNetAfterDepreciation,
-        //     Investment: yearsData.Investment,
-        //     OtherIntangibleAssets: yearsData.OtherIntangibleAssets,
-        //     TotalLongTermInvestment: yearsData.TotalLongTermInvestment,
-        //     CashBank: yearsData.CashBank,
-        //     StoreStock: yearsData.StoreStock,
-        //     DebtorsReceivables: yearsData.DebtorsReceivables,
-        //     OtherCurrentAssets: yearsData.OtherCurrentAssets,
-        //     TotalCurrentAssets: yearsData.TotalCurrentAssets,
-        //     TotalAssets: yearsData.TotalAssets,
-        //     Diff: yearsData.Diff
-        // };
-
         await BSheetTable.create(yearsData)
             .then((data) => {
                 console.log('Data entry successful');
@@ -65,7 +29,26 @@ const yearsIndividualPostBSheet = async (req, res) => {
     }
 };
 
-module.exports = { yearsIndividualPostBSheet };
+const yearsIndividualBSheet = async(req,res)=>{
+    const yearId = req.params.yearId; // Correctly get the yearId from request parameters
+    try {
+        const year = await BSheetTable.findOne({
+            where:{Year_label: yearId}
+        });
+
+        if (!year) {
+            return res.status(404).send({ message: 'No years data found' });
+        }
+
+        res.status(200).send(year);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: 'Internal Server error' });
+    }
+};
+
+module.exports = { yearsIndividualPostBSheet, yearsIndividualBSheet };
 
 
 

@@ -20,8 +20,6 @@ const yearsData = async(req,res)=>{
 
 const yearsIndividual = async(req,res)=>{
     const yearId = req.params.yearId; // Correctly get the yearId from request parameters
-    // console.log(yearId)
-    // console.log('TESTTTTTTTTTTTTT')
     try {
         const year = await PLTable.findOne({
             where:{Year_label: yearId}
@@ -39,38 +37,6 @@ const yearsIndividual = async(req,res)=>{
     }
 };
 
-
-// const yearsIndividualPost = async (req, res) => {
-//     const yearsData = req.body;
-//     console.log(yearsData);
-
-//     try {
-//         const year = await PLTable.findOne({
-//             where: { Year_label: yearsData.yearId }
-//         });
-
-//         if (year) {
-//             console.error('Year id already present');
-//             return res.status(409).send({ message: 'Year data already present' });
-//         }
-
-//         const dataEntry = { Year_label: yearsData.yearId }; // Ensure the attribute name matches the model definition
-
-//         await PLTable.create(dataEntry)
-//             .then((data) => {
-//                 console.log('Data entry successful');
-//                 return res.status(200).send({ message: 'Row added to table' });
-//             })
-//             .catch((error) => {
-//                 console.error('Error creating entry:', error);
-//                 return res.status(500).send({ message: 'Internal Server error' });
-//             });
-
-//     } catch (error) {
-//         console.error(error);
-//         return res.status(500).send({ message: 'Internal Server error' });
-//     }
-// };
 
 
 
