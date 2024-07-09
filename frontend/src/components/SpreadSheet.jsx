@@ -5379,6 +5379,35 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for empty row 2
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: ``
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                empty_row_2 : [
+                    ...prevState.empty_row_2,
+                    ...update
+                ]
+            }))
+        }
+    },[years])
+
     // useEffect for key ratios section
     // useEffect for key ratios header section
     useEffect(()=>{
@@ -5844,6 +5873,35 @@ function Spreadsheet() {
                         ...update
                     ]
                 }
+            }))
+        }
+    },[years])
+
+    // useEffect for empty row 3
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: ``
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                empty_row_3 : [
+                    ...prevState.empty_row_3,
+                    ...update
+                ]
             }))
         }
     },[years])
