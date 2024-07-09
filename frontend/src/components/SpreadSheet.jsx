@@ -5813,6 +5813,41 @@ function Spreadsheet() {
         }
     },[years])
 
+    // userEffect for working capital cycle period
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var currCol;
+            for (let i = 0; i < time_in_years; i++) {
+                currCol = getSpreadsheetColumn(ColIndex)
+
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `=IFERROR(+${currCol}37+${currCol}38-${currCol}39, "NA")`
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                key_ratios: {
+                    ...prevState.key_ratios, 
+                    working_capital_cycle_period: [
+                        ...prevState.key_ratios.working_capital_cycle_period,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
     // useEffect for cash flow section
     // useEffect for cash flow header
     useEffect(()=>{
@@ -8728,6 +8763,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
