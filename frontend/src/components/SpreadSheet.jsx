@@ -1359,7 +1359,7 @@ function Spreadsheet() {
         if (spreadsheetRef.current) {
             const sheetPanel = spreadsheetRef.current.querySelector('.e-sheet-panel');
             if (sheetPanel) {
-                sheetPanel.style.height = '800px'; // Or any dynamic value
+                sheetPanel.style.height = '600px'; // Or any dynamic value
             }
         }
     }, []); 
@@ -9287,6 +9287,9 @@ function Spreadsheet() {
                                     )
                                 }
                             </ColumnsDirective>
+                    </SheetDirective>
+                    <SheetDirective name='% Drawdown (WCA)'>
+
                     </SheetDirective>
                 </SheetsDirective>
             </SpreadsheetComponent>
