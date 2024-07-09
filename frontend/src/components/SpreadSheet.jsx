@@ -5737,6 +5737,44 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for debtors turnover period
+    useEffect(()=>{
+        if (years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var currCol;
+            var PLcol;
+            for (let i = 0; i < time_in_years; i++) {
+                PLcol = getOddNumberAtIndex(ColIndex)
+                PLcol = getSpreadsheetColumn(PLcol)
+                currCol = getSpreadsheetColumn(ColIndex)
+
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `=IFERROR((+'BSheet & Ratios'!${currCol}35)/PL!${PLcol}8*365, "NA")`
+                    }
+                )
+                ColIndex += 1
+            }
+            setSummRowSheet(prevState => ({
+                ...prevState,
+                key_ratios: {
+                    ...prevState.key_ratios, 
+                    debtors_turnover_period: [
+                        ...prevState.key_ratios.debtors_turnover_period,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
     // useEffect for cash flow section
     // useEffect for cash flow header
     useEffect(()=>{
@@ -8608,6 +8646,7 @@ function Spreadsheet() {
                                                         rowSpan={value.rowSpan}
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
                                                     />
                                                 )
                                             }
