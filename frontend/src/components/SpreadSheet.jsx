@@ -6019,16 +6019,30 @@ function Spreadsheet() {
             for (let i = 0; i < time_in_years; i++) {
                 currCol = getSpreadsheetColumn(ColIndex)
 
-                update.push( 
-                    {
-                        colVal:  ``,
-                        colSpan: 1,
-                        rowSpan: 1,
-                        index: ColIndex,
-                        isReadOnly: true,
-                        formula: `=Cashflow!${currCol}14`
-                    }
-                )
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: ``
+                        }
+                    )
+                }
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `=Cashflow!${currCol}14`
+                        }
+                    )
+                }
                 ColIndex += 1
             }
             setSummRowSheet(prevState => ({
@@ -6054,16 +6068,30 @@ function Spreadsheet() {
             for (let i = 0; i < time_in_years; i++) {
                 currCol = getSpreadsheetColumn(ColIndex)
 
-                update.push( 
-                    {
-                        colVal:  ``,
-                        colSpan: 1,
-                        rowSpan: 1,
-                        index: ColIndex,
-                        isReadOnly: true,
-                        formula: `=Cashflow!${currCol}18`
-                    }
-                )
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: ``
+                        }
+                    )
+                }
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `=Cashflow!${currCol}18`
+                        }
+                    )
+                }
                 ColIndex += 1
             }
             setSummRowSheet(prevState => ({
@@ -6089,16 +6117,30 @@ function Spreadsheet() {
             for (let i = 0; i < time_in_years; i++) {
                 currCol = getSpreadsheetColumn(ColIndex)
 
-                update.push( 
-                    {
-                        colVal:  ``,
-                        colSpan: 1,
-                        rowSpan: 1,
-                        index: ColIndex,
-                        isReadOnly: true,
-                        formula: `=Cashflow!${currCol}27`
-                    }
-                )
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: ``
+                        }
+                    )
+                }
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `=Cashflow!${currCol}27`
+                        }
+                    )
+                }
                 ColIndex += 1
             }
             setSummRowSheet(prevState => ({
@@ -6124,16 +6166,30 @@ function Spreadsheet() {
             for (let i = 0; i < time_in_years; i++) {
                 currCol = getSpreadsheetColumn(ColIndex)
 
-                update.push( 
-                    {
-                        colVal:  ``,
-                        colSpan: 1,
-                        rowSpan: 1,
-                        index: ColIndex,
-                        isReadOnly: true,
-                        formula: `=Cashflow!${currCol}28`
-                    }
-                )
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: ``
+                        }
+                    )
+                }
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `=Cashflow!${currCol}28`
+                        }
+                    )
+                }
                 ColIndex += 1
             }
             setSummRowSheet(prevState => ({
@@ -6159,16 +6215,30 @@ function Spreadsheet() {
             for (let i = 0; i < time_in_years; i++) {
                 currCol = getSpreadsheetColumn(ColIndex)
 
-                update.push( 
-                    {
-                        colVal:  ``,
-                        colSpan: 1,
-                        rowSpan: 1,
-                        index: ColIndex,
-                        isReadOnly: true,
-                        formula: `=Cashflow!${currCol}30`
-                    }
-                )
+                if (ColIndex === 1) {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: ``
+                        }
+                    )
+                }
+                else {
+                    update.push( 
+                        {
+                            colVal:  ``,
+                            colSpan: 1,
+                            rowSpan: 1,
+                            index: ColIndex,
+                            isReadOnly: true,
+                            formula: `=Cashflow!${currCol}30`
+                        }
+                    )
+                }
                 ColIndex += 1
             }
             setSummRowSheet(prevState => ({
