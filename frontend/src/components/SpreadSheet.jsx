@@ -5672,7 +5672,7 @@ function Spreadsheet() {
                         rowSpan: 1,
                         index: ColIndex,
                         isReadOnly: true,
-                        formula: `=IFERROR((+'BSheet & Ratios'!${currCol}37)/'BSheet & Ratios'!${currCol}18, "NA")`
+                        formula: `=IFERROR((+'BSheet & Ratios'!${currCol}34)/'BSheet & Ratios'!${currCol}15, "NA")`
                     }
                 )
                 ColIndex += 1
@@ -5710,7 +5710,7 @@ function Spreadsheet() {
                         rowSpan: 1,
                         index: ColIndex,
                         isReadOnly: true,
-                        formula: `=IFERROR((+PL!${PLcol}8)/'BSheet & Ratios'!${currCol}14, "NA")`
+                        formula: `=IFERROR((+PL!${PLcol}5)/'BSheet & Ratios'!${currCol}11, "NA")`
                     }
                 )
                 ColIndex += 1
@@ -5748,7 +5748,7 @@ function Spreadsheet() {
                         rowSpan: 1,
                         index: ColIndex,
                         isReadOnly: true,
-                        formula: `=IFERROR((+'BSheet & Ratios'!${currCol}34)/PL!${PLcol}9*365, "NA")`
+                        formula: `=IFERROR((+'BSheet & Ratios'!${currCol}31)/PL!${PLcol}6*365, "NA")`
                     }
                 )
                 ColIndex += 1
@@ -5786,7 +5786,7 @@ function Spreadsheet() {
                         rowSpan: 1,
                         index: ColIndex,
                         isReadOnly: true,
-                        formula: `=IFERROR((+'BSheet & Ratios'!${currCol}35)/PL!${PLcol}8*365, "NA")`
+                        formula: `=IFERROR((+'BSheet & Ratios'!${currCol}32)/PL!${PLcol}5*365, "NA")`
                     }
                 )
                 ColIndex += 1
@@ -5824,7 +5824,7 @@ function Spreadsheet() {
                         rowSpan: 1,
                         index: ColIndex,
                         isReadOnly: true,
-                        formula: `=IFERROR((+'BSheet & Ratios'!${currCol}15)/PL!${PLcol}9*365, "NA")`
+                        formula: `=IFERROR((+'BSheet & Ratios'!${currCol}12)/PL!${PLcol}6*365, "NA")`
                     }
                 )
                 ColIndex += 1
