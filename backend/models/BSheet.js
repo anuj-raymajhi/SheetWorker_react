@@ -2,6 +2,11 @@ const { Sequelize, DataTypes } = require('sequelize');
 const { sequelize, connectToDatabase } = require('../db');
 
 const BSheetTable = sequelize.define('BSheet&Ratios', {
+    Projected:{
+        type:DataTypes.STRING,
+        allowNull: false,
+        field: 'Projected'
+        },
     Year_label: {
         type: DataTypes.STRING, // Adjust data type as per your needs
         primaryKey: true

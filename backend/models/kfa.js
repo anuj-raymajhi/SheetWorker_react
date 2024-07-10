@@ -2,6 +2,11 @@ const { Sequelize, DataTypes } = require('sequelize');
 const { sequelize, connectToDatabase } = require('../db');
 
 const KeyFinancialTable = sequelize.define('KeyFinancial', {
+    Projected:{
+        type:DataTypes.STRING,
+        allowNull: false,
+        field: 'Projected'
+        },
     Year_label: {
         type: DataTypes.STRING,
         primaryKey: true,

@@ -2,6 +2,11 @@ const { Sequelize, DataTypes } = require('sequelize');
 const { sequelize, connectToDatabase } = require('../db');
 
 const RiskGradingTable = sequelize.define('RiskGradingTable', {
+    Projected:{
+        type:DataTypes.STRING,
+        allowNull: false,
+        field: 'Projected'
+        },
     Year_label: {
         type: DataTypes.INTEGER,
         allowNull: false,

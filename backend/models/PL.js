@@ -2,13 +2,14 @@ const { Sequelize, DataTypes } = require('sequelize');
 const { sequelize, connectToDatabase } = require('../db');
 
     const PLTable = sequelize.define('PL_Worksheet', {
+        Projected:{
+            type:DataTypes.STRING,
+            allowNull: false,
+            field: 'Projected'
+            },
         Year_label: {
             type: DataTypes.STRING, // Adjust data type as per your needs
             primaryKey: true
-        },
-        audited_projected: {
-            type: DataTypes.STRING, // Adjust data type as per your needs
-            allowNull: false
         },
         capacity_utilization: {
             type: DataTypes.STRING, // Adjust data type as per your needs
