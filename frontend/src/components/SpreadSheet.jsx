@@ -1344,6 +1344,166 @@ function Spreadsheet() {
         }
     })
 
+// States for dropdown (WCA) worksheet
+
+    const [dropRowSheet, setDropRowSheet] = useState({
+        particulars : {
+            particulars : [
+                {
+                    colVal: 'Particulars',
+                    rowSpan: 2,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ],
+            year_label : [
+                {
+                    colVal: '',
+                    rowSpan: 1,
+                    colSpan: 1,
+                    index: 0,
+                    isReadOnly: true
+                }
+            ]
+        },
+        sales : [
+            {
+                colVal: 'Sales',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        stocks : [
+            {
+                colVal: '(A) Stocks',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        receivables : [
+            {
+                colVal: '(B) Receivables (stale to be excluded)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        other_CA_trade_advances : [
+            {
+                colVal: '(C) Other CA/ Trade Advances',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        total_current_assets : [
+            {
+                colVal: '(D) Total Current Assets (A+B+C)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        creditors : [
+            {
+                colVal: '(E) Less: Creditors',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        other_current_liabilities : [
+            {
+                colVal: '(F) Less: Other Current Liabilities',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        total_current_liabilities : [
+            {
+                colVal: '(G) Total Current Liabilities (E+F)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        net_working_capital_requirement : [
+            {
+                colVal: '(H) Net Working Capital Requirement (D-G)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        bank_finance : [
+            {
+                colVal: '(I) Bank Finance',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        nic_asia_bank : [
+            {
+                colVal: 'NIC Asia Bank',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        other_BFI : [
+            {
+                colVal: 'Other BFIs',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        equity_finance : [
+            {
+                colVal: 'Equity Finance (H-I)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        financing : [
+            {
+                colVal: 'Financing (%) (I/H)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ],
+        approved_drawdown : [
+            {
+                colVal: 'Approved Drawdown (%)',
+                rowSpan: 1,
+                colSpan: 1,
+                index: 0,
+                isReadOnly: true
+            }
+        ]
+    })
+
     // useEffect to initialize the years values
     useEffect(()=>{
         if (location.state) {
@@ -6260,6 +6420,10 @@ function Spreadsheet() {
         }
     },[summRowSheet])
 
+
+// useEffect for dropdown (WCA) worksheet
+    //useEffect for particulars section
+    //useEffect for particulars row
 
 
 
