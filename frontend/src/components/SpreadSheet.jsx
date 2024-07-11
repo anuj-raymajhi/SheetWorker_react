@@ -6643,6 +6643,37 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for creditors row
+    useEffect(()=>{
+        if(years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var BSheetCol;
+            for (let i = 0; i < time_in_years; i++) {
+                BSheetCol = getSpreadsheetColumn(ColIndex)
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `='BSheet & Ratios'!${BSheetCol}12`
+                    }
+                )
+                ColIndex += 1
+            }
+            setDropRowSheet(prevState => ({
+                ...prevState, 
+                creditors : [
+                    ...prevState.creditors,
+                    ...update
+                ]
+            }))
+        }
+    },[years])
+
     const handleCellSave = (args) => {
         console.log('Cell saved:', args); // Logs detailed information about the saved cell
         console.log(`Value changed to ${args.value} at address ${args.address}`);
@@ -9806,6 +9837,28 @@ function Spreadsheet() {
                                 <CellsDirective>
                                     {
                                         dropRowSheet.total_current_assets.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*(E) creditors row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        dropRowSheet.creditors.map(
                                             (value, index) => {
                                                 return (
                                                     <CellDirective
