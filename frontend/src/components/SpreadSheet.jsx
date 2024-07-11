@@ -6550,6 +6550,36 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for receivables row
+    useEffect(()=>{
+        if(years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var BSheetCol;
+            for (let i = 0; i < time_in_years; i++) {
+                BSheetCol = getSpreadsheetColumn(ColIndex)
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `='BSheet & Ratios'!${BSheetCol}32`
+                    }
+                )
+                ColIndex += 1
+            }
+            setDropRowSheet(prevState => ({
+                ...prevState, 
+                receivables : [
+                    ...prevState.receivables,
+                    ...update
+                ]
+            }))
+        }
+    },[years])
 
     const handleCellSave = (args) => {
         console.log('Cell saved:', args); // Logs detailed information about the saved cell
@@ -9648,6 +9678,28 @@ function Spreadsheet() {
                                     <CellsDirective>
                                         {
                                             dropRowSheet.stocks.map(
+                                                (value, index) => {
+                                                    return (
+                                                        <CellDirective
+                                                            key={index}
+                                                            index={value.index}
+                                                            value={value.colVal}
+                                                            rowSpan={value.rowSpan}
+                                                            colSpan={value.colSpan}
+                                                            isReadOnly={value.isReadOnly}
+                                                            formula={value.formula}
+                                                        />
+                                                    )
+                                                }
+                                            )
+                                        }
+                                    </CellsDirective>
+                                </RowDirective>
+                                {/*(B) receivables row */}
+                                <RowDirective>
+                                    <CellsDirective>
+                                        {
+                                            dropRowSheet.receivables.map(
                                                 (value, index) => {
                                                     return (
                                                         <CellDirective
