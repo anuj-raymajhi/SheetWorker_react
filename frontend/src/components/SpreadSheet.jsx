@@ -16,7 +16,7 @@ function Spreadsheet() {
                 colVal: 'Audited/Projected',
                 colSpan: 1,
                 rowSpan: 2,
-                index: 0
+                index: 0,
             },
         ],
         year_label:[
@@ -6424,6 +6424,68 @@ function Spreadsheet() {
 // useEffect for dropdown (WCA) worksheet
     //useEffect for particulars section
     //useEffect for particulars row
+    useEffect(()=>{
+        if(years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal: 'Audited',
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+            }
+            setDropRowSheet(prevState => ({
+                ...prevState, 
+                particulars: {
+                    ...prevState.particulars,
+                    particulars: [
+                        ...prevState.particulars.particulars,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
+
+    // useEffect for year label row
+    useEffect(()=>{
+        if(years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            let yearCounter = years.yearStart;
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  `${yearCounter}/${(yearCounter + 1).toString().substr(-2)}`,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true
+                    }
+                )
+                ColIndex += 1
+                yearCounter += 1
+            }
+            setDropRowSheet(prevState => ({
+                ...prevState, 
+                particulars: {
+                    ...prevState.particulars,
+                    year_label: [
+                        ...prevState.particulars.year_label,
+                        ...update
+                    ]
+                }
+            }))
+        }
+    },[years])
 
 
 
@@ -9450,10 +9512,64 @@ function Spreadsheet() {
                                         )
                                     )
                                 }
-                            </ColumnsDirective>
+                        </ColumnsDirective>
                     </SheetDirective>
                     <SheetDirective name='% Drawdown (WCA)'>
-
+                        <RowsDirective>
+                            {/*Particulars section */}
+                            {/*Particulars row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        dropRowSheet.particulars.particulars.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*Year label row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        dropRowSheet.particulars.year_label.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                        </RowsDirective>
+                        <ColumnsDirective>
+                            <ColumnDirective width={365} />
+                                {
+                                    Object.keys(cfSheetVals).map(
+                                        (x, index) => (
+                                            <ColumnDirective key={index} width={100} />
+                                        )
+                                    )
+                                }
+                        </ColumnsDirective>
                     </SheetDirective>
                 </SheetsDirective>
             </SpreadsheetComponent>
