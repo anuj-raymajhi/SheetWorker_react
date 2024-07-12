@@ -7436,6 +7436,7 @@ function Spreadsheet() {
                             }
                         </ColumnsDirective>
                     </SheetDirective>
+
                     <SheetDirective name='BSheet & Ratios'>
                         <RowsDirective>
                             {/*Capital and liabilities section */}
@@ -8199,6 +8200,7 @@ function Spreadsheet() {
                             }
                         </ColumnsDirective>
                     </SheetDirective>
+
                     <SheetDirective name='Cashflow'>
                         <RowsDirective>
                             {/*Audited projected section */}
@@ -8876,6 +8878,7 @@ function Spreadsheet() {
                             }
                         </ColumnsDirective>
                     </SheetDirective>
+
                     <SheetDirective name='Summary'>
                         <RowsDirective>
                             {/*Key financials assessment section */}
@@ -9974,6 +9977,7 @@ function Spreadsheet() {
                                 }
                         </ColumnsDirective>
                     </SheetDirective>
+                    
                     <SheetDirective name='% Drawdown (WCA)'>
                         <RowsDirective>
                             {/*Particulars section */}
