@@ -6920,6 +6920,35 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for approved drawdown row
+    useEffect(()=>{
+        if(years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: false,
+                        formula: ``
+                    }
+                )
+                ColIndex += 1
+            }
+            setDropRowSheet(prevState => ({
+                ...prevState, 
+                approved_drawdown : [
+                    ...prevState.approved_drawdown,
+                    ...update
+                ]
+            }))
+        }
+    },[years])
+
     const handleCellSave = (args) => {
         console.log('Cell saved:', args); // Logs detailed information about the saved cell
         console.log(`Value changed to ${args.value} at address ${args.address}`);
@@ -10298,8 +10327,45 @@ function Spreadsheet() {
                                     }
                                 </CellsDirective>
                             </RowDirective>
+                            {/*Approved drawdown (%) row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        dropRowSheet.approved_drawdown.map(
+                                            (value, index) => {
+                                                if (value.index === 0) {
+                                                    return (
+                                                        <CellDirective
+                                                            key={index}
+                                                            index={value.index}
+                                                            value={value.colVal}
+                                                            rowSpan={value.rowSpan}
+                                                            colSpan={value.colSpan}
+                                                            isReadOnly={value.isReadOnly}
+                                                        />
+                                                    )
+                                                }
+                                                else {
+                                                    return (
+                                                        <CellDirective 
+                                                            key={index}
+                                                            index={value.index}
+                                                            validation={{
+                                                                type: 'List',
+                                                                operator: 'Between',
+                                                                value1: '70%,80%,85%',  // Dropdown options
+                                                                ignoreBlank: true,
+                                                                inCellDropDown: true
+                                                            }}
+                                                        />
+                                                    )
+                                                }
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                         </RowsDirective>
-                        
                         
                         <ColumnsDirective>
                             <ColumnDirective width={365} />
