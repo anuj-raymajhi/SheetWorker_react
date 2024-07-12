@@ -6736,6 +6736,37 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for net working capital requirement row
+    useEffect(()=>{
+        if(years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var currCol;
+            for (let i = 0; i < time_in_years; i++) {
+                currCol = getSpreadsheetColumn(ColIndex)
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `=${currCol}7-${currCol}10`
+                    }
+                )
+                ColIndex += 1
+            }
+            setDropRowSheet(prevState => ({
+                ...prevState, 
+                net_working_capital_requirement : [
+                    ...prevState.net_working_capital_requirement,
+                    ...update
+                ]
+            }))
+        }
+    },[years])
+
     const handleCellSave = (args) => {
         console.log('Cell saved:', args); // Logs detailed information about the saved cell
         console.log(`Value changed to ${args.value} at address ${args.address}`);
@@ -9975,6 +10006,28 @@ function Spreadsheet() {
                                                         colSpan={value.colSpan}
                                                         isReadOnly={value.isReadOnly}
                                                         formula={value.formula}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*(H) net working capital requirement (D-G) row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        dropRowSheet.net_working_capital_requirement.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                        formula={value.formula} 
                                                     />
                                                 )
                                             }
