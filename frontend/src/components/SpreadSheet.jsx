@@ -6705,6 +6705,37 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for total current liabilities row
+    useEffect(()=>{
+        if(years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            var currCol;
+            for (let i = 0; i < time_in_years; i++) {
+                currCol = getSpreadsheetColumn(ColIndex)
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: true,
+                        formula: `=SUM(${currCol}8:${currCol}9)`
+                    }
+                )
+                ColIndex += 1
+            }
+            setDropRowSheet(prevState => ({
+                ...prevState, 
+                total_current_liabilities : [
+                    ...prevState.total_current_liabilities,
+                    ...update
+                ]
+            }))
+        }
+    },[years])
+
     const handleCellSave = (args) => {
         console.log('Cell saved:', args); // Logs detailed information about the saved cell
         console.log(`Value changed to ${args.value} at address ${args.address}`);
@@ -9912,6 +9943,28 @@ function Spreadsheet() {
                                 <CellsDirective>
                                     {
                                         dropRowSheet.other_current_liabilities.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                        formula={value.formula}
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
+                            {/*(G) total current liabilities (E+F) */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        dropRowSheet.total_current_liabilities.map(
                                             (value, index) => {
                                                 return (
                                                     <CellDirective
