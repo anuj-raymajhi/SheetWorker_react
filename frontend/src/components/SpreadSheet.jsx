@@ -6829,6 +6829,35 @@ function Spreadsheet() {
         }
     },[years])
 
+    // useEffect for other BFIs row
+    useEffect(()=>{
+        if(years) {
+            var time_in_years = years.yearEnd - years.yearStart + 1;
+            var ColIndex = 1;
+            let update = [];
+            for (let i = 0; i < time_in_years; i++) {
+                update.push( 
+                    {
+                        colVal:  ``,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        index: ColIndex,
+                        isReadOnly: false,
+                        formula: ``
+                    }
+                )
+                ColIndex += 1
+            }
+            setDropRowSheet(prevState => ({
+                ...prevState, 
+                other_BFI : [
+                    ...prevState.other_BFI,
+                    ...update
+                ]
+            }))
+        }
+    },[years])
+
     const handleCellSave = (args) => {
         console.log('Cell saved:', args); // Logs detailed information about the saved cell
         console.log(`Value changed to ${args.value} at address ${args.address}`);
@@ -10141,7 +10170,30 @@ function Spreadsheet() {
                                     }
                                 </CellsDirective>
                             </RowDirective>
+                            {/*Other BFIs row */}
+                            <RowDirective>
+                                <CellsDirective>
+                                    {
+                                        dropRowSheet.other_BFI.map(
+                                            (value, index) => {
+                                                return (
+                                                    <CellDirective
+                                                        key={index}
+                                                        index={value.index}
+                                                        value={value.colVal}
+                                                        rowSpan={value.rowSpan}
+                                                        colSpan={value.colSpan}
+                                                        isReadOnly={value.isReadOnly}
+                                                        formula={value.formula} 
+                                                    />
+                                                )
+                                            }
+                                        )
+                                    }
+                                </CellsDirective>
+                            </RowDirective>
                         </RowsDirective>
+                        
                         
                         <ColumnsDirective>
                             <ColumnDirective width={365} />
