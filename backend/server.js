@@ -16,7 +16,8 @@ app.use('/api',router)
 
 
 
-const PORT = 8000; // or whatever port you're using
+// const PORT = 8000; // or whatever port you're using
+const PORT = process.env.PORT
 
 app.get('/test', (req, res) => {
   res.send('Hello, World!');

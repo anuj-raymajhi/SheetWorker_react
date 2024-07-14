@@ -8,10 +8,11 @@ const config = {
   username: process.env.SQL_USER,
   password: process.env.SQL_PASSWORD,
   host: process.env.SQL_SERVER,
-  database: 'test',
-  username: 'sa',
-  password: 'Helloworld#1',
-  host: '00-P3-D-NIC-62',
+  // database: 'test',
+  // username: 'sa',
+  // password: '<Helloworld#1>',
+  // host: '00-P3-D-NIC-62',
+  // host:'LAPTOP-7005PNJ2',
   dialect: 'mssql', // Replace with your database dialect (e.g., 'mysql', 'sqlite', 'mssql')
   dialectOptions: {
     options: {
