@@ -1,6 +1,6 @@
 # Spreadsheet for Excel
 
-Brief description or overview of your project.
+Spreadsheet component for Audit, created using syncfusion
 
 ## Table of Contents
 
